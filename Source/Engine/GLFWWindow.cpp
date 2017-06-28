@@ -45,19 +45,19 @@ namespace wendy
 		}
 	}
 
-	bool CGLFWWindow::Init(const std::uint32_t aWidth, const std::uint32_t aHeight, const std::string& aTitle)
+	bool CGLFWWindow::Init(const cu::Vector2ui& aWindowSize, const std::string& aTitle)
 	{
 		if (!glfwInit())
 		{
 			return false;
 		}
 
-		myWindow = glfwCreateWindow(static_cast<int>(aWidth), static_cast<int>(aHeight), aTitle.c_str(), nullptr, nullptr);
+		myWindow = glfwCreateWindow(static_cast<int>(aWindowSize.x), static_cast<int>(aWindowSize.y), aTitle.c_str(), nullptr, nullptr);
 		if (!myWindow)
 		{
 			return false;
 		}
-		//glfwGetProcAddress()
+
 		MakeContextCurrent();
 		glfwSetWindowUserPointer(myWindow, this);
 
@@ -103,6 +103,22 @@ namespace wendy
 	{
 		aLoadExtensionFunction = [](const std::string& aProcedureName) -> void(*)() { return glfwGetProcAddress(aProcedureName.c_str()); };
 		return true;
+	}
+
+	cu::Vector2ui CGLFWWindow::GetWindowSize() const
+	{
+		int width, height;
+		glfwGetWindowSize(myWindow, &width, &height);
+
+		return cu::Vector2ui(width, height);
+	}
+
+	cu::Vector2f CGLFWWindow::GetWindowSizeF() const
+	{
+		int width, height;
+		glfwGetWindowSize(myWindow, &width, &height);
+
+		return cu::Vector2f(width, height);
 	}
 
 	void CGLFWWindow::KeyCallback(int aKey, int /*aScanCode*/, int aAction, int /*aModifierKeyBits*/)

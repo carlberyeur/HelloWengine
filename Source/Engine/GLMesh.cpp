@@ -31,12 +31,12 @@ namespace wendy
 
 	CGLMesh::~CGLMesh()
 	{
-		Cleanup();
+		Destroy();
 	}
 
 	CGLMesh& CGLMesh::operator=(CGLMesh&& aTemporary) noexcept
 	{
-		Cleanup();
+		Destroy();
 
 		myVertexCount = aTemporary.myVertexCount;
 		myIndexCount = aTemporary.myIndexCount;
@@ -85,7 +85,7 @@ namespace wendy
 		glDrawElements(GL_TRIANGLES, myIndexCount, GL_UNSIGNED_INT, nullptr);
 	}
 
-	void CGLMesh::Cleanup()
+	void CGLMesh::Destroy()
 	{
 		if (myVertexBufferID != 0)
 		{

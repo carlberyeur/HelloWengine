@@ -34,10 +34,9 @@ namespace wendy
 
 	struct STextureDesc
 	{
-		const void* pixelData;
-		uint32_t pixelHeight;
-		uint32_t pixelWidth;
-		std::string path;
+		cu::CVector<char> pixelData;
+		cu::Vector2ui textureSize;
+		std::uint32_t textureUnit; //texture slot -> make enum for albedo-normalmap-etc
 	};
 
 	class CBaseWindow;

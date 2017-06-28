@@ -66,9 +66,25 @@ namespace wendy
 		return reinterpret_cast<EffectID>(index);
 	}
 
-	TextureID COpenGLRenderer::CreateTexture(const STextureDesc& /*aTextureDesc*/)
+	TextureID COpenGLRenderer::CreateTexture(const STextureDesc& aTextureDesc)
 	{
-		return NullTexture;
+		std::lock_guard<std::mutex> lock(myAddMutex);
+
+		std::uintptr_t index = myTextures.Size<std::uintptr_t>();
+		myTextures.Add();
+
+		auto addFunction = [aTextureDesc, this, index]()
+		{
+			CGLTexture newTexture;
+			if (newTexture.Init(aTextureDesc.textureUnit, aTextureDesc.textureSize, aTextureDesc.pixelData.data()))
+			{
+				myTextures[index] = std::move(newTexture);
+			}
+		};
+
+		myAddFunctions.push_back(addFunction);
+
+		return reinterpret_cast<TextureID>(index);
 	}
 
 	void COpenGLRenderer::DestroyMesh(const MeshID aMesh)
@@ -77,7 +93,7 @@ namespace wendy
 		CGLMesh* mesh = myMeshes.TryGet(index);
 		if (mesh)
 		{
-			*mesh = CGLMesh();
+			mesh->Destroy();
 		}
 	}
 

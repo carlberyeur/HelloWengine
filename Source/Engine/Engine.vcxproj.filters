@@ -93,6 +93,9 @@
       <Filter>Renderer\OpenGLRenderer\RenderCommands</Filter>
     </ClInclude>
     <ClInclude Include="TestSprite2.h" />
+    <ClInclude Include="RenderPipeline.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -137,5 +140,8 @@
       <Filter>Renderer\OpenGLRenderer\RenderCommands</Filter>
     </ClCompile>
     <ClCompile Include="TestSprite2.cpp" />
+    <ClCompile Include="RenderPipeline.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

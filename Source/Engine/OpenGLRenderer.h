@@ -41,9 +41,5 @@ namespace wendy
 		cu::CVector<cu::CFunction<void>> myAddFunctions;
 
 		std::mutex myAddMutex;
-
-		//std::mutex myMeshMutex;
-		//std::mutex myEffectMutex;
-		//std::mutex myTextureMutex;
 	};
 }

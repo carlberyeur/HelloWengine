@@ -16,12 +16,21 @@
 #include "OpenGLRenderer.h"
 #include "TestSprite2.h"
 
+#ifdef _DEBUG
+#define DEBUG_INIT_PARAMETERS() if (!DebugParameters(aInitParameters)) return false;
+#else
+#define DEBUG_INIT_PARAMETERS()
+#endif // _DEBUG
+
+
 namespace wendy
 {
 	CEngine::CEngine()
 		: myWindow(nullptr)
 		, myFramework(nullptr)
 		, myRenderer(nullptr)
+		, myIsRunning(false)
+		, myThreadedRender(false)
 	{
 	}
 
@@ -33,15 +42,17 @@ namespace wendy
 
 	bool CEngine::Init(const SEngineParameters& aInitParameters)
 	{
+		DEBUG_INIT_PARAMETERS();
+
 		myWindow = std::make_unique<CGLFWWindow>();
-		if (!myWindow->Init(800, 600, "Hello Wengine"))
+		if (!myWindow->Init(aInitParameters.windowSize, "Hello Wengine"))
 		{
 			return false;
 		}
 
 		myFramework = std::make_unique<COpenGLFramework>();
 		
-		if (!myFramework->Init(800, 600, *myWindow))
+		if (!myFramework->Init(*myWindow))
 		{
 			return false;
 		}
@@ -63,6 +74,7 @@ namespace wendy
 		WorkPool::Init(!myThreadedRender);
 
 		myIsRunning = true;
+		bool runSuccess = true;
 		
 		try
 		{
@@ -81,14 +93,14 @@ namespace wendy
 		{
 			DL_MESSAGE_BOX(e.what());
 			myIsRunning = false;
-			return false;
+			runSuccess = false;
 		}
 
 		myIsRunning = false;
 
 		WorkPool::Shutdown();
 
-		return true;
+		return runSuccess;
 	}
 
 	bool CEngine::Update()
@@ -122,6 +134,26 @@ namespace wendy
 	std::unique_ptr<CScene> CEngine::CreateScene()
 	{
 		return std::make_unique<CScene>(*myRenderer);
+	}
+
+	bool CEngine::DebugParameters(const SEngineParameters& aInitParameters)
+	{
+		if (aInitParameters.windowSize.Length2() == 0)
+		{
+			return false;
+		}
+
+		if (!aInitParameters.updateCallback)
+		{
+			return false;
+		}
+
+		if (!aInitParameters.renderCallback)
+		{
+			return false;
+		}
+
+		return true;
 	}
 
 	void CEngine::AddRenderWork()

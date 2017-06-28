@@ -46,6 +46,7 @@ bool Init(int /*argc*/, CharType** /*argv*/)
 	params.updateCallback = [&game]() -> bool { return game.Update(); };
 	params.renderCallback = [&game]() { game.Render(); };
 	params.threadedRendering = true;
+	params.windowSize.Set(800u, 600u);
 
 	if (!engine.Init(params))
 	{

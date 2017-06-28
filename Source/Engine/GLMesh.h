@@ -22,9 +22,9 @@ namespace wendy
 		template <typename VertexType>
 		inline bool Init(const cu::CVector<VertexType>& aVertices, const cu::CVector<uint32_t>& aIndices);
 
-	private:
-		void Cleanup();
+		void Destroy();
 
+	private:
 		std::int32_t myVertexCount;
 		std::int32_t myIndexCount;
 
