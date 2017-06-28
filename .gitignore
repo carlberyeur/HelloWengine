@@ -33,3 +33,9 @@
 *.db
 *.suo
 *.user
+Temp/
+*.ilk
+*.pdb
+*.iobj
+*.ipdb
+*.opendb
