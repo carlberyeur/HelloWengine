@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Precompiled">
+      <UniqueIdentifier>{ee381e34-5f9d-4313-b049-7304c5322199}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Container">
+      <UniqueIdentifier>{2c79d401-972a-47c7-9a1f-4042262627c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Debugging">
+      <UniqueIdentifier>{50f61c70-131d-4b34-ad49-b4d00c89b8a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{dc8b93bf-710c-44a4-87f2-8776070528f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataLoading">
+      <UniqueIdentifier>{b0d445e4-48c6-4b49-aebb-3b807d3508f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{6805efc9-63f4-4496-91e1-221c8e71ac45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Threading">
+      <UniqueIdentifier>{a12fa3bf-1759-41b5-a6e5-6220f58226df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Threading\Workpool">
+      <UniqueIdentifier>{f5f2f340-c516-4f7c-ad4f-31951e410b28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Time">
+      <UniqueIdentifier>{27eaa770-045b-4b64-bf8e-99144c405580}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="targetver.h">
+      <Filter>Precompiled</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Precompiled</Filter>
+    </ClInclude>
+    <ClInclude Include="CommonSTL.h" />
+    <ClInclude Include="CommonCU.h" />
+    <ClInclude Include="DebugLogger.h">
+      <Filter>Debugging</Filter>
+    </ClInclude>
+    <ClInclude Include="cuvector.h">
+      <Filter>Container</Filter>
+    </ClInclude>
+    <ClInclude Include="Function.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="TargaLoader.h">
+      <Filter>DataLoading</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjLoader.h">
+      <Filter>DataLoading</Filter>
+    </ClInclude>
+    <ClInclude Include="PNGLoader.h">
+      <Filter>DataLoading</Filter>
+    </ClInclude>
+    <ClInclude Include="InvertMatrix.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="matrix33.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="matrix44.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="vector2.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="vector3.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="vector4.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="cumath.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="InputHelper.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Work.h">
+      <Filter>Threading\Workpool</Filter>
+    </ClInclude>
+    <ClInclude Include="WorkPool.h">
+      <Filter>Threading\Workpool</Filter>
+    </ClInclude>
+    <ClInclude Include="Synchronizer.h">
+      <Filter>Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadNamer.h">
+      <Filter>Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="AlarmClock.h">
+      <Filter>Time</Filter>
+    </ClInclude>
+    <ClInclude Include="StopWatch.h">
+      <Filter>Time</Filter>
+    </ClInclude>
+    <ClInclude Include="CUTime.h">
+      <Filter>Time</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Precompiled</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugLogger.cpp">
+      <Filter>Debugging</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjLoader.cpp">
+      <Filter>DataLoading</Filter>
+    </ClCompile>
+    <ClCompile Include="PNGLoader.cpp">
+      <Filter>DataLoading</Filter>
+    </ClCompile>
+    <ClCompile Include="TargaLoader.cpp">
+      <Filter>DataLoading</Filter>
+    </ClCompile>
+    <ClCompile Include="InvertMatrix.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="InputHelper.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Work.cpp">
+      <Filter>Threading\Workpool</Filter>
+    </ClCompile>
+    <ClCompile Include="WorkPool.cpp">
+      <Filter>Threading\Workpool</Filter>
+    </ClCompile>
+    <ClCompile Include="ThreadNamer.cpp">
+      <Filter>Threading</Filter>
+    </ClCompile>
+    <ClCompile Include="AlarmClock.cpp">
+      <Filter>Time</Filter>
+    </ClCompile>
+    <ClCompile Include="StopWatch.cpp">
+      <Filter>Time</Filter>
+    </ClCompile>
+    <ClCompile Include="CUTime.cpp">
+      <Filter>Time</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

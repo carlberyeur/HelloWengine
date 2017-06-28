@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Precompiled">
+      <UniqueIdentifier>{27a5f261-124e-407d-9d40-e6306520a7d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework">
+      <UniqueIdentifier>{be78b729-b01c-47ca-844b-34498e28ae44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{3edb5702-2222-4647-b7f8-0071de18727b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Window">
+      <UniqueIdentifier>{b0205ead-126e-4318-96da-b0af86140ae0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Direct3D">
+      <UniqueIdentifier>{5c14d828-4127-483b-b82f-cf7595d480d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\OpenGL">
+      <UniqueIdentifier>{b00862cf-c967-4689-ab8b-20cab1922d4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\OpenGLRenderer">
+      <UniqueIdentifier>{7f43ab91-7c0b-4bba-a083-d1f9648a41b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{e4a023e4-1952-40d9-b1e2-f358898be815}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\OpenGLRenderer\Mesh">
+      <UniqueIdentifier>{619c2ac1-f43b-4a23-a046-0ffff551dabd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\OpenGLRenderer\Effect">
+      <UniqueIdentifier>{b73b17fe-237a-43a0-89ba-cccb3214327c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\OpenGLRenderer\Texture">
+      <UniqueIdentifier>{1e77f5e0-f54b-466e-a943-d676895deee7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\OpenGLRenderer\RenderCommands">
+      <UniqueIdentifier>{b50055c8-90d2-43b7-b952-43b252c23bf6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="targetver.h">
+      <Filter>Precompiled</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Precompiled</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h" />
+    <ClInclude Include="BaseFramework.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseRenderer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="GLFWWindow.h">
+      <Filter>Window</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseWindow.h">
+      <Filter>Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Direct3DFramework.h">
+      <Filter>Framework\Direct3D</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLFramework.h">
+      <Filter>Framework\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLRenderer.h">
+      <Filter>Renderer\OpenGLRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="GLMesh.h">
+      <Filter>Renderer\OpenGLRenderer\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexStructs.h">
+      <Filter>Renderer\OpenGLRenderer\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderCommand.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TestSprite.h" />
+    <ClInclude Include="GLEffect.h">
+      <Filter>Renderer\OpenGLRenderer\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="GLUniformBuffer.h">
+      <Filter>Renderer\OpenGLRenderer\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="GLTexture.h">
+      <Filter>Renderer\OpenGLRenderer\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderModelCommand.h">
+      <Filter>Renderer\OpenGLRenderer\RenderCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="TestSprite2.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Precompiled</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine.cpp" />
+    <ClCompile Include="GLFWWindow.cpp">
+      <Filter>Window</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLFramework.cpp">
+      <Filter>Framework\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Direct3DFramework.cpp">
+      <Filter>Framework\Direct3D</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseWindow.cpp">
+      <Filter>Window</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLRenderer.cpp">
+      <Filter>Renderer\OpenGLRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="GLMesh.cpp">
+      <Filter>Renderer\OpenGLRenderer\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexStructs.cpp">
+      <Filter>Renderer\OpenGLRenderer\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="TestSprite.cpp" />
+    <ClCompile Include="GLEffect.cpp">
+      <Filter>Renderer\OpenGLRenderer\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="GLUniformBuffer.cpp">
+      <Filter>Renderer\OpenGLRenderer\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="GLTexture.cpp">
+      <Filter>Renderer\OpenGLRenderer\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderModelCommand.cpp">
+      <Filter>Renderer\OpenGLRenderer\RenderCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="TestSprite2.cpp" />
+  </ItemGroup>
+</Project>
