@@ -43,7 +43,7 @@ namespace wendy
 		return true;
 	}
 
-	void COpenGLFramework::OnWindowResize(const std::uint32_t /*aWidth*/, const std::uint32_t /*aHeight*/)
+	void COpenGLFramework::OnWindowResize(const cu::Vector2ui& /*aWindowSize*/)
 	{
 	}
 

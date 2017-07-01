@@ -15,7 +15,7 @@ namespace wendy
 		virtual bool Init(CBaseWindow& aWindow) override;
 		virtual bool BeginFrame() override;
 		virtual bool EndFrame() override;
-		virtual void OnWindowResize(const std::uint32_t aWidth, const std::uint32_t aHeight) override;
+		virtual void OnWindowResize(const cu::Vector2ui& aWindowSize) override;
 
 	private:
 		bool LoadExtensions(CBaseWindow& aWindow);

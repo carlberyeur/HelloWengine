@@ -14,7 +14,6 @@
 #include "Direct3DFramework.h"
 #include "OpenGLFramework.h"
 #include "OpenGLRenderer.h"
-#include "TestSprite2.h"
 
 #ifdef _DEBUG
 #define DEBUG_INIT_PARAMETERS() if (!DebugParameters(aInitParameters)) return false;
@@ -25,6 +24,8 @@
 
 namespace wendy
 {
+	CEngine* CEngine::theInstance = nullptr;
+
 	CEngine::CEngine()
 		: myWindow(nullptr)
 		, myFramework(nullptr)
@@ -32,13 +33,20 @@ namespace wendy
 		, myIsRunning(false)
 		, myThreadedRender(false)
 	{
+		assert(theInstance == nullptr);
+		theInstance = this;
 	}
 
 	CEngine::~CEngine()
 	{
+		assert(theInstance == this);
+		theInstance = nullptr;
 	}
 
-	TestSprite2* testSprite = nullptr;
+	CEngine* CEngine::GetInstance()
+	{
+		return theInstance;
+	}
 
 	bool CEngine::Init(const SEngineParameters& aInitParameters)
 	{
@@ -58,8 +66,6 @@ namespace wendy
 		}
 
 		myRenderer = std::make_unique<COpenGLRenderer>();
-
-		testSprite = new TestSprite2(*myRenderer);
 
 		myUpdateCallback = aInitParameters.updateCallback;
 		myRenderCallback = aInitParameters.renderCallback;
@@ -114,7 +120,6 @@ namespace wendy
 		}
 
 		myRenderCallback();
-		testSprite->Render(*myRenderer);
 
 		if (!myThreadedRender)
 		{

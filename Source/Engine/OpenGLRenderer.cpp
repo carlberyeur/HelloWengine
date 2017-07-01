@@ -2,12 +2,14 @@
 #include "OpenGLRenderer.h"
 #include "GLMesh.h"
 #include "GLEffect.h"
+#include "GLUniformBuffer.h"
 #include "GLTexture.h"
 
 #include "VertexStructs.h"
 
 #include "RenderCommand.h"
 #include "BaseWindow.h"
+#include "OpenGLFramework.h"
 
 namespace wendy
 {
@@ -66,6 +68,26 @@ namespace wendy
 		return reinterpret_cast<EffectID>(index);
 	}
 
+	ConstantBufferID COpenGLRenderer::CreateConstantBuffer(const SConstantBufferDesc& aConstantBufferDesc)
+	{
+		std::lock_guard<std::mutex> lock(myAddMutex);
+
+		std::uintptr_t index = myUniformBuffers.Size<std::uintptr_t>();
+		myUniformBuffers.Add();
+
+		auto addFunction = [aConstantBufferDesc, this, index]()
+		{
+			CGLEffect* effect = GetEffect(aConstantBufferDesc.effect);
+			if (effect)
+			{
+				myUniformBuffers[index] = effect->GetUniformBuffer(aConstantBufferDesc.constantBuffer);
+			}
+		};
+
+		myAddFunctions.push_back(addFunction);
+		return reinterpret_cast<ConstantBufferID>(index);
+	}
+
 	TextureID COpenGLRenderer::CreateTexture(const STextureDesc& aTextureDesc)
 	{
 		std::lock_guard<std::mutex> lock(myAddMutex);
@@ -107,6 +129,12 @@ namespace wendy
 	{
 		size_t index = reinterpret_cast<size_t>(aID);
 		return myEffects.TryGet(index);
+	}
+
+	CGLUniformBuffer* COpenGLRenderer::GetUniformBuffer(ConstantBufferID aID)
+	{
+		size_t index = reinterpret_cast<size_t>(aID);
+		return myUniformBuffers.TryGet(index);
 	}
 
 	CGLTexture* COpenGLRenderer::GetTexture(TextureID aID)

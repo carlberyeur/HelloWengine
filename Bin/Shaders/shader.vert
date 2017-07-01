@@ -2,10 +2,11 @@
 
 in vec3 Pos;
 
-uniform mat3 hej;
+uniform mat4 transform;
 
 void main(void)
 {
-	vec3 newPos = Pos * hej;
-	gl_Position = vec4(newPos, 1.0f);
+	vec4 newPos = vec4(Pos, 1.f);
+	newPos = newPos * transform;
+	gl_Position = vec4(newPos.xyz, 1.0f);
 }

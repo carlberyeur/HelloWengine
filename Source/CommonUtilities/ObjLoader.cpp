@@ -1,16 +1,43 @@
 #include "stdafx.h"
 #include "ObjLoader.h"
 
+//stolen from glm
+void glm_hash_combine(size_t& seed, size_t hash)
+{
+	hash += 0x9e3779b9 + (seed << 6) + (seed >> 2);
+	seed ^= hash;
+}
+
+namespace std
+{
+	template <>
+	struct std::hash<cu::CObjLoader::SVertex>
+	{
+		//stolen from glm
+		size_t operator()(cu::CObjLoader::SVertex const& aVertex) const
+		{
+			size_t positionHash = 0;
+			hash<float> hasher;
+			glm_hash_combine(positionHash, hasher(aVertex.position.x));
+			glm_hash_combine(positionHash, hasher(aVertex.position.y));
+			glm_hash_combine(positionHash, hasher(aVertex.position.z));
+
+			//size_t normalHash = 0;
+			//glm_hash_combine(normalHash, hasher(aVertex.normal.x));
+			//glm_hash_combine(normalHash, hasher(aVertex.normal.y));
+			//glm_hash_combine(normalHash, hasher(aVertex.normal.z));
+
+			size_t uvHash = 0;
+			glm_hash_combine(uvHash, hasher(aVertex.uv.x));
+			glm_hash_combine(uvHash, hasher(aVertex.uv.y));
+						
+			return ((positionHash /*^ (normalHash << 1) >> 1*/) ^ (uvHash << 1));
+		}
+	};
+}
+
 namespace cu
 {
-	CObjLoader::CObjLoader()
-	{
-	}
-
-	CObjLoader::~CObjLoader()
-	{
-	}
-
 	bool CObjLoader::LoadObjFile(const std::string& aFilePath, SMeshData& aDataOut)
 	{
 		std::ifstream file(aFilePath);
@@ -63,9 +90,46 @@ namespace cu
 						return false;
 					}
 				}
+
+				aDataOut.faces.push_back(face);
 			}
 		}
 
 		return true;
+	}
+
+	bool CObjLoader::LoadObjFile(const std::string& aFilePath, SIndexedMeshData& aDataOut)
+	{
+		SMeshData data = {};
+		if (!LoadObjFile(aFilePath, data))
+		{
+			return false;
+		}
+
+		std::unordered_map<SVertex, uint32_t> uniqueVertices = {};
+
+		for (const SFaceData& face : data.faces)
+		{
+			for (std::uint32_t i = 0; i < 3; i++)
+			{
+				SVertex vertex = {};
+
+				vertex.position = data.positions[face.positionIndex[i] - 1];
+				if (!data.uvs.empty())
+				{
+					vertex.uv = data.uvs[face.uvIndex[i] - 1];
+				}
+
+				if (uniqueVertices.find(vertex) == uniqueVertices.end())
+				{
+					uniqueVertices[vertex] = aDataOut.vertices.Size<std::uint32_t>();
+					aDataOut.vertices.push_back(vertex);
+				}
+
+				aDataOut.indices.push_back(uniqueVertices[vertex]);
+			}
+		}
+
+		return !aDataOut.indices.empty() && !aDataOut.vertices.empty();
 	}
 }

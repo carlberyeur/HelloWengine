@@ -83,7 +83,7 @@ namespace wendy
 		return SUCCEEDED(goodPresent);
 	}
 
-	void CDirect3DFramework::OnWindowResize(const std::uint32_t /*aWidth*/, const std::uint32_t /*aHeight*/)
+	void CDirect3DFramework::OnWindowResize(const cu::Vector2ui& /*aWindowSize*/)
 	{
 	}
 
@@ -101,7 +101,7 @@ namespace wendy
 			return false;
 		}
 
-		HRESULT backBufferRTVResult = myDevice->CreateRenderTargetView(backBuffer, nullptr, &myBackBufferRTV); //instead of null we can pass a D3D11_RENDERTARGETVIEW_DESC.
+		HRESULT backBufferRTVResult = myDevice->CreateRenderTargetView(backBuffer, nullptr, &myBackBufferRTV);
 		backBuffer->Release();
 		if (FAILED(backBufferRTVResult))
 		{

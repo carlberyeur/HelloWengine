@@ -165,6 +165,7 @@
     <ClInclude Include="BaseFramework.h" />
     <ClInclude Include="BaseRenderer.h" />
     <ClInclude Include="BaseWindow.h" />
+    <ClInclude Include="ChangeEffectCommand.h" />
     <ClInclude Include="Direct3DFramework.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="GLEffect.h" />
@@ -172,12 +173,15 @@
     <ClInclude Include="GLMesh.h" />
     <ClInclude Include="GLTexture.h" />
     <ClInclude Include="GLUniformBuffer.h" />
+    <ClInclude Include="Model.h" />
+    <ClInclude Include="ModelLoader.h" />
     <ClInclude Include="OpenGLFramework.h" />
     <ClInclude Include="OpenGLRenderer.h" />
     <ClInclude Include="RenderCommand.h" />
     <ClInclude Include="RenderModelCommand.h" />
     <ClInclude Include="RenderPipeline.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="SetCullModeCommand.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TestSprite.h" />
@@ -186,6 +190,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseWindow.cpp" />
+    <ClCompile Include="ChangeEffectCommand.cpp" />
     <ClCompile Include="Direct3DFramework.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="GLEffect.cpp" />
@@ -193,11 +198,14 @@
     <ClCompile Include="GLMesh.cpp" />
     <ClCompile Include="GLTexture.cpp" />
     <ClCompile Include="GLUniformBuffer.cpp" />
+    <ClCompile Include="Model.cpp" />
+    <ClCompile Include="ModelLoader.cpp" />
     <ClCompile Include="OpenGLFramework.cpp" />
     <ClCompile Include="OpenGLRenderer.cpp" />
     <ClCompile Include="RenderModelCommand.cpp" />
     <ClCompile Include="RenderPipeline.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SetCullModeCommand.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

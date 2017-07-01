@@ -27,6 +27,8 @@ namespace wendy
 		CEngine(const CEngine& aCopy) = delete;
 		~CEngine();
 
+		static CEngine* GetInstance();
+
 		bool Init(const SEngineParameters& aInitParameters);
 		bool Run();
 		bool Update();
@@ -47,5 +49,7 @@ namespace wendy
 
 		std::atomic_bool myIsRunning;
 		bool myThreadedRender;
+
+		static CEngine* theInstance;
 	};
 }
