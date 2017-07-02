@@ -1,6 +1,8 @@
 #pragma once
 #include "BaseState.h"
 
+#include "../CommonUtilities/StopWatch.h"
+
 namespace wendy
 {
 	class CScene;
@@ -27,4 +29,7 @@ private:
 	std::unique_ptr<wendy::CScene> myScene;
 
 	size_t myTorus;
+
+	cu::CStopWatch myStopWatch;
+	float myAngle;
 };

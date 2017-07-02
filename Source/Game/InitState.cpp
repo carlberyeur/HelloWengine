@@ -7,6 +7,8 @@
 
 CInitState::CInitState(CStateStack& aStateStack)
 	: CBaseState(aStateStack)
+	, myTorus(SIZE_MAX)
+	, myAngle(0.f)
 {
 }
 
@@ -27,15 +29,24 @@ bool CInitState::Init()
 	transform = transform * cu::Matrix44f::CreateRotateAroundX(3.14f * 0.5f);
 	model->SetTransformation(transform);
 
+	myStopWatch.Init();
+
 	return true;
 }
 
 bool CInitState::Update()
 {
-	//wendy::CModel* model = myScene->GetModel(myTorus);
+	myStopWatch.Update();
+
+	wendy::CModel* model = myScene->GetModel(myTorus);
 	//cu::Matrix44f transform = model->GetTransformation();
-	//transform = transform * cu::Matrix44f::CreateRotateAroundZ(myAngle);
-	//model->SetTransformation(transform);
+	cu::Matrix44f transform;
+	transform.SetScale({ 0.5f, 0.5f, 0.5f });
+	transform = transform * cu::Matrix44f::CreateRotateAroundX(3.14f * 0.5f);
+	transform = transform * cu::Matrix44f::CreateRotateAroundZ(myAngle);
+	myAngle += myStopWatch.GetDeltaTime().GetSeconds() * 0.9f;
+	model->SetTransformation(transform);
+
 	return myShouldContinue;
 }
 
