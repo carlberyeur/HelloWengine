@@ -4,7 +4,9 @@
 #include "BaseRenderer.h"
 #include "Model.h"
 #include "ModelLoader.h"
+
 #include "ChangeEffectCommand.h"
+#include "SetCullModeCommand.h"
 
 namespace wendy
 {
@@ -23,7 +25,7 @@ namespace wendy
 		SEffectDesc effectDesc;
 		effectDesc.vertexPath = "Shaders/shader.vert";
 		effectDesc.pixelPath = "Shaders/shader.frag";
-		effectDesc.inputAttributes = { "Pos" };
+		effectDesc.inputAttributes = { "Pos", "Norm", "Tangent", "Bitangent", "uv" };
 		effectDesc.constantBuffers = { "transform" };
 
 		myEffect = aRenderer.CreateEffect(effectDesc);
@@ -42,6 +44,7 @@ namespace wendy
 	void CRenderPipeline::DoFrame(CBaseRenderer& aRenderer)
 	{
 		aRenderer.AddRenderCommand(new CChangeEffectCommand(myEffect));
+		aRenderer.AddRenderCommand(new CSetCullModeCommand(eCullMode_WireFrame));
 
 		for (CModel& model : myModels)
 		{

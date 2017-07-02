@@ -20,8 +20,10 @@ bool CInitState::Init()
 {
 	myScene = wendy::CEngine::GetInstance()->CreateScene();
 	myScene->Init();
-	myTorus = myScene->AddModel("Meshes/torus.obj");
-
+	//myTorus = myScene->AddModel("Meshes/torus.obj");
+	//myTorus = myScene->AddModel("Meshes/sphere.fbx");
+	myTorus = myScene->AddModel("Meshes/M_thumbleweed_01.fbx");
+	
 
 	wendy::CModel* model = myScene->GetModel(myTorus);
 	cu::Matrix44f transform;
