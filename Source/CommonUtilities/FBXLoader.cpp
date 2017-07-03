@@ -5,41 +5,49 @@
 #include "assimp\scene.h"
 #include "assimp\postprocess.h"
 
+#if defined(_WIN64) //|| defined(_apple64?) || defined (_linux64?)
+
 #ifdef _DEBUG
 #pragma comment (lib, "..\\Dependencies\\assimp-vc140-mtd.lib")
 #else
 #pragma comment (lib, "..\\Dependencies\\assimp-vc140-mt.lib")
 #endif
 
+#else
+
+#pragma comment (lib, "..\\Dependencies\\assimp32.lib")
+
+#endif // _AMD64
+
+
 namespace cu
 {
 	struct SVertexCollection
 	{
-		SVertexCollection(void* aBuffer) : position(0) { data = static_cast<char*>(aBuffer); }
+		SVertexCollection(void* aBuffer) { data = static_cast<char*>(aBuffer); }
 
 		void PushVec2f(const aiVector3D& aPos)
 		{
-			float* fdata = reinterpret_cast<float*>(data + position);
+			float* fdata = reinterpret_cast<float*>(data);
 
 			fdata[0] = aPos.x;
 			fdata[1] = aPos.y;
 
-			position += sizeof(float) * 2;
+			data += sizeof(float) * 2;
 		}
 		void PushVec4f(const aiVector3D& aPos)
 		{
-			float* fdata = reinterpret_cast<float*>(data + position);
+			float* fdata = reinterpret_cast<float*>(data /*+ position*/);
 
 			fdata[0] = aPos.x;
 			fdata[1] = aPos.y;
 			fdata[2] = aPos.z;
 			fdata[3] = 1.f;
 
-			position += sizeof(float) * 4;
+			data += sizeof(float) * 4;
 		}
 
 		char* data;
-		int position;
 	};
 
 	bool CFBXLoader::LoadFbxFile(const std::string& aFilePath, SModelData& aDataOut)
