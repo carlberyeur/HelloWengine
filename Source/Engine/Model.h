@@ -22,6 +22,7 @@ namespace wendy
 		inline const cu::Vector3f& GetPosition() const;
 		inline void SetTransformation(const cu::Matrix44f& aTransformation);
 		inline void SetPosition(const cu::Vector3f& aPosition);
+		inline void SetPosition(const float aX, const float aY, const float aZ);
 
 	private:
 		//CBoundingSphere myBoundingSphere
@@ -50,5 +51,10 @@ namespace wendy
 	inline void CModel::SetPosition(const cu::Vector3f& aPosition)
 	{
 		myTransformation.myPosition = aPosition;
+	}
+
+	inline void CModel::SetPosition(const float aX, const float aY, const float aZ)
+	{
+		myTransformation.myPosition.Set(aX, aY, aZ);
 	}
 }
