@@ -111,7 +111,7 @@ namespace wendy
 
 		meshDesc.vertices.AddChunk(fbxData.mesh.vertices.data(), fbxData.mesh.vertices.ByteSize<>());
 		meshDesc.vertexSize = fbxData.mesh.vertexSize;
-		meshDesc.vertexCount = fbxData.mesh.vertices.Size<int>();
+		meshDesc.vertexCount = fbxData.mesh.vertexCount;
 
 		MeshID mesh = myRenderer.CreateMesh(meshDesc);
 
