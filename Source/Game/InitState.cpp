@@ -20,16 +20,22 @@ bool CInitState::Init()
 {
 	myScene = wendy::CEngine::GetInstance()->CreateScene();
 	myScene->Init();
-	//myTorus = myScene->AddModel("Meshes/torus.obj");
-	//myTorus = myScene->AddModel("Meshes/sphere.fbx");
-	myTorus = myScene->AddModel("Meshes/M_thumbleweed_01.fbx");
 	
+	//myTorus = myScene->AddModel("Meshes/sphere.fbx");
 
+	myTorus = myScene->AddModel("Meshes/torus.obj");
 	wendy::CModel* model = myScene->GetModel(myTorus);
 	cu::Matrix44f transform;
 	transform.SetScale({ 0.5f, 0.5f, 0.5f });
 	transform = transform * cu::Matrix44f::CreateRotateAroundX(3.14f * 0.5f);
 	model->SetTransformation(transform);
+
+	myTumbleWeed = myScene->AddModel("Meshes/M_thumbleweed_01.fbx");
+	wendy::CModel* model2 = myScene->GetModel(myTumbleWeed);
+	cu::Matrix44f transform2;
+	transform2.SetScale({ 0.5f, 0.5f, 0.5f });
+	model2->SetTransformation(transform2);
+	model2->SetPosition(0.f, 0.f, -10.f);
 
 	myStopWatch.Init();
 
