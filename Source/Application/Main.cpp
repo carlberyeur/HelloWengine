@@ -3,28 +3,16 @@
 #include "../Engine/Engine.h"
 #include "../Game/Game.h"
 
-#include "../CommonUtilities/ObjLoader.h"
-
 //#define USE_WIDE_CHAR
 
 template <typename CharType>
 bool Init(int argc, CharType** argv);
 
 #ifdef USE_WIDE_CHAR
-
 int wmain(int argc, wchar_t** argv)
-{
-	if (!Init(argc, argv))
-	{
-		return 1336;
-	}
-
-	return 0;
-}
-
 #else
-
 int main(int argc, char** argv)
+#endif // USE_WIDE_CHAR
 {
 	if (!Init(argc, argv))
 	{
@@ -34,7 +22,6 @@ int main(int argc, char** argv)
 	return 0;
 }
 
-#endif // USE_WIDE_CHAR
 
 template <typename CharType>
 bool Init(int /*argc*/, CharType** /*argv*/)
