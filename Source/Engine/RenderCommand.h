@@ -11,7 +11,6 @@ namespace wendy
 		IRenderCommand() {}
 		virtual ~IRenderCommand() {}
 
-		virtual void Execute(CBaseRenderer& /*aRenderer*/) {}
 		virtual void Execute(COpenGLRenderer& aRenderer) = 0;
 	};
 }

@@ -16,22 +16,27 @@ namespace wendy
 		: myDevice(nullptr)
 		, myDeviceContext(nullptr)
 		, mySwapchain(nullptr)
+		, myBackBufferRTV(nullptr)
 	{
 	}
 
 	CDirect3DFramework::~CDirect3DFramework()
 	{
+		SAFE_RELEASE(myBackBufferRTV);
+
 		SAFE_RELEASE(mySwapchain);
 		SAFE_RELEASE(myDeviceContext);
 		SAFE_RELEASE(myDevice);
 	}
 
-	bool CDirect3DFramework::Init(const std::uint32_t aWidth, const std::uint32_t aHeight, CBaseWindow& aWindow)
+	bool CDirect3DFramework::Init(CBaseWindow& aWindow)
 	{
+		cu::Vector2ui windowSize = aWindow.GetWindowSize();
+
 		DXGI_SWAP_CHAIN_DESC swapChainDesc = {};
 		swapChainDesc.BufferCount = 1;
-		swapChainDesc.BufferDesc.Width = aWidth;
-		swapChainDesc.BufferDesc.Height = aHeight;
+		swapChainDesc.BufferDesc.Width = windowSize.x;
+		swapChainDesc.BufferDesc.Height = windowSize.y;
 		swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 		swapChainDesc.BufferDesc.RefreshRate.Numerator = 0;
 		swapChainDesc.BufferDesc.RefreshRate.Denominator = 1;
@@ -49,26 +54,60 @@ namespace wendy
 		flags |= D3D11_CREATE_DEVICE_DEBUG;
 #endif
 
-		HRESULT result = D3D11CreateDeviceAndSwapChain(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, flags, &featureLevel, 1, D3D11_SDK_VERSION, &swapChainDesc, &mySwapchain, &myDevice, nullptr, &myDeviceContext);
-		if (FAILED(result))
+		HRESULT deviceAndSwapChainResult = D3D11CreateDeviceAndSwapChain(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, flags, &featureLevel, 1, D3D11_SDK_VERSION, &swapChainDesc, &mySwapchain, &myDevice, nullptr, &myDeviceContext);
+		if (FAILED(deviceAndSwapChainResult))
 		{
 			return false;
 		}
 
+		if (!GetBackBuffer())
+		{
+			return false;
+		}
+		
 		return true;
 	}
 
 	bool CDirect3DFramework::BeginFrame()
 	{
-		return false;
+		const float clearColour[4] = { 0.f, 0.f, 0.0f, 0.f };
+		myDeviceContext->ClearRenderTargetView(myBackBufferRTV, clearColour);
+		
+		return true;
 	}
 
 	bool CDirect3DFramework::EndFrame()
 	{
-		return false;
+		HRESULT goodPresent = mySwapchain->Present(0, 0);
+
+		return SUCCEEDED(goodPresent);
 	}
 
-	void CDirect3DFramework::OnWindowResize(const std::uint32_t /*aWidth*/, const std::uint32_t /*aHeight*/)
+	void CDirect3DFramework::OnWindowResize(const cu::Vector2ui& /*aWindowSize*/)
 	{
+	}
+
+	void CDirect3DFramework::ActivateBackBuffer(ID3D11DepthStencilView* aDepthStencilView)
+	{
+		myDeviceContext->OMSetRenderTargets(1, &myBackBufferRTV, aDepthStencilView);
+	}
+
+	bool CDirect3DFramework::GetBackBuffer()
+	{
+		ID3D11Texture2D* backBuffer = nullptr;
+		HRESULT backBufferResult = mySwapchain->GetBuffer(0, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(&backBuffer));
+		if (FAILED(backBufferResult))
+		{
+			return false;
+		}
+
+		HRESULT backBufferRTVResult = myDevice->CreateRenderTargetView(backBuffer, nullptr, &myBackBufferRTV);
+		backBuffer->Release();
+		if (FAILED(backBufferRTVResult))
+		{
+			return false;
+		}
+
+		return true;
 	}
 }

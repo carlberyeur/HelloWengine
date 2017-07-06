@@ -13,42 +13,62 @@
 #include "Direct3DFramework.h"
 #include "OpenGLFramework.h"
 #include "OpenGLRenderer.h"
-#include "TestSprite2.h"
+
+#ifdef _DEBUG
+#define DEBUG_INIT_PARAMETERS() if (!DebugParameters(aInitParameters)) return false;
+#else
+#define DEBUG_INIT_PARAMETERS()
+#endif // _DEBUG
+
 
 namespace wendy
 {
+	CEngine* CEngine::theInstance = nullptr;
+
 	CEngine::CEngine()
 		: myWindow(nullptr)
 		, myFramework(nullptr)
 		, myRenderer(nullptr)
+		, myIsRunning(false)
+		, myThreadedRender(false)
 	{
+		assert(theInstance == nullptr);
+		theInstance = this;
 	}
 
 	CEngine::~CEngine()
 	{
+		assert(theInstance == this);
+		theInstance = nullptr;
 	}
 
-	TestSprite2* testSprite = nullptr;
+	CEngine* CEngine::GetInstance()
+	{
+		return theInstance;
+	}
 
 	bool CEngine::Init(const SEngineParameters& aInitParameters)
 	{
+<<<<<<< HEAD
 		
+=======
+		DEBUG_INIT_PARAMETERS();
+
+>>>>>>> origin/master
 		myWindow = std::make_unique<CGLFWWindow>();
-		if (!myWindow->Init(800, 600, "Hello Wengine"))
+		if (!myWindow->Init(aInitParameters.windowSize, "Hello Wengine"))
 		{
 			return false;
 		}
 
 		myFramework = std::make_unique<COpenGLFramework>();
 		
-		if (!myFramework->Init(800, 600, *myWindow))
+		if (!myFramework->Init(*myWindow))
 		{
 			return false;
 		}
 
 		myRenderer = std::make_unique<COpenGLRenderer>();
-
-		testSprite = new TestSprite2(*myRenderer);
 
 		myUpdateCallback = aInitParameters.updateCallback;
 		myRenderCallback = aInitParameters.renderCallback;
@@ -63,6 +83,7 @@ namespace wendy
 		WorkPool::Init(!myThreadedRender);
 
 		myIsRunning = true;
+		bool runSuccess = true;
 		
 		try
 		{
@@ -81,14 +102,14 @@ namespace wendy
 		{
 			DL_MESSAGE_BOX(e.what(), false);
 			myIsRunning = false;
-			return false;
+			runSuccess = false;
 		}
 
 		myIsRunning = false;
 
 		WorkPool::Shutdown();
 
-		return true;
+		return runSuccess;
 	}
 
 	bool CEngine::Update()
@@ -102,7 +123,6 @@ namespace wendy
 		}
 
 		myRenderCallback();
-		testSprite->Render(*myRenderer);
 
 		if (!myThreadedRender)
 		{
@@ -122,6 +142,26 @@ namespace wendy
 	std::unique_ptr<CScene> CEngine::CreateScene()
 	{
 		return std::make_unique<CScene>(*myRenderer);
+	}
+
+	bool CEngine::DebugParameters(const SEngineParameters& aInitParameters)
+	{
+		if (aInitParameters.windowSize.Length2() == 0)
+		{
+			return false;
+		}
+
+		if (!aInitParameters.updateCallback)
+		{
+			return false;
+		}
+
+		if (!aInitParameters.renderCallback)
+		{
+			return false;
+		}
+
+		return true;
 	}
 
 	void CEngine::AddRenderWork()

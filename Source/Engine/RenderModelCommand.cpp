@@ -9,11 +9,10 @@
 
 namespace wendy
 {
-	CRenderModelCommand::CRenderModelCommand(const MeshID aMesh, const EffectID aEffect, const size_t aConstantBuffer, const cu::Matrix33f& aTransformation, const TextureID aTexture)
+	CRenderModelCommand::CRenderModelCommand(const MeshID aMesh, const ConstantBufferID aConstantBuffer, const TextureID aTexture, const cu::Matrix44f& aTransformation)
 		: myTransformation(aTransformation)
-		, myConstantBuffers(aConstantBuffer)
+		, myConstantBuffer(aConstantBuffer)
 		, myMesh(aMesh)
-		, myEffect(aEffect)
 		, myTexture(aTexture)
 	{
 	}
@@ -24,17 +23,17 @@ namespace wendy
 
 	void CRenderModelCommand::Execute(COpenGLRenderer& aRenderer)
 	{
-		CGLEffect* effect = aRenderer.GetEffect(myEffect);
-		if (!effect) return;
+		CGLUniformBuffer* constantBuffer = aRenderer.GetUniformBuffer(myConstantBuffer);
+		if (!constantBuffer) return;
 
 		CGLMesh* mesh = aRenderer.GetMesh(myMesh);
 		if (!mesh) return;
 
-		//get texture
-		//set texture
+		//CGLTexture* texture = aRenderer.GetTexture(myTexture);
+		//if (!texture) return;
 
-		effect->Activate();
-		effect->GetUniformBuffer(myConstantBuffers).SetData(myTransformation);
+		//texture->Activate();
+		constantBuffer->SetData(myTransformation);
 		mesh->Draw();
 	}
 }

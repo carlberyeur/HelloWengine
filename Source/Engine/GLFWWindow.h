@@ -12,7 +12,7 @@ namespace wendy
 		CGLFWWindow();
 		~CGLFWWindow();
 
-		virtual bool Init(const std::uint32_t aWidth, const std::uint32_t aHeight, const std::string& aTitle) override;
+		virtual bool Init(const cu::Vector2ui& aWindowSize, const std::string& aTitle) override;
 		virtual bool PollEvents() override;
 		virtual void* GetNativeHandle() override;
 		virtual bool IsOpen() override;
@@ -21,6 +21,9 @@ namespace wendy
 		virtual void MakeContextCurrent(std::nullptr_t) override;
 		virtual bool AssignSwapBuffersFunction(cu::CFunction<void>& aSwapBufferFunctionPointer) override;
 		virtual bool GetExtensionLoaderFunction(cu::CFunction<void(*)(), const std::string&>& aLoadExtensionFunction) override;
+
+		virtual cu::Vector2ui GetWindowSize() const override;
+		virtual cu::Vector2f GetWindowSizeF() const override;
 
 	private:
 		void KeyCallback(int aKey, int aScanCode, int aAction, int aModifierKeyBits);

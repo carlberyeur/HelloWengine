@@ -39,3 +39,5 @@ Temp/
 *.iobj
 *.ipdb
 *.opendb
+*.ipch
+*.bat

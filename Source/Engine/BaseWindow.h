@@ -8,7 +8,7 @@ namespace wendy
 		CBaseWindow();
 		virtual ~CBaseWindow();
 
-		virtual bool Init(const std::uint32_t aWidth, const std::uint32_t aHeight, const std::string& aTitle) = 0;
+		virtual bool Init(const cu::Vector2ui& aWindowSize, const std::string& aTitle) = 0;
 		virtual bool PollEvents() = 0;
 		virtual bool IsOpen() = 0;
 		virtual void* GetNativeHandle() = 0;
@@ -17,6 +17,9 @@ namespace wendy
 		virtual void MakeContextCurrent(std::nullptr_t) {}
 		virtual bool AssignSwapBuffersFunction(cu::CFunction<void>& aSwapBufferFunctionPointer);
 		virtual bool GetExtensionLoaderFunction(cu::CFunction<void(*)(), const std::string&>& aLoadExtensionFunction);
+
+		virtual cu::Vector2ui GetWindowSize() const = 0;
+		virtual cu::Vector2f GetWindowSizeF() const = 0;
 
 		void SetKeyboardCallback(const cu::CFunction<void, int, int>& aKeyboardCallback);
 

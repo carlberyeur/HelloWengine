@@ -34,7 +34,10 @@
     <Filter Include="Renderer\OpenGLRenderer\Texture">
       <UniqueIdentifier>{1e77f5e0-f54b-466e-a943-d676895deee7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Renderer\OpenGLRenderer\RenderCommands">
+    <Filter Include="Scene\Renderables">
+      <UniqueIdentifier>{7e6cf39b-eb63-454d-a759-84dc5c365b4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\RenderCommands">
       <UniqueIdentifier>{b50055c8-90d2-43b7-b952-43b252c23bf6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -90,9 +93,22 @@
       <Filter>Renderer\OpenGLRenderer\Texture</Filter>
     </ClInclude>
     <ClInclude Include="RenderModelCommand.h">
-      <Filter>Renderer\OpenGLRenderer\RenderCommands</Filter>
+      <Filter>Renderer\RenderCommands</Filter>
     </ClInclude>
     <ClInclude Include="TestSprite2.h" />
+    <ClInclude Include="RenderPipeline.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SetCullModeCommand.h">
+      <Filter>Renderer\RenderCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Scene\Renderables</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelLoader.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeEffectCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -134,8 +150,21 @@
       <Filter>Renderer\OpenGLRenderer\Texture</Filter>
     </ClCompile>
     <ClCompile Include="RenderModelCommand.cpp">
-      <Filter>Renderer\OpenGLRenderer\RenderCommands</Filter>
+      <Filter>Renderer\RenderCommands</Filter>
     </ClCompile>
     <ClCompile Include="TestSprite2.cpp" />
+    <ClCompile Include="RenderPipeline.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SetCullModeCommand.cpp">
+      <Filter>Renderer\RenderCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Scene\Renderables</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelLoader.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="ChangeEffectCommand.cpp" />
   </ItemGroup>
 </Project>

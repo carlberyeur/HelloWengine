@@ -77,17 +77,13 @@ namespace cu
 		static const Vector2 One;
 	};
 
-	using Vector2c = Vector2<char>;
 	using Vector2i = Vector2<int>;
 	using Vector2ui = Vector2<unsigned int>;
 	using Vector2f = Vector2<float>;
-	using Vector2d = Vector2<double>;
 
-	using Point2c = Vector2<char>;
 	using Point2i = Vector2<int>;
 	using Point2ui = Vector2<unsigned int>;
 	using Point2f = Vector2<float>;
-	using Point2d = Vector2<double>;
 
 	template<typename TYPE> using Point2 = Vector2<TYPE>;
 

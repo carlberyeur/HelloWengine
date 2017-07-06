@@ -53,9 +53,6 @@
     <ClInclude Include="ObjLoader.h">
       <Filter>DataLoading</Filter>
     </ClInclude>
-    <ClInclude Include="PNGLoader.h">
-      <Filter>DataLoading</Filter>
-    </ClInclude>
     <ClInclude Include="InvertMatrix.h">
       <Filter>Math</Filter>
     </ClInclude>
@@ -101,6 +98,9 @@
     <ClInclude Include="CUTime.h">
       <Filter>Time</Filter>
     </ClInclude>
+    <ClInclude Include="FBXLoader.h">
+      <Filter>DataLoading</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -110,9 +110,6 @@
       <Filter>Debugging</Filter>
     </ClCompile>
     <ClCompile Include="ObjLoader.cpp">
-      <Filter>DataLoading</Filter>
-    </ClCompile>
-    <ClCompile Include="PNGLoader.cpp">
       <Filter>DataLoading</Filter>
     </ClCompile>
     <ClCompile Include="TargaLoader.cpp">
@@ -141,6 +138,9 @@
     </ClCompile>
     <ClCompile Include="CUTime.cpp">
       <Filter>Time</Filter>
+    </ClCompile>
+    <ClCompile Include="FBXLoader.cpp">
+      <Filter>DataLoading</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

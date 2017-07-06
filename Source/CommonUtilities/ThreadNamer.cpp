@@ -48,7 +48,6 @@ namespace CU
 	void SetThreadName(uint32_t dwThreadID, const std::string& threadName)
 	{
 #ifdef _WIN32
-		locThreadNames[dwThreadID] = threadName;
 		THREADNAME_INFO info;
 		info.dwType = 0x1000;
 		info.szName = threadName.c_str();
@@ -63,9 +62,13 @@ namespace CU
 		__except (EXCEPTION_EXECUTE_HANDLER)
 		{
 		}
+<<<<<<< HEAD
 #elif defined(__APPLE__)
 #pragma message("SetThreadName not implemented on macOS")
 		
+=======
+		locThreadNames[dwThreadID] = threadName;
+>>>>>>> origin/master
 #endif // _WIN32
 	}
 

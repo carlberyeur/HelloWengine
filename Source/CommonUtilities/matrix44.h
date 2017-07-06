@@ -224,15 +224,15 @@ namespace cu
 			TYPE scaling = aFar / (aFar - aNear);
 			Matrix44<TYPE> returnMatrix = Matrix44<TYPE>::Identity;
 
-			float AspectRatioY = aHeight / aWidth;
-			float FovX = aFov * (static_cast<float>(M_PI) / 180.0f);
-			float TanFovX = tan(FovX / 2.0f);
-			float FovY = 2.0f * atan(TanFovX * AspectRatioY);
+			TYPE AspectRatioY = aHeight / aWidth;
+			TYPE FovX = aFov * (static_cast<TYPE>(M_PI) / 180.0f);
+			TYPE TanFovX = tan(FovX / 2.0f);
+			TYPE FovY = 2.0f * atan(TanFovX * AspectRatioY);
 
-			float TanFovY = tan(FovY / 2.0f);
-			float FarMinusNear = aFar - aNear;
-			float OneDivTanFov = 1.0f / TanFovY;
-			float FovYDivFarMinusNear = FovY / FarMinusNear;
+			TYPE TanFovY = tan(FovY / 2.0f);
+			TYPE FarMinusNear = aFar - aNear;
+			TYPE OneDivTanFov = 1.0f / TanFovY;
+			TYPE FovYDivFarMinusNear = FovY / FarMinusNear;
 
 			returnMatrix.my2DArray[0][0] = AspectRatioY * OneDivTanFov;
 			returnMatrix.my2DArray[1][1] = OneDivTanFov;
@@ -251,7 +251,13 @@ namespace cu
 
 		static Matrix44 CreateOrthogonalProjectionMatrixLH(TYPE aNear, TYPE aFar, TYPE aWidth, TYPE aHeight)
 		{
+<<<<<<< HEAD
 			Matrix44<float> matrix;
+=======
+			assert(aWidth > 0.f && aHeight > 0.f && (aFar - aNear) > 0.f && (aNear - aFar) > 0.f);
+
+			Matrix44 matrix;
+>>>>>>> origin/master
 			matrix.m11 = 2.f / aWidth;
 			matrix.m22 = 2.f / aHeight;
 			matrix.m33 = 1.f / (aFar - aNear);
@@ -286,8 +292,8 @@ namespace cu
 			rotationX.m14 = TYPE(0);
 
 			rotationX.m21 = TYPE(0);
-			rotationX.m22 = TYPEcos(aAngle);
-			rotationX.m23 = TYPEsin(aAngle);
+			rotationX.m22 = TYPE(cos(aAngle));
+			rotationX.m23 = TYPE(sin(aAngle));
 			rotationX.m24 = TYPE(0);
 
 			rotationX.m31 = TYPE(0);
@@ -383,7 +389,7 @@ namespace cu
 			return Vector3<TYPE>(myRightVector.Length(), myUpVector.Length(), myForwardVector.Length());
 		}
 
-		Vector3<TYPE> GetPosition() const
+		const Vector3<TYPE>& GetPosition() const
 		{
 			return myPosition;
 		}
@@ -418,7 +424,7 @@ namespace cu
 			return *this;
 		}
 
-		Matrix44<TYPE>& Rotate(float anAngle, Axees anAxis)
+		Matrix44<TYPE>& Rotate(TYPE anAngle, Axees anAxis)
 		{
 			Matrix44<TYPE> temp;
 
@@ -448,7 +454,7 @@ namespace cu
 			return *this;
 		}
 
-		Matrix44<TYPE>& RotateAroundAxis(float anAngle, Axees anAxis)
+		Matrix44<TYPE>& RotateAroundAxis(TYPE anAngle, Axees anAxis)
 		{
 			Matrix44<TYPE> temp;
 
@@ -479,7 +485,7 @@ namespace cu
 		}
 
 		/* rotates x,y then z*/
-		Matrix44<TYPE>& Rotate(const float x, const float y, const float z)
+		Matrix44<TYPE>& Rotate(const TYPE x, const TYPE y, const TYPE z)
 		{
 			Rotate(x, Axees::X);
 			Rotate(y, Axees::Y);
@@ -489,7 +495,7 @@ namespace cu
 		}
 
 		/* rotates x,y then z*/
-		Matrix44<TYPE>& RotateAroundAxes(const float x, const float y, const float z)
+		Matrix44<TYPE>& RotateAroundAxes(const TYPE x, const TYPE y, const TYPE z)
 		{
 			RotateAroundAxis(x, Axees::X);
 			Rotate(y, Axees::Y);
@@ -506,6 +512,7 @@ namespace cu
 
 			return *this;
 		}
+
 		Matrix44<TYPE>& SetScale(const Vector3<TYPE>& aScaleVector)
 		{
 			myRightVector.Normalize();
@@ -534,9 +541,9 @@ namespace cu
 
 			static const Vector3f objectUpVector(0.0f, 1.0f, 0.0f);
 
-			float xSize = myRightVector.Length();
-			float ySize = myUpVector.Length();
-			float zSize = myForwardVector.Length();
+			TYPE xSize = myRightVector.Length();
+			TYPE ySize = myUpVector.Length();
+			TYPE zSize = myForwardVector.Length();
 
 			Vector3f zAxis = aLookTo - aLookFrom;
 			zAxis = zAxis.GetNormalized() * zSize;
@@ -621,7 +628,7 @@ namespace cu
 
 		void Invert()
 		{
-			InvertMatrix(&m11);
+			InvertMatrix(myMatrix.data());
 		}
 
 		Matrix44<TYPE> GetInverted() const

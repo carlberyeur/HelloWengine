@@ -13,8 +13,8 @@ namespace wendy
 		cu::CFunction<bool> updateCallback;
 		cu::CFunction<void> renderCallback;
 		
-		//cu::Vector2ui windowSize;
-		//
+		cu::Vector2ui windowSize;
+		
 		//bool fullscreen : 1;
 		//bool vsync : 1;
 		bool threadedRendering : 1;
@@ -27,6 +27,8 @@ namespace wendy
 		CEngine(const CEngine& aCopy) = delete;
 		~CEngine();
 
+		static CEngine* GetInstance();
+
 		bool Init(const SEngineParameters& aInitParameters);
 		bool Run();
 		bool Update();
@@ -35,6 +37,7 @@ namespace wendy
 		std::unique_ptr<CScene> CreateScene();
 
 	private:
+		bool DebugParameters(const SEngineParameters& aInitParameters);
 		void AddRenderWork();
 
 		cu::CFunction<bool> myUpdateCallback;
@@ -46,5 +49,7 @@ namespace wendy
 
 		std::atomic_bool myIsRunning;
 		bool myThreadedRender;
+
+		static CEngine* theInstance;
 	};
 }

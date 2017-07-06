@@ -20,9 +20,25 @@ namespace cu
 			CVector<Vector3f> normals;
 		};
 
-		CObjLoader();
-		~CObjLoader();
+		struct SVertex
+		{
+			Vector3f position;
+			//Vector3f normal;
+			Vector2f uv;
+			
+			bool operator==(const SVertex& aRight) const
+			{
+				return position == aRight.position && /*normal == aRight.normal && */uv == aRight.uv;
+			}
+		};
 
-		bool LoadObjFile(const std::string& aFilePath, SMeshData& aDataOut);
+		struct SIndexedMeshData
+		{
+			CVector<SVertex> vertices;
+			CVector<std::uint32_t> indices;
+		};
+
+		static bool LoadObjFile(const std::string& aFilePath, SMeshData& aDataOut);
+		static bool LoadObjFile(const std::string& aFilePath, SIndexedMeshData& aDataOut);
 	};
 }

@@ -16,7 +16,7 @@ namespace wendy
 	{
 	}
 
-	bool COpenGLFramework::Init(const std::uint32_t /*aWidth*/, const std::uint32_t /*aHeight*/, CBaseWindow& aWindow)
+	bool COpenGLFramework::Init(CBaseWindow& aWindow)
 	{
 		if (!aWindow.AssignSwapBuffersFunction(mySwapBuffers))
 		{
@@ -43,7 +43,7 @@ namespace wendy
 		return true;
 	}
 
-	void COpenGLFramework::OnWindowResize(const std::uint32_t /*aWidth*/, const std::uint32_t /*aHeight*/)
+	void COpenGLFramework::OnWindowResize(const cu::Vector2ui& /*aWindowSize*/)
 	{
 	}
 
