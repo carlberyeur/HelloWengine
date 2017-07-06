@@ -23,3 +23,6 @@
 #include <memory>
 #include <mutex>
 #include <thread>
+
+#include <math.h>
+#include <memory.h>
