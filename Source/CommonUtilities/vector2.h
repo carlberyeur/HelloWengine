@@ -24,26 +24,26 @@ namespace cu
 		inline void Set(const TYPE aX, const TYPE aY);
 		template<typename U> inline void Set(const U aX, const U aY);
 
-		__forceinline Vector2& operator+=(const Vector2& aRight);
-		__forceinline Vector2& operator-=(const Vector2& aRight);
-		__forceinline Vector2& operator*=(const Vector2& aRight);
-		__forceinline Vector2& operator/=(const Vector2& aRight);
+		HW_INLINE Vector2& operator+=(const Vector2& aRight);
+		HW_INLINE Vector2& operator-=(const Vector2& aRight);
+		HW_INLINE Vector2& operator*=(const Vector2& aRight);
+		HW_INLINE Vector2& operator/=(const Vector2& aRight);
 
-		__forceinline Vector2 operator+(const Vector2& aRight) const;
-		__forceinline Vector2 operator-(const Vector2& aRight) const;
-		__forceinline Vector2 operator*(const Vector2& aRight) const;
-		__forceinline Vector2 operator/(const Vector2& aRight) const;
+		HW_INLINE Vector2 operator+(const Vector2& aRight) const;
+		HW_INLINE Vector2 operator-(const Vector2& aRight) const;
+		HW_INLINE Vector2 operator*(const Vector2& aRight) const;
+		HW_INLINE Vector2 operator/(const Vector2& aRight) const;
 
-		__forceinline Vector2 operator-() const;
+		HW_INLINE Vector2 operator-() const;
 
-		__forceinline Vector2& operator*=(const TYPE aRight);
-		__forceinline Vector2& operator/=(const TYPE aRight);
+		HW_INLINE Vector2& operator*=(const TYPE aRight);
+		HW_INLINE Vector2& operator/=(const TYPE aRight);
 
-		__forceinline Vector2 operator*(const TYPE aRight) const;
-		__forceinline Vector2 operator/(const TYPE aRight) const;
+		HW_INLINE Vector2 operator*(const TYPE aRight) const;
+		HW_INLINE Vector2 operator/(const TYPE aRight) const;
 
-		__forceinline bool operator==(const Vector2& aRight) const;
-		__forceinline bool operator!=(const Vector2& aRight) const;
+		HW_INLINE bool operator==(const Vector2& aRight) const;
+		HW_INLINE bool operator!=(const Vector2& aRight) const;
 		
 		inline Vector2 Abs() const;
 		inline TYPE Length() const;
@@ -97,13 +97,13 @@ namespace cu
 	template<typename TYPE> const Vector2<TYPE> Vector2<TYPE>::One(1, 1);
 
 	template<typename TYPE>
-	__forceinline Vector2<TYPE>& operator*=(const TYPE aLeft, Vector2<TYPE>& aRight)
+	HW_INLINE Vector2<TYPE>& operator*=(const TYPE aLeft, Vector2<TYPE>& aRight)
 	{
 		return aRight *= aLeft;
 	}
 
 	template<typename TYPE>
-	__forceinline Vector2<TYPE> operator*(const TYPE aLeft, Vector2<TYPE> aRight)
+	HW_INLINE Vector2<TYPE> operator*(const TYPE aLeft, Vector2<TYPE> aRight)
 	{
 		return aRight *= aLeft;
 	}
@@ -141,7 +141,7 @@ namespace cu
 	}
 
 	template<typename TYPE>
-	__forceinline Vector2<TYPE>& Vector2<TYPE>::operator=(const Vector2& aRight)
+	HW_INLINE Vector2<TYPE>& Vector2<TYPE>::operator=(const Vector2& aRight)
 	{
 		x = aRight.x;
 		y = aRight.y;
@@ -151,7 +151,7 @@ namespace cu
 
 	template<typename TYPE>
 	template<typename U>
-	__forceinline Vector2<TYPE>& Vector2<TYPE>::operator=(const Vector2<U>& aRight)
+	HW_INLINE Vector2<TYPE>& Vector2<TYPE>::operator=(const Vector2<U>& aRight)
 	{
 		x = static_cast<TYPE>(aRight.x);
 		y = static_cast<TYPE>(aRight.y);
@@ -175,7 +175,7 @@ namespace cu
 	}
 
 	template<typename TYPE>
-	__forceinline Vector2<TYPE>& Vector2<TYPE>::operator+=(const Vector2& aRight)
+	HW_INLINE Vector2<TYPE>& Vector2<TYPE>::operator+=(const Vector2& aRight)
 	{
 		x += aRight.x;
 		y += aRight.y;
@@ -184,7 +184,7 @@ namespace cu
 	}
 
 	template<typename TYPE>
-	__forceinline Vector2<TYPE>& Vector2<TYPE>::operator-=(const Vector2& aRight)
+	HW_INLINE Vector2<TYPE>& Vector2<TYPE>::operator-=(const Vector2& aRight)
 	{
 		x -= aRight.x;
 		y -= aRight.y;
@@ -194,7 +194,7 @@ namespace cu
 
 
 	template<typename TYPE>
-	__forceinline Vector2<TYPE>& Vector2<TYPE>::operator*=(const Vector2& aRight)
+	HW_INLINE Vector2<TYPE>& Vector2<TYPE>::operator*=(const Vector2& aRight)
 	{
 		x *= aRight.x;
 		y *= aRight.y;
@@ -203,7 +203,7 @@ namespace cu
 	}
 
 	template<typename TYPE>
-	__forceinline Vector2<TYPE>& Vector2<TYPE>::operator/=(const Vector2& aRight)
+	HW_INLINE Vector2<TYPE>& Vector2<TYPE>::operator/=(const Vector2& aRight)
 	{
 		x /= aRight.x;
 		y /= aRight.y;
@@ -212,35 +212,35 @@ namespace cu
 	}
 
 	template<typename TYPE>
-	__forceinline Vector2<TYPE> Vector2<TYPE>::operator+(const Vector2& aRight) const
+	HW_INLINE Vector2<TYPE> Vector2<TYPE>::operator+(const Vector2& aRight) const
 	{
 		Vector2 left = self;
 		return left += aRight;
 	}
 
 	template<typename TYPE>
-	__forceinline Vector2<TYPE> Vector2<TYPE>::operator-(const Vector2& aRight) const
+	HW_INLINE Vector2<TYPE> Vector2<TYPE>::operator-(const Vector2& aRight) const
 	{
 		Vector2 left = self;
 		return left -= aRight;
 	}
 
 	template<typename TYPE>
-	__forceinline Vector2<TYPE> Vector2<TYPE>::operator*(const Vector2& aRight) const
+	HW_INLINE Vector2<TYPE> Vector2<TYPE>::operator*(const Vector2& aRight) const
 	{
 		Vector2 left = self;
 		return left *= aRight;
 	}
 
 	template<typename TYPE>
-	__forceinline Vector2<TYPE> Vector2<TYPE>::operator/(const Vector2& aRight) const
+	HW_INLINE Vector2<TYPE> Vector2<TYPE>::operator/(const Vector2& aRight) const
 	{
 		Vector2 left = self;
 		return left /= aRight;
 	}
 
 	template<typename TYPE>
-	__forceinline Vector2<TYPE> Vector2<TYPE>::operator-() const
+	HW_INLINE Vector2<TYPE> Vector2<TYPE>::operator-() const
 	{
 		Vector2 right = self;
 		
@@ -251,7 +251,7 @@ namespace cu
 	}
 
 	template<typename TYPE>
-	__forceinline Vector2<TYPE>& Vector2<TYPE>::operator*=(const TYPE aRight)
+	HW_INLINE Vector2<TYPE>& Vector2<TYPE>::operator*=(const TYPE aRight)
 	{
 		x *= aRight;
 		y *= aRight;
@@ -260,7 +260,7 @@ namespace cu
 	}
 
 	template<typename TYPE>
-	__forceinline Vector2<TYPE>& Vector2<TYPE>::operator/=(const TYPE aRight)
+	HW_INLINE Vector2<TYPE>& Vector2<TYPE>::operator/=(const TYPE aRight)
 	{
 		x /= aRight;
 		y /= aRight;
@@ -269,7 +269,7 @@ namespace cu
 	}
 
 	template<typename TYPE>
-	__forceinline Vector2<TYPE> Vector2<TYPE>::operator*(const TYPE aRight) const
+	HW_INLINE Vector2<TYPE> Vector2<TYPE>::operator*(const TYPE aRight) const
 	{
 		Vector2 left = self;
 		left *= aRight;
@@ -278,7 +278,7 @@ namespace cu
 	}
 
 	template<typename TYPE>
-	__forceinline Vector2<TYPE> Vector2<TYPE>::operator/(const TYPE aRight) const
+	HW_INLINE Vector2<TYPE> Vector2<TYPE>::operator/(const TYPE aRight) const
 	{
 		Vector2 left = self;
 		left /= aRight;
@@ -287,13 +287,13 @@ namespace cu
 	}
 
 	template<typename TYPE>
-	__forceinline bool Vector2<TYPE>::operator==(const Vector2& aRight) const
+	HW_INLINE bool Vector2<TYPE>::operator==(const Vector2& aRight) const
 	{
 		return (x == aRight.x) && (y == aRight.y);
 	}
 
 	template<typename TYPE>
-	__forceinline bool Vector2<TYPE>::operator!=(const Vector2& aRight) const
+	HW_INLINE	 bool Vector2<TYPE>::operator!=(const Vector2& aRight) const
 	{
 		return !(self == aRight);
 	}
