@@ -2,6 +2,7 @@
 #include "DebugLogger.h"
 
 #include <iostream>
+#ifdef _WIN32
 #include <Windows.h>
 
 extern "C"
@@ -12,18 +13,23 @@ extern "C"
 		_In_   unsigned       _Line
 	);
 }
+#endif
+
 
 #define SUPRESS_UNUSED_WARNING(variable) variable
 constexpr unsigned int MAX_STRING_BUFFER_SIZE = 2048u;
 
 #if defined _WIN32
-#define VSPRINTF vsprintf_s
-#define DebugOutputWindow8 OutputDebugStringA
-#define DebugOutputWindow16 OutputDebugStringW
+	#define VSPRINTF vsprintf_s
+	#define WVSPRINTF wvsprintf
+	#define DebugOutputWindow8 OutputDebugStringA
+	#define DebugOutputWindow16 OutputDebugStringW
 #else
-#define VSPRINTF vsprintf
-#define DebugOutputWindow8 (void)
-#define DebugOutputWindow16 (void)
+	#define VSPRINTF vsprintf
+	#define WVSPRINTF(B, FS, ARGS) 
+//vsprintf((B), cast this badboy to char(FS), (ARGS))
+	#define DebugOutputWindow8 (void)
+	#define DebugOutputWindow16 (void)
 #endif
 
 namespace cu
@@ -67,7 +73,7 @@ namespace cu
 		va_list args;
 
 		va_start(args, aFormattedString);
-		wvsprintf(buffer, aFormattedString, args);
+		WVSPRINTF(buffer, aFormattedString, args);
 		va_end(args);
 
 		std::wcout << buffer << std::endl;
@@ -98,6 +104,9 @@ namespace cu
 			_wassert(nullptr, nullptr, 0);
 			break;
 		}
+#elif defined(__APPLE__)
+		DL_PRINT("ShowMessageBox not implemented on macOS", false);
+#pragma message("ShowMessageBox not implemented on macOS")
 #else
 #error "Fix this! ...or just go with supressing the warning"
 #endif
@@ -127,8 +136,13 @@ namespace cu
 			_wassert(nullptr, nullptr, 0);
 			break;
 		}
+#elif defined(__APPLE__)
+		DL_PRINT("ShowMessageBox not implemented on macOS", false);
+	#pragma message("ShowMessageBox not implemented on macOS")
 #else
+
 #error "Fix this! ...or just go with supressing the warning"
+
 #endif
 	}
 
@@ -137,11 +151,14 @@ namespace cu
 #ifdef _WIN32
 		HANDLE hConsole = nullptr;
 		hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-
+				
 		if (hConsole != nullptr)
 		{
-			SetConsoleTextAttribute(hConsole, aColor);
+			SetConsoleTextAttribute(hConsole, color);
 		}
+#elif defined(__APPLE__)
+		DL_PRINT("ShowMessageBox not implemented on macOS", false);
+	#pragma message("ShowMessageBox not implemented on macOS")
 #else
 #error "Fix this! ...or just go with supressing the warning"
 		SUPRESS_UNUSED_WARNING(aColor);
