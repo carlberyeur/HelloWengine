@@ -19,14 +19,14 @@ namespace wendy
 		virtual void Start(CBaseWindow& aWindow) override;
 
 		virtual void AddRenderCommand(IRenderCommand* aRenderCommand) override;
-		virtual void SwapCommandBuffer();
+		virtual void SwapCommandBuffer() override;
 		virtual void DoRenderQueue() override;
 
 		virtual MeshID CreateMesh(const SMeshDesc& aMeshDesc) override;
 		virtual EffectID CreateEffect(const SEffectDesc& aEffectDesc) override;
 		virtual TextureID CreateTexture(const STextureDesc& aTextureDesc) override;
 
-		virtual void DestroyMesh(const MeshID aMesh);
+		virtual void DestroyMesh(const MeshID aMesh) override;
 
 		CGLMesh* GetMesh(MeshID aID);
 		CGLEffect* GetEffect(EffectID aID);
