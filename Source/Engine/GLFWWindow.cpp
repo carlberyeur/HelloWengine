@@ -2,7 +2,8 @@
 #include "GLFWWindow.h"
 
 #define GLFW_INCLUDE_NONE
-#include <GLFW\glfw3.h>
+#include <GLFW/glfw3.h>
+
 
 #if defined(_WIN32)
 
@@ -16,10 +17,10 @@
 #include <GLFW\glfw3native.h>
 #define GET_NATIVE_WINDOW_PTR() glfwGetX11Display(myWindow)
 
-#elif defined(_APPLE_)
+#elif defined(__APPLE__)
 
 #define GLFW_EXPOSE_NATIVE_COCOA
-#include <GLFW\glfw3native.h>
+#include <GLFW/glfw3native.h>
 #define GET_NATIVE_WINDOW_PTR() glfwGetCocoaWindow(myWindow)
 
 #else
