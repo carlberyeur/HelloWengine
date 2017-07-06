@@ -2,7 +2,8 @@
 #include "BaseFramework.h"
 
 #define GLFW_INCLUDE_GLEXT
-#include <GLFW\glfw3.h>
+#define GLFW_INCLUDE_GLCOREARB
+#include <GLFW/glfw3.h>
 
 namespace wendy
 {
@@ -22,7 +23,7 @@ namespace wendy
 
 		cu::CFunction<void> mySwapBuffers;
 	};
-
+	
 	extern PFNGLATTACHSHADERPROC glAttachShader;
 	extern PFNGLDETACHSHADERPROC glDetachShader;
 	extern PFNGLCOMPILESHADERPROC glCompileShader;
