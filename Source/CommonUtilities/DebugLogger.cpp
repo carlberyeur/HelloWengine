@@ -157,8 +157,8 @@ namespace cu
 			SetConsoleTextAttribute(hConsole, color);
 		}
 #elif defined(__APPLE__)
-		DL_PRINT("ShowMessageBox not implemented on macOS", false);
-	#pragma message("ShowMessageBox not implemented on macOS")
+		DL_PRINT("SetConsoleColor not implemented on macOS", false);
+	#pragma message("SetConsoleColor not implemented on macOS")
 #else
 #error "Fix this! ...or just go with supressing the warning"
 		SUPRESS_UNUSED_WARNING(aColor);
