@@ -81,7 +81,8 @@ namespace cu
 	template<typename T, typename SizeType>
 	inline SizeType CSynchronizer<T, SizeType>::ReadSize() const
 	{
-		return myBuffers[myReadFrom].Size<SizeType>();
+		// xcode wanted this, me is confused
+		return myBuffers[myReadFrom].template Size<SizeType>();
 	}
 
 	template<typename T, typename SizeType>
