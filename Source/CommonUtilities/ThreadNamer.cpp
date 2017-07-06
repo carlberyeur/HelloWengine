@@ -28,6 +28,9 @@ namespace CU
 #ifdef _WIN32
 		DWORD threadId = GetCurrentThreadId();
 		SetThreadName(threadId, threadName);
+#elif defined(__APPLE__)
+#pragma message("SetThreadName not implemented on macOS")
+		
 #endif // _WIN32
 	}
 
@@ -36,6 +39,9 @@ namespace CU
 #ifdef _WIN32
 		DWORD threadId = ::GetThreadId(thread.native_handle());
 		SetThreadName(threadId, threadName);
+#elif defined(__APPLE__)
+#pragma message("SetThreadName not implemented on macOS")
+		
 #endif // _WIN32
 	}
 
@@ -57,6 +63,9 @@ namespace CU
 		__except (EXCEPTION_EXECUTE_HANDLER)
 		{
 		}
+#elif defined(__APPLE__)
+#pragma message("SetThreadName not implemented on macOS")
+		
 #endif // _WIN32
 	}
 
@@ -65,7 +74,11 @@ namespace CU
 #ifdef _WIN32
 		DWORD id = GetCurrentThreadId();
 		return GetThreadName(id);
-#endif // _WIN32
+#elif defined(__APPLE__)
+#pragma message("GetThreadName not implemented on macOS")
+		return locUnNamedThread;
+#endif
+		
 	}
 
 	const std::string& GetThreadName(std::thread& aThread)
@@ -73,7 +86,10 @@ namespace CU
 #ifdef _WIN32
 		DWORD id = ::GetThreadId(aThread.native_handle());
 		return GetThreadName(id);
-#endif // _WIN32
+#elif defined(__APPLE__)
+#pragma message("GetThreadName not implemented on macOS")
+		return locUnNamedThread;
+#endif
 	}
 
 	const std::string& GetThreadName(const uint32_t aThreadID)
@@ -85,6 +101,9 @@ namespace CU
 		}
 
 		return locUnNamedThread;
-#endif // _WIN32
+#elif defined(__APPLE__)
+#pragma message("GetThreadName not implemented on macOS")
+		return locUnNamedThread;
+#endif
 	}
 }
