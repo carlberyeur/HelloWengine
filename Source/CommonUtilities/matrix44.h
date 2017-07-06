@@ -1,5 +1,9 @@
 #pragma once
-#include <intrin.h>
+
+//x86 intrin just includes the right one
+//#include <intrin.h>
+#include <x86intrin.h>
+
 
 #include "InvertMatrix.h"
 
@@ -247,7 +251,7 @@ namespace cu
 
 		static Matrix44 CreateOrthogonalProjectionMatrixLH(TYPE aNear, TYPE aFar, TYPE aWidth, TYPE aHeight)
 		{
-			Matrix44f matrix;
+			Matrix44<float> matrix;
 			matrix.m11 = 2.f / aWidth;
 			matrix.m22 = 2.f / aHeight;
 			matrix.m33 = 1.f / (aFar - aNear);
@@ -264,7 +268,7 @@ namespace cu
 			SetRotation(mRotationZ * mRotationX * mRotationY);
 		}
 
-		template <typename TYPE>
+		//template <typename TYPE>
 		const Vector3<TYPE> GetEulerRotation() const
 		{
 			const Matrix33<TYPE> rotation = GetRotation();
@@ -287,8 +291,8 @@ namespace cu
 			rotationX.m24 = TYPE(0);
 
 			rotationX.m31 = TYPE(0);
-			rotationX.m32 = TYPE-sin(aAngle);
-			rotationX.m33 = TYPEcos(aAngle);
+			rotationX.m32 = TYPE(-sin(aAngle));
+			rotationX.m33 = TYPE(cos(aAngle));
 			rotationX.m34 = TYPE(0);
 
 			rotationX.m41 = TYPE(0);
