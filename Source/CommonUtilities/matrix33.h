@@ -296,7 +296,14 @@ namespace cu
 
 		Matrix33 &Set2DRotation(const TYPE anAngle)
 		{
+#ifdef _WIN32
 			static_assert(false, "this function doesn't do what it's supposed to do, mvh carl");
+#else
+#pragma comment("Set2DRotation doesn't do what it's supposed to do, mvh carl")
+#endif
+			
+			
+			
 			Matrix33<TYPE> tempMatrix = self;
 			tempMatrix.CreateRotateAroundZ(anAngle);
 			tempMatrix.m31 = m31;
