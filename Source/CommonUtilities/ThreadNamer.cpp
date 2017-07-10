@@ -2,10 +2,10 @@
 #include "ThreadNamer.h"
 
 static const std::string locUnNamedThread("UnNamed");
+static std::map<uint32_t, std::string> locThreadNames;
 
 #ifdef _WIN32
 #include <windows.h>
-static std::map<uint32_t, std::string> locThreadNames;
 
 #pragma pack(push,8)
 typedef struct tagTHREADNAME_INFO
@@ -18,6 +18,10 @@ typedef struct tagTHREADNAME_INFO
 #pragma pack(pop)
 #endif // _WIN32
 
+#ifdef __APPLE__
+#include <pthread.h>
+#endif
+
 namespace CU
 {
 	void SetThreadName(const uint32_t dwThreadID, const std::string& threadName);
@@ -29,8 +33,13 @@ namespace CU
 		DWORD threadId = GetCurrentThreadId();
 		SetThreadName(threadId, threadName);
 #elif defined(__APPLE__)
-#pragma message("SetThreadName not implemented on macOS")
+		pthread_setname_np(threadName.c_str());
 		
+		uint64_t threadId;
+		pthread_threadid_np(NULL, &threadId);
+		
+		SetThreadName(static_cast<uint32_t>(threadId), threadName);
+
 #endif // _WIN32
 	}
 
@@ -40,8 +49,8 @@ namespace CU
 		DWORD threadId = ::GetThreadId(thread.native_handle());
 		SetThreadName(threadId, threadName);
 #elif defined(__APPLE__)
-#pragma message("SetThreadName not implemented on macOS")
-		
+		DL_PRINT("Mac OS X: must be set from within the thread (can't specify thread ID)", false);
+	#pragma message("Mac OS X: must be set from within the thread (can't specify thread ID)")
 #endif // _WIN32
 	}
 
@@ -62,51 +71,50 @@ namespace CU
 		__except (EXCEPTION_EXECUTE_HANDLER)
 		{
 		}
-<<<<<<< HEAD
-#elif defined(__APPLE__)
-#pragma message("SetThreadName not implemented on macOS")
-		
-=======
-		locThreadNames[dwThreadID] = threadName;
->>>>>>> origin/master
 #endif // _WIN32
+		
+		locThreadNames[dwThreadID] = threadName;
 	}
 
 	const std::string& GetThreadName()
 	{
-#ifdef _WIN32
-		DWORD id = GetCurrentThreadId();
-		return GetThreadName(id);
-#elif defined(__APPLE__)
-#pragma message("GetThreadName not implemented on macOS")
-		return locUnNamedThread;
-#endif
+		uint32_t id = 0;
 		
+#ifdef _WIN32
+		id = static_cast<uint32_t>(GetCurrentThreadId());
+#elif defined(__APPLE__)
+		uint64_t threadId;
+		pthread_threadid_np(NULL, &threadId);
+		
+		id = static_cast<uint32_t>(threadId);
+#endif
+		return GetThreadName(id);
 	}
 
 	const std::string& GetThreadName(std::thread& aThread)
 	{
+		uint32_t id = 0;
 #ifdef _WIN32
-		DWORD id = ::GetThreadId(aThread.native_handle());
-		return GetThreadName(id);
+		id = static_cast<uint32_t>(::GetThreadId(aThread.native_handle()));
+		
 #elif defined(__APPLE__)
-#pragma message("GetThreadName not implemented on macOS")
-		return locUnNamedThread;
+		uint64_t threadId;
+		pthread_threadid_np(aThread.native_handle(), &threadId);
+		
+		id = static_cast<uint32_t>(threadId);
 #endif
+		
+		return GetThreadName(id);
+
 	}
 
 	const std::string& GetThreadName(const uint32_t aThreadID)
 	{
-#ifdef _WIN32
 		if (locThreadNames.find(aThreadID) != locThreadNames.end())
 		{
 			return locThreadNames[aThreadID];
 		}
 
 		return locUnNamedThread;
-#elif defined(__APPLE__)
-#pragma message("GetThreadName not implemented on macOS")
-		return locUnNamedThread;
-#endif
 	}
 }
