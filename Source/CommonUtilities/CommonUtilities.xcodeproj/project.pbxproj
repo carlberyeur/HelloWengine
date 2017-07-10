@@ -388,6 +388,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				GCC_WARN_CHECK_SWITCH_STATEMENTS = NO;
 				LIBRARY_SEARCH_PATHS = "../Dependencies/macOS/$(CONFIGURATION)";
 				OBJROOT = ../../Temp;
 				PRODUCT_NAME = "$(TARGET_NAME)_$(CONFIGURATION)";
@@ -409,6 +410,7 @@
 					NDEBUG,
 					RELEASE,
 				);
+				GCC_WARN_CHECK_SWITCH_STATEMENTS = NO;
 				LIBRARY_SEARCH_PATHS = "../Dependencies/macOS/$(CONFIGURATION)";
 				OBJROOT = ../../Temp;
 				PRODUCT_NAME = "$(TARGET_NAME)_$(CONFIGURATION)";
