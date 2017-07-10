@@ -123,8 +123,8 @@
 			isa = PBXGroup;
 			children = (
 				5EBB846A1F0E947E00CEAB43 /* FBXLoader.cpp */,
-				5EBB84671F0E946600CEAB43 /* AssImp */,
 				5EBB84681F0E946600CEAB43 /* FBXLoader.h */,
+				5EBB84671F0E946600CEAB43 /* AssImp */,
 				5ECF02B21F0D20D300013409 /* ThreadNamer.cpp */,
 				5ECF02B31F0D20D300013409 /* ThreadNamer.h */,
 				5E0E2C3A1F04016E0055B7A0 /* cumath.h */,

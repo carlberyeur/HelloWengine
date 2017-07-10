@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5E6C59DE1F10F7A2003B3D2F /* libassimp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E6C59DD1F10F7A2003B3D2F /* libassimp.a */; };
-		5E6C59E01F11006D003B3D2F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E6C59DF1F11006D003B3D2F /* libz.tbd */; };
+		5E5AEB951F13AFD300F7C48C /* libassimp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ECCFB821F10ED0900713AB7 /* libassimp.a */; };
+		5E5AEB971F13B16700F7C48C /* libzlibstatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E5AEB961F13B16700F7C48C /* libzlibstatic.a */; };
 		5EB6714A1F0C2B24004AABDC /* libEngine_Debug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ED2C1C71F0BDCD8001A3FBA /* libEngine_Debug.a */; };
 		5EB6714B1F0C2B82004AABDC /* libGame_Debug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ED2C1C41F0BDCBF001A3FBA /* libGame_Debug.a */; };
 		5EB6714C1F0C2BF4004AABDC /* stdafx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5ED2C1AA1F0BD4E2001A3FBA /* stdafx.cpp */; };
@@ -31,6 +31,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5E5AEB961F13B16700F7C48C /* libzlibstatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzlibstatic.a; path = ../Dependencies/macOS/Release/libzlibstatic.a; sourceTree = "<group>"; };
 		5E6C59DD1F10F7A2003B3D2F /* libassimp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libassimp.a; path = ../Dependencies/macOS/libassimp.a; sourceTree = "<group>"; };
 		5E6C59DF1F11006D003B3D2F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		5EB5E33D1F10F15600223400 /* libassimp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libassimp.a; path = ../Dependencies/macOS/Debug/libassimp.a; sourceTree = "<group>"; };
@@ -54,8 +55,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E6C59E01F11006D003B3D2F /* libz.tbd in Frameworks */,
-				5E6C59DE1F10F7A2003B3D2F /* libassimp.a in Frameworks */,
+				5E5AEB971F13B16700F7C48C /* libzlibstatic.a in Frameworks */,
+				5E5AEB951F13AFD300F7C48C /* libassimp.a in Frameworks */,
 				5ECF02B01F0D1E4B00013409 /* OpenGL.framework in Frameworks */,
 				5ECF02AE1F0D1C4400013409 /* libglfw.3.2.dylib in Frameworks */,
 				5ECF02B11F0D1E5800013409 /* libCommonUtilities_Debug.a in Frameworks */,
@@ -106,6 +107,7 @@
 		5ED2C1AF1F0BD536001A3FBA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5E5AEB961F13B16700F7C48C /* libzlibstatic.a */,
 				5E6C59DF1F11006D003B3D2F /* libz.tbd */,
 				5E6C59DD1F10F7A2003B3D2F /* libassimp.a */,
 				5EB5E33D1F10F15600223400 /* libassimp.a */,
