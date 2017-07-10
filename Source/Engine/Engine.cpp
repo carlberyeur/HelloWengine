@@ -49,12 +49,8 @@ namespace wendy
 
 	bool CEngine::Init(const SEngineParameters& aInitParameters)
 	{
-<<<<<<< HEAD
-		
-=======
 		DEBUG_INIT_PARAMETERS();
 
->>>>>>> origin/master
 		myWindow = std::make_unique<CGLFWWindow>();
 		if (!myWindow->Init(aInitParameters.windowSize, "Hello Wengine"))
 		{

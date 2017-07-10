@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "ObjLoader.h"
 
-<<<<<<< HEAD
 #if defined _WIN32
 #define SSCANF sscanf_s
 #else
@@ -9,11 +8,8 @@
 
 #endif
 
-namespace cu
-=======
 //stolen from glm
 void glm_hash_combine(size_t& seed, size_t hash)
->>>>>>> origin/master
 {
 	hash += 0x9e3779b9 + (seed << 6) + (seed >> 2);
 	seed ^= hash;
@@ -108,9 +104,6 @@ namespace cu
 
 		return true;
 	}
-<<<<<<< HEAD
-}
-=======
 
 	bool CObjLoader::LoadObjFile(const std::string& aFilePath, SIndexedMeshData& aDataOut)
 	{
@@ -147,4 +140,3 @@ namespace cu
 		return !aDataOut.indices.empty() && !aDataOut.vertices.empty();
 	}
 }
->>>>>>> origin/master

@@ -251,13 +251,8 @@ namespace cu
 
 		static Matrix44 CreateOrthogonalProjectionMatrixLH(TYPE aNear, TYPE aFar, TYPE aWidth, TYPE aHeight)
 		{
-<<<<<<< HEAD
 			Matrix44<float> matrix;
-=======
 			assert(aWidth > 0.f && aHeight > 0.f && (aFar - aNear) > 0.f && (aNear - aFar) > 0.f);
-
-			Matrix44 matrix;
->>>>>>> origin/master
 			matrix.m11 = 2.f / aWidth;
 			matrix.m22 = 2.f / aHeight;
 			matrix.m33 = 1.f / (aFar - aNear);
