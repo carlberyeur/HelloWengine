@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E6C59DE1F10F7A2003B3D2F /* libassimp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E6C59DD1F10F7A2003B3D2F /* libassimp.a */; };
+		5E6C59E01F11006D003B3D2F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E6C59DF1F11006D003B3D2F /* libz.tbd */; };
 		5EB6714A1F0C2B24004AABDC /* libEngine_Debug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ED2C1C71F0BDCD8001A3FBA /* libEngine_Debug.a */; };
 		5EB6714B1F0C2B82004AABDC /* libGame_Debug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ED2C1C41F0BDCBF001A3FBA /* libGame_Debug.a */; };
 		5EB6714C1F0C2BF4004AABDC /* stdafx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5ED2C1AA1F0BD4E2001A3FBA /* stdafx.cpp */; };
@@ -29,6 +31,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5E6C59DD1F10F7A2003B3D2F /* libassimp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libassimp.a; path = ../Dependencies/macOS/libassimp.a; sourceTree = "<group>"; };
+		5E6C59DF1F11006D003B3D2F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		5EB5E33D1F10F15600223400 /* libassimp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libassimp.a; path = ../Dependencies/macOS/Debug/libassimp.a; sourceTree = "<group>"; };
+		5EBB84801F0E9C0F00CEAB43 /* assimp-vc140-mt.library */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "assimp-vc140-mt.library"; path = "../Dependencies/assimp-vc140-mt.library"; sourceTree = "<group>"; };
+		5ECCFB801F10E8EE00713AB7 /* libassimp_release.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libassimp_release.a; path = ../Dependencies/macOS/libassimp_release.a; sourceTree = "<group>"; };
+		5ECCFB821F10ED0900713AB7 /* libassimp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libassimp.a; path = ../Dependencies/macOS/Release/libassimp.a; sourceTree = "<group>"; };
 		5ECF02AD1F0D1C4400013409 /* libglfw.3.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.2.dylib; path = ../../../../../../../../usr/local/Cellar/glfw/3.2.1/lib/libglfw.3.2.dylib; sourceTree = "<group>"; };
 		5ECF02AF1F0D1E4B00013409 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		5ED2C19D1F0BCF56001A3FBA /* Application_Debug */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Application_Debug; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,6 +54,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E6C59E01F11006D003B3D2F /* libz.tbd in Frameworks */,
+				5E6C59DE1F10F7A2003B3D2F /* libassimp.a in Frameworks */,
 				5ECF02B01F0D1E4B00013409 /* OpenGL.framework in Frameworks */,
 				5ECF02AE1F0D1C4400013409 /* libglfw.3.2.dylib in Frameworks */,
 				5ECF02B11F0D1E5800013409 /* libCommonUtilities_Debug.a in Frameworks */,
@@ -96,6 +106,12 @@
 		5ED2C1AF1F0BD536001A3FBA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5E6C59DF1F11006D003B3D2F /* libz.tbd */,
+				5E6C59DD1F10F7A2003B3D2F /* libassimp.a */,
+				5EB5E33D1F10F15600223400 /* libassimp.a */,
+				5ECCFB821F10ED0900713AB7 /* libassimp.a */,
+				5ECCFB801F10E8EE00713AB7 /* libassimp_release.a */,
+				5EBB84801F0E9C0F00CEAB43 /* assimp-vc140-mt.library */,
 				5ECF02AF1F0D1E4B00013409 /* OpenGL.framework */,
 				5ECF02AD1F0D1C4400013409 /* libglfw.3.2.dylib */,
 				5ED2C1CB1F0BE4D7001A3FBA /* libCommonUtilities_Debug.a */,
@@ -262,14 +278,16 @@
 		5ED2C1A51F0BCF56001A3FBA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)";
 				CONFIGURATION_TEMP_DIR = "$(PROJECT_TEMP_DIR)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = stdafx.h;
 				LIBRARY_SEARCH_PATHS = (
 					../../Lib,
+					../,
 					/usr/local/Cellar/glfw/3.2.1/lib,
+					"../Dependencies/macOS/$(CONFIGURATION)",
 				);
 				OBJROOT = ../../Temp;
 				PRODUCT_NAME = "$(TARGET_NAME)_$(CONFIGURATION)";
@@ -280,14 +298,16 @@
 		5ED2C1A61F0BCF56001A3FBA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)";
 				CONFIGURATION_TEMP_DIR = "$(PROJECT_TEMP_DIR)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = stdafx.h;
 				LIBRARY_SEARCH_PATHS = (
 					../../Lib,
+					../,
 					/usr/local/Cellar/glfw/3.2.1/lib,
+					"../Dependencies/macOS/$(CONFIGURATION)",
 				);
 				OBJROOT = ../../Temp;
 				PRODUCT_NAME = "$(TARGET_NAME)_$(CONFIGURATION)";

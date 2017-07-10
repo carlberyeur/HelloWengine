@@ -45,6 +45,16 @@
 		5E491CE31F05517400B58BEF /* libglfw.3.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E491CE21F05517400B58BEF /* libglfw.3.2.dylib */; };
 		5E491CE51F05518800B58BEF /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E491CE41F05518800B58BEF /* OpenGL.framework */; };
 		5E491CE71F057D2700B58BEF /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E491CE61F057D2700B58BEF /* GLUT.framework */; };
+		5EBB84761F0E95B100CEAB43 /* ChangeEffectCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5EBB846C1F0E95B100CEAB43 /* ChangeEffectCommand.cpp */; };
+		5EBB84771F0E95B100CEAB43 /* ChangeEffectCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 5EBB846D1F0E95B100CEAB43 /* ChangeEffectCommand.h */; };
+		5EBB84781F0E95B100CEAB43 /* Model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5EBB846E1F0E95B100CEAB43 /* Model.cpp */; };
+		5EBB84791F0E95B100CEAB43 /* Model.h in Headers */ = {isa = PBXBuildFile; fileRef = 5EBB846F1F0E95B100CEAB43 /* Model.h */; };
+		5EBB847A1F0E95B100CEAB43 /* ModelLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5EBB84701F0E95B100CEAB43 /* ModelLoader.cpp */; };
+		5EBB847B1F0E95B100CEAB43 /* ModelLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 5EBB84711F0E95B100CEAB43 /* ModelLoader.h */; };
+		5EBB847C1F0E95B100CEAB43 /* RenderPipeline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5EBB84721F0E95B100CEAB43 /* RenderPipeline.cpp */; };
+		5EBB847D1F0E95B100CEAB43 /* RenderPipeline.h in Headers */ = {isa = PBXBuildFile; fileRef = 5EBB84731F0E95B100CEAB43 /* RenderPipeline.h */; };
+		5EBB847E1F0E95B100CEAB43 /* SetCullModeCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5EBB84741F0E95B100CEAB43 /* SetCullModeCommand.cpp */; };
+		5EBB847F1F0E95B100CEAB43 /* SetCullModeCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 5EBB84751F0E95B100CEAB43 /* SetCullModeCommand.h */; };
 		5ED2C1CF1F0BE5F2001A3FBA /* libCommonUtilities_Debug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ED2C1BE1F0BDA51001A3FBA /* libCommonUtilities_Debug.a */; };
 /* End PBXBuildFile section */
 
@@ -92,6 +102,16 @@
 		5E491CE21F05517400B58BEF /* libglfw.3.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.2.dylib; path = ../../../../../../../../usr/local/Cellar/glfw/3.2.1/lib/libglfw.3.2.dylib; sourceTree = "<group>"; };
 		5E491CE41F05518800B58BEF /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		5E491CE61F057D2700B58BEF /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		5EBB846C1F0E95B100CEAB43 /* ChangeEffectCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChangeEffectCommand.cpp; sourceTree = "<group>"; };
+		5EBB846D1F0E95B100CEAB43 /* ChangeEffectCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeEffectCommand.h; sourceTree = "<group>"; };
+		5EBB846E1F0E95B100CEAB43 /* Model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Model.cpp; sourceTree = "<group>"; };
+		5EBB846F1F0E95B100CEAB43 /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
+		5EBB84701F0E95B100CEAB43 /* ModelLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ModelLoader.cpp; sourceTree = "<group>"; };
+		5EBB84711F0E95B100CEAB43 /* ModelLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelLoader.h; sourceTree = "<group>"; };
+		5EBB84721F0E95B100CEAB43 /* RenderPipeline.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RenderPipeline.cpp; sourceTree = "<group>"; };
+		5EBB84731F0E95B100CEAB43 /* RenderPipeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderPipeline.h; sourceTree = "<group>"; };
+		5EBB84741F0E95B100CEAB43 /* SetCullModeCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SetCullModeCommand.cpp; sourceTree = "<group>"; };
+		5EBB84751F0E95B100CEAB43 /* SetCullModeCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetCullModeCommand.h; sourceTree = "<group>"; };
 		5ED2C1BE1F0BDA51001A3FBA /* libCommonUtilities_Debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCommonUtilities_Debug.a; path = ../../Lib/libCommonUtilities_Debug.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -130,6 +150,16 @@
 		5E491C941F05370900B58BEF /* source */ = {
 			isa = PBXGroup;
 			children = (
+				5EBB846C1F0E95B100CEAB43 /* ChangeEffectCommand.cpp */,
+				5EBB846D1F0E95B100CEAB43 /* ChangeEffectCommand.h */,
+				5EBB846E1F0E95B100CEAB43 /* Model.cpp */,
+				5EBB846F1F0E95B100CEAB43 /* Model.h */,
+				5EBB84701F0E95B100CEAB43 /* ModelLoader.cpp */,
+				5EBB84711F0E95B100CEAB43 /* ModelLoader.h */,
+				5EBB84721F0E95B100CEAB43 /* RenderPipeline.cpp */,
+				5EBB84731F0E95B100CEAB43 /* RenderPipeline.h */,
+				5EBB84741F0E95B100CEAB43 /* SetCullModeCommand.cpp */,
+				5EBB84751F0E95B100CEAB43 /* SetCullModeCommand.h */,
 				5E491C951F05435900B58BEF /* BaseFramework.h */,
 				5E491C961F05435900B58BEF /* BaseRenderer.h */,
 				5E491C971F05435900B58BEF /* BaseWindow.cpp */,
@@ -195,6 +225,8 @@
 				5E491CDA1F05435900B58BEF /* TestSprite.h in Headers */,
 				5E491CD81F05435900B58BEF /* targetver.h in Headers */,
 				5E491CDC1F05435900B58BEF /* TestSprite2.h in Headers */,
+				5EBB847B1F0E95B100CEAB43 /* ModelLoader.h in Headers */,
+				5EBB84791F0E95B100CEAB43 /* Model.h in Headers */,
 				5E491CC61F05435900B58BEF /* GLFWWindow.h in Headers */,
 				5E491CC41F05435900B58BEF /* GLEffect.h in Headers */,
 				5E491CBC1F05435900B58BEF /* BaseRenderer.h in Headers */,
@@ -203,11 +235,14 @@
 				5E491CCA1F05435900B58BEF /* GLTexture.h in Headers */,
 				5E491CCC1F05435900B58BEF /* GLUniformBuffer.h in Headers */,
 				5E491CDE1F05435900B58BEF /* VertexStructs.h in Headers */,
+				5EBB84771F0E95B100CEAB43 /* ChangeEffectCommand.h in Headers */,
 				5E491CD71F05435900B58BEF /* stdafx.h in Headers */,
+				5EBB847F1F0E95B100CEAB43 /* SetCullModeCommand.h in Headers */,
 				5E491CD31F05435900B58BEF /* RenderModelCommand.h in Headers */,
 				5E491CD51F05435900B58BEF /* Scene.h in Headers */,
 				5E491CD11F05435900B58BEF /* RenderCommand.h in Headers */,
 				5E491CBB1F05435900B58BEF /* BaseFramework.h in Headers */,
+				5EBB847D1F0E95B100CEAB43 /* RenderPipeline.h in Headers */,
 				5E491CC81F05435900B58BEF /* GLMesh.h in Headers */,
 				5E491CD01F05435900B58BEF /* OpenGLRenderer.h in Headers */,
 				5E491CC21F05435900B58BEF /* Engine.h in Headers */,
@@ -273,6 +308,7 @@
 			files = (
 				5E491CD41F05435900B58BEF /* Scene.cpp in Sources */,
 				5E491CC91F05435900B58BEF /* GLTexture.cpp in Sources */,
+				5EBB847A1F0E95B100CEAB43 /* ModelLoader.cpp in Sources */,
 				5E491CCD1F05435900B58BEF /* OpenGLFramework.cpp in Sources */,
 				5E491CDB1F05435900B58BEF /* TestSprite2.cpp in Sources */,
 				5E491CD21F05435900B58BEF /* RenderModelCommand.cpp in Sources */,
@@ -280,8 +316,12 @@
 				5E491CD91F05435900B58BEF /* TestSprite.cpp in Sources */,
 				5E491CDD1F05435900B58BEF /* VertexStructs.cpp in Sources */,
 				5E491CC51F05435900B58BEF /* GLFWWindow.cpp in Sources */,
+				5EBB84781F0E95B100CEAB43 /* Model.cpp in Sources */,
+				5EBB847C1F0E95B100CEAB43 /* RenderPipeline.cpp in Sources */,
 				5E491CCF1F05435900B58BEF /* OpenGLRenderer.cpp in Sources */,
+				5EBB84761F0E95B100CEAB43 /* ChangeEffectCommand.cpp in Sources */,
 				5E491CC31F05435900B58BEF /* GLEffect.cpp in Sources */,
+				5EBB847E1F0E95B100CEAB43 /* SetCullModeCommand.cpp in Sources */,
 				5E491CD61F05435900B58BEF /* stdafx.cpp in Sources */,
 				5E491CC11F05435900B58BEF /* Engine.cpp in Sources */,
 				5E491CBD1F05435900B58BEF /* BaseWindow.cpp in Sources */,
@@ -384,7 +424,7 @@
 		5E491C921F0536FC00B58BEF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)";
 				CONFIGURATION_TEMP_DIR = "$(PROJECT_TEMP_DIR)";
@@ -406,7 +446,7 @@
 		5E491C931F0536FC00B58BEF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)";
 				CONFIGURATION_TEMP_DIR = "$(PROJECT_TEMP_DIR)";
