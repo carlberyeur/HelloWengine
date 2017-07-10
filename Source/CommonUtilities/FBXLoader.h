@@ -2,7 +2,15 @@
 
 struct aiScene;
 struct aiMaterial;
-enum aiTextureType;
+
+// Sorry for this
+
+#ifdef _WIN32
+enum aiTextureType; // ISO C++ forbids forward reference to 'enum' types
+#else
+#include "AssImp/material.h"
+#endif
+
 
 namespace cu
 {
