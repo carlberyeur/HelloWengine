@@ -7,7 +7,7 @@
 
 CInitState::CInitState(CStateStack& aStateStack)
 	: CBaseState(aStateStack)
-	, myTorus(SIZE_MAX)
+	, myTumbleWeed(SIZE_MAX)
 	, myAngle(0.f)
 {
 }
@@ -21,14 +21,6 @@ bool CInitState::Init()
 	myScene = wendy::CEngine::GetInstance()->CreateScene();
 	myScene->Init();
 	
-	//myTorus = myScene->AddModel("Meshes/sphere.fbx");
-
-	myTorus = myScene->AddModel("Meshes/torus.obj");
-	wendy::CModel* model = myScene->GetModel(myTorus);
-	cu::Matrix44f transform;
-	transform.SetScale({ 0.5f, 0.5f, 0.5f });
-	transform = transform * cu::Matrix44f::CreateRotateAroundX(3.14f * 0.5f);
-	model->SetTransformation(transform);
 
 	myTumbleWeed = myScene->AddModel("Meshes/M_thumbleweed_01.fbx");
 	wendy::CModel* model2 = myScene->GetModel(myTumbleWeed);
@@ -46,7 +38,7 @@ bool CInitState::Update()
 {
 	myStopWatch.Update();
 
-	wendy::CModel* model = myScene->GetModel(myTorus);
+	wendy::CModel* model = myScene->GetModel(myTumbleWeed);
 	//cu::Matrix44f transform = model->GetTransformation();
 	cu::Matrix44f transform;
 	transform.SetScale({ 0.5f, 0.5f, 0.5f });
