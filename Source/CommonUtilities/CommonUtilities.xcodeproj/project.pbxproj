@@ -83,6 +83,7 @@
 		5E0E2C561F04016E0055B7A0 /* Work.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Work.h; sourceTree = "<group>"; };
 		5E0E2C571F04016E0055B7A0 /* WorkPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WorkPool.cpp; sourceTree = "<group>"; };
 		5E0E2C581F04016E0055B7A0 /* WorkPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkPool.h; sourceTree = "<group>"; };
+		5E5AEB9B1F14E43500F7C48C /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		5EB5E33A1F10F03F00223400 /* libassimp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libassimp.a; path = ../Dependencies/macOS/Release/libassimp.a; sourceTree = "<group>"; };
 		5EBB84671F0E946600CEAB43 /* AssImp */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AssImp; sourceTree = "<group>"; };
 		5EBB84681F0E946600CEAB43 /* FBXLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBXLoader.h; sourceTree = "<group>"; };
@@ -168,6 +169,7 @@
 		5EB5E3391F10F03F00223400 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5E5AEB9B1F14E43500F7C48C /* CoreFoundation.framework */,
 				5EB5E33A1F10F03F00223400 /* libassimp.a */,
 			);
 			name = Frameworks;
