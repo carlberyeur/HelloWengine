@@ -48,6 +48,18 @@ namespace cu
 		static void SetConsoleColor(const unsigned short aColor);
 
 	private:
+		enum eMessageBoxReturn
+		{
+			eIgnore = 0,
+			eAbort  = 1,
+			eRetry  = 2
+		};
+		
+		
+		static eMessageBoxReturn ShowMessageBoxMacOS(const char* aString);
+		static eMessageBoxReturn ShowMessageBoxWin(const char* aString);
+		
+		
 		CDebugLogger();
 		~CDebugLogger();
 
