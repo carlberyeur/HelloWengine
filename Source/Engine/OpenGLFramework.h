@@ -2,7 +2,9 @@
 #include "BaseFramework.h"
 
 #define GLFW_INCLUDE_GLEXT
+#ifdef __APPLE__
 #define GLFW_INCLUDE_GLCOREARB
+#endif // !__APPLE__
 #include <GLFW/glfw3.h>
 
 namespace wendy

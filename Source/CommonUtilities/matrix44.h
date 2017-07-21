@@ -1,9 +1,11 @@
 #pragma once
 
 //x86 intrin just includes the right one
-//#include <intrin.h>
+#ifdef _WIN32
+#include <intrin.h>
+#else
 #include <x86intrin.h>
-
+#endif // _WIN32
 
 #include "InvertMatrix.h"
 

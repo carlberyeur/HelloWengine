@@ -47,7 +47,7 @@ bool CInitState::Update()
 {
 	myStopWatch.Update();
 
-	wendy::CModel* model = myScene->GetModel(myTumbleWeed);
+	wendy::CModel* model = myScene->GetModel(myTumbleWeed, wendy::eRenderPipeline::eRenderPipeline_Model);
 	//cu::Matrix44f transform = model->GetTransformation();
 	cu::Matrix44f transform;
 	transform.SetScale({ 0.5f, 0.5f, 0.5f });

@@ -186,14 +186,14 @@ namespace cu
 		switch (result)
 		{
 			case IDIGNORE:
-    			return eMessageBoxReturn::eIgnore;
+				return eMessageBoxReturn::eIgnore;
 			case IDABORT:
 				return eMessageBoxReturn::eAbort;
 			case IDRETRY:
 				return eMessageBoxReturn::eRetry;
 			default:
 				return eMessageBoxReturn::eAbort;
-    	break;
+		break;
 		}
 #endif
 		
@@ -213,7 +213,7 @@ namespace cu
 			case IDRETRY:
 				return eMessageBoxReturn::eRetry;
 			default:
-				return return eMessageBoxReturn::eAbort;
+				return eMessageBoxReturn::eAbort;
 				
 		}
 #endif
@@ -228,7 +228,7 @@ namespace cu
 				
 		if (hConsole != nullptr)
 		{
-			SetConsoleTextAttribute(hConsole, color);
+			SetConsoleTextAttribute(hConsole, aColor);
 		}
 #elif defined(__APPLE__)
 		DL_PRINT("SetConsoleColor not implemented on macOS", false);

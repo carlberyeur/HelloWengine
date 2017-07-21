@@ -6,7 +6,7 @@
 #include "AssImp/postprocess.h"
 
 
-#if defined(_WIN64) // || defined (_linux64?)
+#if defined(_WIN64)
 	#ifdef _DEBUG
 		#pragma comment (lib, "..\\Dependencies\\assimp-vc140-mtd.lib")
 	#else
