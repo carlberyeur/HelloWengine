@@ -101,7 +101,9 @@
     <ClInclude Include="FBXLoader.h">
       <Filter>DataLoading</Filter>
     </ClInclude>
-    <ClInclude Include="DDSLoader.h" />
+    <ClInclude Include="DDSLoader.h">
+      <Filter>DataLoading</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -143,6 +145,8 @@
     <ClCompile Include="FBXLoader.cpp">
       <Filter>DataLoading</Filter>
     </ClCompile>
-    <ClCompile Include="DDSLoader.cpp" />
+    <ClCompile Include="DDSLoader.cpp">
+      <Filter>DataLoading</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

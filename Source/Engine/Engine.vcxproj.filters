@@ -85,7 +85,6 @@
     <ClInclude Include="Scene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="TestSprite.h" />
     <ClInclude Include="GLEffect.h">
       <Filter>Renderer\OpenGLRenderer\Effect</Filter>
     </ClInclude>
@@ -98,7 +97,6 @@
     <ClInclude Include="RenderModelCommand.h">
       <Filter>Renderer\RenderCommands</Filter>
     </ClInclude>
-    <ClInclude Include="TestSprite2.h" />
     <ClInclude Include="SetCullModeCommand.h">
       <Filter>Renderer\RenderCommands</Filter>
     </ClInclude>
@@ -153,7 +151,6 @@
     <ClCompile Include="Scene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="TestSprite.cpp" />
     <ClCompile Include="GLEffect.cpp">
       <Filter>Renderer\OpenGLRenderer\Effect</Filter>
     </ClCompile>
@@ -166,7 +163,6 @@
     <ClCompile Include="RenderModelCommand.cpp">
       <Filter>Renderer\RenderCommands</Filter>
     </ClCompile>
-    <ClCompile Include="TestSprite2.cpp" />
     <ClCompile Include="SetCullModeCommand.cpp">
       <Filter>Renderer\RenderCommands</Filter>
     </ClCompile>
