@@ -195,6 +195,8 @@ namespace cu
 				return eMessageBoxReturn::eAbort;
 		break;
 		}
+#else
+		SUPRESS_UNUSED_WARNING(aString);
 #endif
 		
 		return eMessageBoxReturn::eAbort;
