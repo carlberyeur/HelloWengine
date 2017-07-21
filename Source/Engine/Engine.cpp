@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Engine.h"
-
 #include "BaseWindow.h"
 #include "BaseFramework.h"
 #include "BaseRenderer.h"
@@ -97,7 +96,7 @@ namespace wendy
 		}
 		catch (const std::exception& e)
 		{
-			DL_MESSAGE_BOX(e.what());
+			DL_MESSAGE_BOX(e.what(), false);
 			myIsRunning = false;
 			runSuccess = false;
 		}

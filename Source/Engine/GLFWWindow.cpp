@@ -2,7 +2,8 @@
 #include "GLFWWindow.h"
 
 #define GLFW_INCLUDE_NONE
-#include <GLFW\glfw3.h>
+#include <GLFW/glfw3.h>
+
 
 #if defined(_WIN32)
 
@@ -16,10 +17,10 @@
 #include <GLFW\glfw3native.h>
 #define GET_NATIVE_WINDOW_PTR() glfwGetX11Display(myWindow)
 
-#elif defined(_APPLE_)
+#elif defined(__APPLE__)
 
 #define GLFW_EXPOSE_NATIVE_COCOA
-#include <GLFW\glfw3native.h>
+#include <GLFW/glfw3native.h>
 #define GET_NATIVE_WINDOW_PTR() glfwGetCocoaWindow(myWindow)
 
 #else
@@ -52,6 +53,11 @@ namespace wendy
 			return false;
 		}
 
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, true);
+		
 		myWindow = glfwCreateWindow(static_cast<int>(aWindowSize.x), static_cast<int>(aWindowSize.y), aTitle.c_str(), nullptr, nullptr);
 		if (!myWindow)
 		{

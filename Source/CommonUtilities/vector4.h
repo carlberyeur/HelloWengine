@@ -26,33 +26,33 @@ namespace cu
 		explicit Vector4(const Vector2<TYPE>& aXY, const TYPE aZ, const TYPE aW);
 		explicit Vector4(const Vector2<TYPE>& aXY, const Vector2<TYPE> &aZW);
 
-		__forceinline Vector4& operator=(const Vector4& aRight);
-		__forceinline Vector4& operator=(const Vector3<TYPE>& aRight);
-		__forceinline Vector4& operator=(const Vector2<TYPE>& aRight);
+		HW_INLINE Vector4& operator=(const Vector4& aRight);
+		HW_INLINE Vector4& operator=(const Vector3<TYPE>& aRight);
+		HW_INLINE Vector4& operator=(const Vector2<TYPE>& aRight);
 
 		void Set(const TYPE aX, const TYPE aY, const TYPE aZ, const TYPE aW);
 
-		__forceinline Vector4& operator+=(const Vector3<TYPE>& aRight);
-		__forceinline Vector4& operator+=(const Vector4& aRight);
-		__forceinline Vector4& operator-=(const Vector4& aRight);
-		__forceinline Vector4& operator*=(const Vector4& aRight);
-		__forceinline Vector4& operator/=(const Vector4& aRight);
-		__forceinline Vector4& operator*=(const TYPE aRight);
-		__forceinline Vector4& operator/=(const TYPE aRight);
+		HW_INLINE Vector4& operator+=(const Vector3<TYPE>& aRight);
+		HW_INLINE Vector4& operator+=(const Vector4& aRight);
+		HW_INLINE Vector4& operator-=(const Vector4& aRight);
+		HW_INLINE Vector4& operator*=(const Vector4& aRight);
+		HW_INLINE Vector4& operator/=(const Vector4& aRight);
+		HW_INLINE Vector4& operator*=(const TYPE aRight);
+		HW_INLINE Vector4& operator/=(const TYPE aRight);
 
-		__forceinline Vector4 operator+(const Vector4& aRight) const;
-		__forceinline Vector4 operator-(const Vector4& aRight) const;
-		__forceinline Vector4 operator*(const Vector4& aRight) const;
-		__forceinline Vector4 operator/(const Vector4& aRight) const;
+		HW_INLINE Vector4 operator+(const Vector4& aRight) const;
+		HW_INLINE Vector4 operator-(const Vector4& aRight) const;
+		HW_INLINE Vector4 operator*(const Vector4& aRight) const;
+		HW_INLINE Vector4 operator/(const Vector4& aRight) const;
 
-		__forceinline Vector4 operator+(const Vector3<TYPE>& aRight) const;
-		__forceinline Vector4 operator-(const Vector3<TYPE>& aRight) const;
-		__forceinline Vector4 operator*(const TYPE aRight) const;
-		__forceinline Vector4 operator/(const TYPE aRight) const;
-		__forceinline Vector4 operator-() const;
+		HW_INLINE Vector4 operator+(const Vector3<TYPE>& aRight) const;
+		HW_INLINE Vector4 operator-(const Vector3<TYPE>& aRight) const;
+		HW_INLINE Vector4 operator*(const TYPE aRight) const;
+		HW_INLINE Vector4 operator/(const TYPE aRight) const;
+		HW_INLINE Vector4 operator-() const;
 
-		__forceinline bool operator==(const Vector4& aRight) const;
-		__forceinline bool operator!=(const Vector4& aRight) const;
+		HW_INLINE bool operator==(const Vector4& aRight) const;
+		HW_INLINE bool operator!=(const Vector4& aRight) const;
 
 		Vector4 Lerp(const Vector4& aInterpolateToVector, const TYPE aInterpolatingSpeed) const;
 		Vector4& Lerp(const Vector4& aInterpolateToVector, const TYPE aInterpolatingSpeed);
@@ -115,13 +115,13 @@ namespace cu
 	template<typename TYPE> const Vector4<TYPE> Vector4<TYPE>::One(1, 1, 1, 1);
 
 	template<typename TYPE>
-	__forceinline Vector4<TYPE>& operator*=(const TYPE aLeft, Vector4<TYPE>& aRight)
+	HW_INLINE Vector4<TYPE>& operator*=(const TYPE aLeft, Vector4<TYPE>& aRight)
 	{
 		return aRight *= aLeft;
 	}
 
 	template<typename TYPE>
-	__forceinline Vector4<TYPE> operator*(const TYPE aLeft, Vector4<TYPE> aRight)
+	HW_INLINE Vector4<TYPE> operator*(const TYPE aLeft, Vector4<TYPE> aRight)
 	{
 		return aRight *= aLeft;
 	}
@@ -212,7 +212,7 @@ namespace cu
 	}
 
 	template<typename TYPE>
-	__forceinline Vector4<TYPE>& Vector4<TYPE>::operator=(const Vector4& aRight)
+	HW_INLINE Vector4<TYPE>& Vector4<TYPE>::operator=(const Vector4& aRight)
 	{
 		x = aRight.x;
 		y = aRight.y;
@@ -223,7 +223,7 @@ namespace cu
 	}
 
 	template<typename TYPE>
-	__forceinline Vector4<TYPE> &Vector4<TYPE>::operator=(const Vector3<TYPE>& aRight)
+	HW_INLINE Vector4<TYPE> &Vector4<TYPE>::operator=(const Vector3<TYPE>& aRight)
 	{
 		x = aRight.x;
 		y = aRight.y;
@@ -234,7 +234,7 @@ namespace cu
 	}
 
 	template<typename TYPE>
-	__forceinline Vector4<TYPE>& Vector4<TYPE>::operator=(const Vector2<TYPE>& aRight)
+	HW_INLINE Vector4<TYPE>& Vector4<TYPE>::operator=(const Vector2<TYPE>& aRight)
 	{
 		x = aRight.x;
 		y = aRight.y;
@@ -254,7 +254,7 @@ namespace cu
 	}
 
 	template<typename TYPE>
-	__forceinline Vector4<TYPE>& Vector4<TYPE>::operator+=(const Vector4& aRight)
+	HW_INLINE Vector4<TYPE>& Vector4<TYPE>::operator+=(const Vector4& aRight)
 	{
 		x += aRight.x;
 		y += aRight.y;
@@ -265,7 +265,7 @@ namespace cu
 	}
 
 	template<typename TYPE>
-	__forceinline Vector4<TYPE>& Vector4<TYPE>::operator+=(const Vector3<TYPE>& aRight)
+	HW_INLINE Vector4<TYPE>& Vector4<TYPE>::operator+=(const Vector3<TYPE>& aRight)
 	{
 		x += aRight.x;
 		y += aRight.y;
@@ -275,7 +275,7 @@ namespace cu
 	}
 
 	template<typename TYPE>
-	__forceinline Vector4<TYPE>& Vector4<TYPE>::operator-=(const Vector4 &aRight)
+	HW_INLINE Vector4<TYPE>& Vector4<TYPE>::operator-=(const Vector4 &aRight)
 	{
 		x -= aRight.x;
 		y -= aRight.y;
@@ -286,7 +286,7 @@ namespace cu
 	}
 
 	template<typename TYPE>
-	__forceinline Vector4<TYPE>& Vector4<TYPE>::operator*=(const Vector4& aRight)
+	HW_INLINE Vector4<TYPE>& Vector4<TYPE>::operator*=(const Vector4& aRight)
 	{
 		x *= aRight.x;
 		y *= aRight.y;
@@ -297,7 +297,7 @@ namespace cu
 	}
 
 	template<typename TYPE>
-	__forceinline Vector4<TYPE>& Vector4<TYPE>::operator/=(const Vector4& aRight)
+	HW_INLINE Vector4<TYPE>& Vector4<TYPE>::operator/=(const Vector4& aRight)
 	{
 		x /= aRight.x;
 		y /= aRight.y;
@@ -308,7 +308,7 @@ namespace cu
 	}
 
 	template<typename TYPE>
-	__forceinline Vector4<TYPE>& Vector4<TYPE>::operator*=(const TYPE aRight)
+	HW_INLINE Vector4<TYPE>& Vector4<TYPE>::operator*=(const TYPE aRight)
 	{
 		x *= aRight;
 		y *= aRight;
@@ -319,7 +319,7 @@ namespace cu
 	}
 
 	template<typename TYPE>
-	__forceinline Vector4<TYPE>& Vector4<TYPE>::operator/=(const TYPE aRight)
+	HW_INLINE Vector4<TYPE>& Vector4<TYPE>::operator/=(const TYPE aRight)
 	{
 		x /= aRight;
 		y /= aRight;
@@ -330,75 +330,75 @@ namespace cu
 	}
 
 	template<typename TYPE>
-	__forceinline Vector4<TYPE> Vector4<TYPE>::operator+(const Vector4& aRight) const
+	HW_INLINE Vector4<TYPE> Vector4<TYPE>::operator+(const Vector4& aRight) const
 	{
 		Vector4 sum = self;
 		return sum += aRight;
 	}
 
 	template<typename TYPE>
-	__forceinline Vector4<TYPE> Vector4<TYPE>::operator-(const Vector4& aRight) const
+	HW_INLINE Vector4<TYPE> Vector4<TYPE>::operator-(const Vector4& aRight) const
 	{
 		Vector4 difference = self;
 		return difference -= aRight;
 	}
 
 	template<typename TYPE>
-	__forceinline Vector4<TYPE> Vector4<TYPE>::operator*(const Vector4& aRight) const
+	HW_INLINE Vector4<TYPE> Vector4<TYPE>::operator*(const Vector4& aRight) const
 	{
 		Vector4 product = self;
 		return product *= aRight;
 	}
 
 	template<typename TYPE>
-	__forceinline Vector4<TYPE> Vector4<TYPE>::operator/(const Vector4& aRight) const
+	HW_INLINE Vector4<TYPE> Vector4<TYPE>::operator/(const Vector4& aRight) const
 	{
 		Vector4 quote = self;
 		return quote /= aRight;
 	}
 
 	template<typename TYPE>
-	__forceinline Vector4<TYPE> Vector4<TYPE>::operator+(const Vector3<TYPE>& aRight) const
+	HW_INLINE Vector4<TYPE> Vector4<TYPE>::operator+(const Vector3<TYPE>& aRight) const
 	{
 		Vector4 sum = self;
 		return sum += aRight;
 	}
 
 	template<typename TYPE>
-	__forceinline Vector4<TYPE> Vector4<TYPE>::operator-(const Vector3<TYPE>& aRight) const
+	HW_INLINE Vector4<TYPE> Vector4<TYPE>::operator-(const Vector3<TYPE>& aRight) const
 	{
 		Vector4 difference = self;
 		return difference -= aRight;
 	}
 
 	template<typename TYPE>
-	__forceinline Vector4<TYPE> Vector4<TYPE>::operator*(const TYPE aRight) const
+	HW_INLINE Vector4<TYPE> Vector4<TYPE>::operator*(const TYPE aRight) const
 	{
 		Vector4 product = self;
 		return product *= aRight;
 	}
 
 	template<typename TYPE>
-	__forceinline Vector4<TYPE> Vector4<TYPE>::operator/(const TYPE aRight) const
+	HW_INLINE Vector4<TYPE> Vector4<TYPE>::operator/(const TYPE aRight) const
 	{
 		Vector4 quote = self;
 		return quote /= aRight;
 	}
 
 	template<typename TYPE>
-	__forceinline Vector4<TYPE> Vector4<TYPE>::operator-() const
+	HW_INLINE Vector4<TYPE> Vector4<TYPE>::operator-() const
 	{
 		return Vector4(-x, -y, -z, -w);
 	}
 
 	template<typename TYPE>
-	__forceinline bool Vector4<TYPE>::operator==(const Vector4& aRight) const
+	HW_INLINE bool Vector4<TYPE>::operator==(const Vector4& aRight) const
 	{
 		return (x == aRight.x && y == aRight.y && z == aRight.z && w == aRight.w);
 	}
 
 	template<typename TYPE>
-	__forceinline bool Vector4<TYPE>::operator!=(const Vector4& aRight) const
+	HW_INLINE bool Vector4<TYPE>::operator!=(const Vector4& aRight) const
 	{
 		return !(self == aRight);
 	}
@@ -406,7 +406,7 @@ namespace cu
 	template<typename TYPE>
 	Vector4<TYPE> Vector4<TYPE>::Lerp(const Vector4& aInterpolateToVector, const TYPE aInterpolatingSpeed) const
 	{
-		Vector3 copy = self;
+		Vector3<TYPE> copy = self;
 		copy.Lerp(aInterpolateToVector, aInterpolatingSpeed);
 		return copy;
 	}

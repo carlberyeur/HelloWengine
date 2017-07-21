@@ -2,6 +2,7 @@
 #include "DebugLogger.h"
 
 #include <iostream>
+#ifdef _WIN32
 #include <Windows.h>
 
 extern "C"
@@ -12,18 +13,26 @@ extern "C"
 		_In_   unsigned       _Line
 	);
 }
+#elif defined(__APPLE__)
+#include <CoreFoundation/CFUserNotification.h>
+
+#endif
+
 
 #define SUPRESS_UNUSED_WARNING(variable) variable
 constexpr unsigned int MAX_STRING_BUFFER_SIZE = 2048u;
 
 #if defined _WIN32
-#define VSPRINTF vsprintf_s
-#define DebugOutputWindow8 OutputDebugStringA
-#define DebugOutputWindow16 OutputDebugStringW
+	#define VSPRINTF vsprintf_s
+	#define WVSPRINTF wvsprintf
+	#define DebugOutputWindow8 OutputDebugStringA
+	#define DebugOutputWindow16 OutputDebugStringW
 #else
-#define VSPRINTF vsprintf
-#define DebugOutputWindow8 (void)
-#define DebugOutputWindow16 (void)
+	#define VSPRINTF vsprintf
+	#define WVSPRINTF(B, FS, ARGS) 
+//vsprintf((B), cast this badboy to char(FS), (ARGS))
+	#define DebugOutputWindow8 (void)
+	#define DebugOutputWindow16 (void)
 #endif
 
 namespace cu
@@ -67,7 +76,7 @@ namespace cu
 		va_list args;
 
 		va_start(args, aFormattedString);
-		wvsprintf(buffer, aFormattedString, args);
+		WVSPRINTF(buffer, aFormattedString, args);
 		va_end(args);
 
 		std::wcout << buffer << std::endl;
@@ -76,31 +85,34 @@ namespace cu
 
 	void CDebugLogger::ShowMessageBox(const char* aFormattedString, ...)
 	{
-#ifdef _WIN32
 		char buffer[MAX_STRING_BUFFER_SIZE] = {};
 		va_list args;
 
 		va_start(args, aFormattedString);
 		VSPRINTF(buffer, aFormattedString, args);
 		va_end(args);
-
-		int error = MessageBoxA(nullptr, buffer, "Error", MB_ABORTRETRYIGNORE);
-		switch (error)
+		
+		eMessageBoxReturn result;
+		
+#ifdef _WIN32
+		result = ShowMessageBoxWin(buffer);
+#elif defined(__APPLE__)
+		result = ShowMessageBoxMacOS(buffer);
+#endif
+		
+		switch(result)
 		{
-		case IDIGNORE:
-			break;
-		case IDABORT:
-			std::cout << buffer << std::endl;
-			DebugOutputWindow8(buffer);
-			exit(1337);
-			break;
-		case IDRETRY:
-			_wassert(nullptr, nullptr, 0);
+			case eMessageBoxReturn::eIgnore:
+				break;
+			case eMessageBoxReturn::eAbort:
+				std::cout << buffer << std::endl;
+				DebugOutputWindow8(buffer);
+				exit(1337);
+				break;
+			case eMessageBoxReturn::eRetry:
+				//_wassert(nullptr, nullptr, 0);
 			break;
 		}
-#else
-#error "Fix this! ...or just go with supressing the warning"
-#endif
 	}
 
 	void CDebugLogger::ShowMessageBox(const wchar_t* aFormattedString, ...)
@@ -127,9 +139,85 @@ namespace cu
 			_wassert(nullptr, nullptr, 0);
 			break;
 		}
+#elif defined(__APPLE__)
+		DL_PRINT("ShowMessageBox not implemented on macOS", false);
+	#pragma message("ShowMessageBox not implemented on macOS")
 #else
+
 #error "Fix this! ...or just go with supressing the warning"
+
 #endif
+	}
+	
+	CDebugLogger::eMessageBoxReturn CDebugLogger::ShowMessageBoxMacOS(const char* aString)
+	{
+#ifdef __APPLE__
+		const int IDIGNORE 	 =	1;
+		const int IDABORT	 =	0;
+		const int IDRETRY	 =	2;
+
+		//convert the strings from char* to CFStringRef
+		CFStringRef header_ref = CFStringCreateWithCString( NULL, "Error", kCFStringEncodingUTF8);
+		CFStringRef message_ref = CFStringCreateWithCString( NULL, aString, kCFStringEncodingUTF8);
+			
+		CFOptionFlags result;  //result code from the message box
+			
+		//launch the message box
+		CFUserNotificationDisplayAlert(
+			0, // no timeout
+			kCFUserNotificationNoteAlertLevel, //change it depending message_type flags ( MB_ICONASTERISK.... etc.)
+			NULL, //icon url, use default, you can change it depending message_type flags
+			NULL, //not used
+			NULL, //localization of strings
+			header_ref, //header text
+			message_ref, //message text
+			CFSTR("Abort"), //default button
+			CFSTR("Ignore"), //alternate button title
+			CFSTR("Retry"), //other button title, null--> no other button
+			&result //response flags
+			);
+		
+		//Clean up the strings
+		CFRelease( header_ref );
+		CFRelease( message_ref );
+			
+		//Convert the result
+		
+		switch (result)
+		{
+			case IDIGNORE:
+    			return eMessageBoxReturn::eIgnore;
+			case IDABORT:
+				return eMessageBoxReturn::eAbort;
+			case IDRETRY:
+				return eMessageBoxReturn::eRetry;
+			default:
+				return eMessageBoxReturn::eAbort;
+    	break;
+		}
+#endif
+		
+		return eMessageBoxReturn::eAbort;
+	}
+	
+	CDebugLogger::eMessageBoxReturn CDebugLogger::ShowMessageBoxWin(const char* aString)
+	{
+#ifdef _WIN32
+		int error = MessageBoxA(nullptr, aString, "Error", MB_ABORTRETRYIGNORE);
+		switch (error)
+		{
+			case IDIGNORE:
+				return eMessageBoxReturn::eIgnore;
+			case IDABORT:
+				return eMessageBoxReturn::eAbort;
+			case IDRETRY:
+				return eMessageBoxReturn::eRetry;
+			default:
+				return return eMessageBoxReturn::eAbort;
+				
+		}
+#endif
+		return eMessageBoxReturn::eAbort;
 	}
 
 	void CDebugLogger::SetConsoleColor(const unsigned short aColor)
@@ -137,11 +225,14 @@ namespace cu
 #ifdef _WIN32
 		HANDLE hConsole = nullptr;
 		hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-
+				
 		if (hConsole != nullptr)
 		{
-			SetConsoleTextAttribute(hConsole, aColor);
+			SetConsoleTextAttribute(hConsole, color);
 		}
+#elif defined(__APPLE__)
+		DL_PRINT("SetConsoleColor not implemented on macOS", false);
+	#pragma message("SetConsoleColor not implemented on macOS")
 #else
 #error "Fix this! ...or just go with supressing the warning"
 		SUPRESS_UNUSED_WARNING(aColor);

@@ -91,7 +91,7 @@ namespace cu
 	inline void CVector<T>::Add()
 	{
 		T t;
-		push_back(std::move(t));
+		this->push_back(std::move(t));
 	}
 
 	template<typename T>
@@ -100,8 +100,8 @@ namespace cu
 		static_assert(std::is_trivially_copyable<T>(), "Element type is not trivially copyable");
 
 		size_t newSize = aByteSize / sizeof(T);
-		resize(newSize);
-		memcpy(data(), aData, aByteSize);
+		this->resize(newSize);
+		memcpy(this->data(), aData, aByteSize);
 	}
 
 	template<typename T>
@@ -127,29 +127,29 @@ namespace cu
 	template<typename T>
 	inline void CVector<T>::RemoveAtIndex(const size_t aIndex)
 	{
-		erase(begin() + aIndex);
+		this->erase(this->begin() + aIndex);
 	}
 	
 	template<typename T>
 	inline void CVector<T>::RemoveCyclicAtIndex(const size_t aIndex)
 	{
-		if (size() > 1)
+		if (this->size() > 1)
 		{
-			at(aIndex) = std::move(at(size() - 1));
+			this->at(aIndex) = std::move(at(this->size() - 1));
 		}
 
-		pop_back();
+		this->pop_back();
 	}
 
 	template<typename T>
 	inline void CVector<T>::DeleteAll()
 	{
-		for (size_t i = 0; i < size(); ++i)
+		for (size_t i = 0; i < this->size(); ++i)
 		{
-			delete at(i);
+			delete this->at(i);
 		}
 
-		clear();
+		this->clear();
 	}
 
 	template<typename T>
@@ -157,7 +157,7 @@ namespace cu
 	{
 		if (HasIndex(aIndex))
 		{
-			return &at(aIndex);
+			return &this->at(aIndex);
 		}
 
 		return nullptr;
@@ -168,7 +168,7 @@ namespace cu
 	{
 		if (HasIndex(aIndex))
 		{
-			return &at(aIndex);
+			return &this->at(aIndex);
 		}
 
 		return nullptr;
@@ -177,15 +177,15 @@ namespace cu
 	template<typename T>
 	inline bool CVector<T>::HasIndex(const size_t aIndex) const
 	{
-		return aIndex < size();
+		return aIndex < this->size();
 	}
 
 	template<typename T>
 	inline size_t CVector<T>::Find(const T& aElement) const
 	{
-		for (size_t i = 0; i < size(); ++i)
+		for (size_t i = 0; i < this->size(); ++i)
 		{
-			if (at(i) == aElement)
+			if (this->at(i) == aElement)
 			{
 				return i;
 			}
@@ -198,27 +198,27 @@ namespace cu
 	template<typename SizeType>
 	inline T& CVector<T>::At(const SizeType aIndex)
 	{
-		return at(static_cast<size_t>(aIndex));
+		return this->at(static_cast<size_t>(aIndex));
 	}
 
 	template<typename T>
 	template<typename SizeType>
 	inline const T& CVector<T>::At(const SizeType aIndex) const
 	{
-		return at(static_cast<size_t>(aIndex));
+		return this->at(static_cast<size_t>(aIndex));
 	}
 
 	template<typename T>
 	template<typename SizeType>
 	inline SizeType CVector<T>::Size() const
 	{
-		return static_cast<SizeType>(size());
+		return static_cast<SizeType>(this->size());
 	}
 
 	template<typename T>
 	template<typename SizeType>
 	inline SizeType CVector<T>::ByteSize() const
 	{
-		return static_cast<SizeType>(size() * sizeof(T));
+		return static_cast<SizeType>(this->size() * sizeof(T));
 	}
 }

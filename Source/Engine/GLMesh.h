@@ -41,6 +41,6 @@ namespace wendy
 	template<typename VertexType>
 	inline bool CGLMesh::Init(const cu::CVector<VertexType>& aVertices, const cu::CVector<uint32_t>& aIndices)
 	{
-		return Init(sizeof(VertexType), aVertices.Size<int>(), aVertices.data(), aIndices, VertexType::AttributeInfos);
+		return Init(sizeof(VertexType), aVertices.template Size<int>(), aVertices.data(), aIndices, VertexType::AttributeInfos);
 	}
 }

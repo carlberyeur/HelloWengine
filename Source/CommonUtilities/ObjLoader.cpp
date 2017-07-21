@@ -1,6 +1,13 @@
 #include "stdafx.h"
 #include "ObjLoader.h"
 
+#if defined _WIN32
+#define SSCANF sscanf_s
+#else
+#define SSCANF sscanf
+
+#endif
+
 //stolen from glm
 void glm_hash_combine(size_t& seed, size_t hash)
 {
@@ -73,14 +80,14 @@ namespace cu
 			else if (type == "f")
 			{
 				SFaceData face;
-				int matches = sscanf_s(line.c_str(), "f %d/%d/%d %d/%d/%d %d/%d/%d",
+				int matches = SSCANF(line.c_str(), "f %d/%d/%d %d/%d/%d %d/%d/%d",
 					&face.positionIndex[0], &face.uvIndex[0], &face.normalIndex[0],
 					&face.positionIndex[1], &face.uvIndex[1], &face.normalIndex[1],
 					&face.positionIndex[2], &face.uvIndex[2], &face.normalIndex[2]);
 
 				if (matches != 9) // no uv:s?
 				{
-					matches = sscanf_s(line.c_str(), "f %d//%d %d//%d %d//%d",
+					matches = SSCANF(line.c_str(), "f %d//%d %d//%d %d//%d",
 						&face.positionIndex[0], &face.normalIndex[0],
 						&face.positionIndex[1], &face.normalIndex[1],
 						&face.positionIndex[2], &face.normalIndex[2]);

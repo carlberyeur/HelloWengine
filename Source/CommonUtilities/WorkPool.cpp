@@ -22,7 +22,7 @@ namespace WorkPool
 
 	static std::mutex locQueueMutex;
 	static std::condition_variable locConditionalVariable;
-	static std::atomic_bool locIsStopped = true;
+	static std::atomic_bool locIsStopped(true);
 
 	void Process(const size_t aID);
 	bool CanEnter();

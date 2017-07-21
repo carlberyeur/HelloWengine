@@ -1,18 +1,20 @@
 #include "stdafx.h"
 #include "FBXLoader.h"
 
-#include "AssImp\cimport.h"
-#include "assimp\scene.h"
-#include "assimp\postprocess.h"
+#include "AssImp/cimport.h"
+#include "AssImp/scene.h"
+#include "AssImp/postprocess.h"
 
-#if defined(_WIN64) //|| defined(_apple64?) || defined (_linux64?)
 
-#ifdef _DEBUG
-#pragma comment (lib, "..\\Dependencies\\assimp-vc140-mtd.lib")
-#else
-#pragma comment (lib, "..\\Dependencies\\assimp-vc140-mt.lib")
-#endif
+#if defined(_WIN64) // || defined (_linux64?)
+	#ifdef _DEBUG
+		#pragma comment (lib, "..\\Dependencies\\assimp-vc140-mtd.lib")
+	#else
+		#pragma comment (lib, "..\\Dependencies\\assimp-vc140-mt.lib")
+	#endif
 
+#elif defined(__APPLE__)
+		#pragma comment(lib, "libassimp.a")
 #else
 
 #pragma comment (lib, "..\\Dependencies\\assimp32.lib")

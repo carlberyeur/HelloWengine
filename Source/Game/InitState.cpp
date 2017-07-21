@@ -7,7 +7,7 @@
 
 CInitState::CInitState(CStateStack& aStateStack)
 	: CBaseState(aStateStack)
-	//, myTorus(SIZE_MAX)
+	, myTorus(SIZE_MAX)
 	, myTumbleWeed(SIZE_MAX)
 	, myAngle(0.f)
 {
@@ -47,7 +47,7 @@ bool CInitState::Update()
 {
 	myStopWatch.Update();
 
-	wendy::CModel* model = myScene->GetModel(myTumbleWeed, wendy::eRenderPipeline_Model);
+	wendy::CModel* model = myScene->GetModel(myTumbleWeed);
 	//cu::Matrix44f transform = model->GetTransformation();
 	cu::Matrix44f transform;
 	transform.SetScale({ 0.5f, 0.5f, 0.5f });
