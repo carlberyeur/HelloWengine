@@ -9,6 +9,8 @@
 #include "../CommonUtilities/ObjLoader.h"
 #include "../CommonUtilities/FBXLoader.h"
 
+#include "../CommonUtilities/DDSLoader.h"
+
 namespace wendy
 {
 	CModelLoader::CModelLoader(CBaseRenderer& aRenderer)
@@ -68,12 +70,12 @@ namespace wendy
 
 		MeshID mesh = myRenderer.CreateMesh(meshDesc);
 		
-		STextureDesc textureDesc;
-		textureDesc.pixelData.AddChunk(nullptr, 0u);
-		textureDesc.textureSize.Set(0u, 0u);
-		textureDesc.textureUnit = 0u;
+		//STextureDesc textureDesc;
+		//textureDesc.pixelData.AddChunk(nullptr, 0u);
+		//textureDesc.textureSize.Set(0u, 0u);
+		//textureDesc.textureUnit = 0u;
 
-		TextureID texture = myRenderer.CreateTexture(textureDesc);
+		//TextureID texture = myRenderer.CreateTexture(textureDesc);
 
 		SConstantBufferDesc constantBufferDesc;
 		constantBufferDesc.constantBuffer = std::hash<std::string>()("transform");
@@ -81,7 +83,7 @@ namespace wendy
 
 		ConstantBufferID constantBuffer = myRenderer.CreateConstantBuffer(constantBufferDesc);
 
-		if (!aModelOut.Init(mesh, texture, constantBuffer))
+		if (!aModelOut.Init(mesh, NullTexture, constantBuffer, NullConstantBuffer))
 		{
 			return false;
 		}
@@ -115,20 +117,32 @@ namespace wendy
 
 		MeshID mesh = myRenderer.CreateMesh(meshDesc);
 
+		cu::CDDSLoader::STextureData textureData;
+		cu::CDDSLoader::LoadDDSFile("Textures/" + fbxData.textures[cu::CFBXLoader::STextureData::eTextureType::eAlbedo], textureData);
+
 		STextureDesc textureDesc;
-		textureDesc.pixelData.AddChunk(nullptr, 0u);
-		textureDesc.textureSize.Set(0u, 0u);
+		textureDesc.pixelData = textureData.data;
+		textureDesc.textureSize = textureData.textureSize;
 		textureDesc.textureUnit = 0u;
+		textureDesc.dxt.enable = true;
+		textureDesc.dxt.mipMapCount = textureData.mipMapCount;
+		textureDesc.dxt.format = textureData.dxtFormat;
 
 		TextureID texture = myRenderer.CreateTexture(textureDesc);
 
-		SConstantBufferDesc constantBufferDesc;
-		constantBufferDesc.constantBuffer = std::hash<std::string>()("transform");
-		constantBufferDesc.effect = aEffect;
+		SConstantBufferDesc albedoBufferDesc;
+		albedoBufferDesc.constantBuffer = std::hash<std::string>()("albedo");
+		albedoBufferDesc.effect = aEffect;
 
-		ConstantBufferID constantBuffer = myRenderer.CreateConstantBuffer(constantBufferDesc);
+		ConstantBufferID albedoBuffer = myRenderer.CreateConstantBuffer(albedoBufferDesc);
 
-		if (!aModelOut.Init(mesh, texture, constantBuffer))
+		SConstantBufferDesc transformBufferDesc;
+		transformBufferDesc.constantBuffer = std::hash<std::string>()("transform");
+		transformBufferDesc.effect = aEffect;
+
+		ConstantBufferID constantBuffer = myRenderer.CreateConstantBuffer(transformBufferDesc);
+
+		if (!aModelOut.Init(mesh, texture, constantBuffer, albedoBuffer))
 		{
 			return false;
 		}

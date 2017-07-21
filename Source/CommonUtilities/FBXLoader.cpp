@@ -74,7 +74,7 @@ namespace cu
 			return false;
 		}
 
-		if (scene->HasTextures())
+		if (scene->HasMaterials())
 		{
 			LoadTexturesInternal(*scene, aDataOut.textures);
 		}

@@ -1,11 +1,18 @@
 #pragma once
 
-#include "RenderPipeline.h"
-
 namespace wendy
 {
 	class CBaseRenderer;
+	class CBaseRenderPipeline;
 	class CModel;
+
+	enum eRenderPipeline : std::uint16_t
+	{
+		eRenderPipeline_Model,
+		//eRenderPipeline_AlphaModel,
+		//eRenderPipeline_GUI,
+		eRenderPipeline_Length
+	};
 
 	class CScene
 	{
@@ -16,11 +23,11 @@ namespace wendy
 		bool Init();
 		void Render();
 
-		size_t AddModel(const std::string& aModelPath);
-		CModel* GetModel(const size_t aID);
+		size_t AddModel(const std::string& aModelPath, const eRenderPipeline aPipeline);
+		CModel* GetModel(const size_t aID, const eRenderPipeline aPipeline);
 
 	private:
-		CRenderPipeline myModelPipeline;
+		std::array<CBaseRenderPipeline*, eRenderPipeline_Length> myRenderPipelines;
 		CBaseRenderer& myRenderer;
 	};
 }

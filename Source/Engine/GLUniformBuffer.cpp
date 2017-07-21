@@ -20,6 +20,12 @@ namespace wendy
 	}
 
 	template<>
+	void CGLUniformBuffer::SetData(const int& aType)
+	{
+		glUniform1i(myLocation, aType);
+	}
+
+	template<>
 	void CGLUniformBuffer::SetData(const cu::Matrix33f& aType)
 	{
 		glUniformMatrix3fv(myLocation, 1, GL_FALSE, aType.myMatrix.data());

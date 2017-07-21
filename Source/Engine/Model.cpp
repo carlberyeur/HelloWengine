@@ -8,8 +8,9 @@ namespace wendy
 {
 	CModel::CModel()
 		: myMesh(NullMesh)
-		, myTexture(NullTexture)
 		, myTransformationBuffer(NullConstantBuffer)
+		, myTexture(NullTexture)
+		, myAlbedoBuffer(NullConstantBuffer)
 	{
 	}
 
@@ -17,18 +18,19 @@ namespace wendy
 	{
 	}
 	
-	bool CModel::Init(const MeshID aMesh, const TextureID aTexture, const ConstantBufferID aTransformationBuffer)
+	bool CModel::Init(const MeshID aMesh, const TextureID aTexture, const ConstantBufferID aTransformationBuffer, const ConstantBufferID aAlbedoBuffer)
 	{
 		myMesh = aMesh;
 		myTexture = aTexture;
 		myTransformationBuffer = aTransformationBuffer;
+		myAlbedoBuffer = aAlbedoBuffer;
 
 		return true;
 	}
 
 	void CModel::Render(CBaseRenderer& aRenderer)
 	{
-		CRenderModelCommand* renderCommand = new CRenderModelCommand(myMesh, myTransformationBuffer, myTexture, myTransformation);
+		CRenderModelCommand* renderCommand = new CRenderModelCommand(myMesh, myTransformationBuffer, myTexture, myAlbedoBuffer, myTransformation);
 		aRenderer.AddRenderCommand(renderCommand);
 	}
 }

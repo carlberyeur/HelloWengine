@@ -45,6 +45,12 @@ namespace wendy
 		cu::CVector<char> pixelData;
 		cu::Vector2ui textureSize;
 		std::uint32_t textureUnit; //texture slot -> make enum for albedo-normalmap-etc
+		struct
+		{
+			bool enable;
+			std::uint32_t mipMapCount;
+			std::uint32_t format;
+		} dxt;
 	};
 
 	class CBaseWindow;

@@ -1,22 +1,34 @@
 #include "stdafx.h"
 #include "Scene.h"
 
+#include "BaseRenderPipeline.h"
+#include "ModelRenderPipeline.h"
+
 namespace wendy
 {
 	CScene::CScene(CBaseRenderer& aRenderer)
 		: myRenderer(aRenderer)
 	{
+		myRenderPipelines.fill(nullptr);
 	}
 
 	CScene::~CScene()
 	{
+		for (CBaseRenderPipeline* renderPipeline : myRenderPipelines)
+		{
+			delete renderPipeline;
+		}
 	}
 
 	bool CScene::Init()
 	{
-		if (!myModelPipeline.Init(myRenderer))
+		myRenderPipelines[eRenderPipeline_Model] = new CModelRenderPipeline();
+		for (CBaseRenderPipeline* renderPipeline : myRenderPipelines)
 		{
-			return false;
+			if (!renderPipeline->Init(myRenderer))
+			{
+				return false;
+			}
 		}
 
 		return true;
@@ -24,17 +36,20 @@ namespace wendy
 
 	void CScene::Render()
 	{
-		myModelPipeline.PrepareFrame();
-		myModelPipeline.DoFrame(myRenderer);
+		for (CBaseRenderPipeline* renderPipeline : myRenderPipelines)
+		{
+			renderPipeline->PrepareFrame();
+			renderPipeline->DoFrame(myRenderer);
+		}
 	}
 
-	size_t CScene::AddModel(const std::string& aModelPath)
+	size_t CScene::AddModel(const std::string& aModelPath, const eRenderPipeline aPipeline)
 	{
-		return myModelPipeline.AddModel(aModelPath);
+		return myRenderPipelines[aPipeline]->AddModel(aModelPath);
 	}
 
-	CModel* CScene::GetModel(const size_t aID)
+	CModel* CScene::GetModel(const size_t aID, const eRenderPipeline aPipeline)
 	{
-		return myModelPipeline.GetModel(aID);
+		return myRenderPipelines[aPipeline]->GetModel(aID);
 	}
 }

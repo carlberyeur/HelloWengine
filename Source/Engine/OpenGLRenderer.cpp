@@ -24,6 +24,8 @@ namespace wendy
 	void COpenGLRenderer::Start(CBaseWindow& aWindow)
 	{
 		aWindow.MakeContextCurrent();
+
+		glEnable(GL_BLEND);
 	}
 
 	MeshID COpenGLRenderer::CreateMesh(const SMeshDesc& aMeshDesc)
@@ -98,9 +100,19 @@ namespace wendy
 		auto addFunction = [aTextureDesc, this, index]()
 		{
 			CGLTexture newTexture;
-			if (newTexture.Init(aTextureDesc.textureUnit, aTextureDesc.textureSize, aTextureDesc.pixelData.data()))
+			if (aTextureDesc.dxt.enable)
 			{
-				myTextures[index] = std::move(newTexture);
+				if (newTexture.InitCompressed(aTextureDesc.textureUnit, aTextureDesc.textureSize, aTextureDesc.pixelData.data(), aTextureDesc.dxt.mipMapCount, aTextureDesc.dxt.format))
+				{
+					myTextures[index] = std::move(newTexture);
+				}
+			}
+			else
+			{
+				if (newTexture.Init(aTextureDesc.textureUnit, aTextureDesc.textureSize, aTextureDesc.pixelData.data()))
+				{
+					myTextures[index] = std::move(newTexture);
+				}
 			}
 		};
 

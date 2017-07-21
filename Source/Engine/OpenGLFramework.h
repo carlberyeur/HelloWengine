@@ -55,6 +55,7 @@ namespace wendy
 	extern PFNGLACTIVETEXTUREPROC glActiveTexture;
 	extern PFNGLUNIFORM1IPROC glUniform1i;
 	extern PFNGLGENERATEMIPMAPPROC glGenerateMipmap;
+	extern PFNGLCOMPRESSEDTEXIMAGE2DPROC glCompressedTexImage2D;
 	extern PFNGLGENFRAMEBUFFERSPROC glGenFramebuffers;
 	extern PFNGLBINDFRAMEBUFFERPROC glBindFramebuffer;
 	extern PFNGLDELETEFRAMEBUFFERSPROC glDeleteFramebuffers;

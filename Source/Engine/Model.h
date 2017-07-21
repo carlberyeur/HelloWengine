@@ -15,11 +15,14 @@ namespace wendy
 		CModel(const CModel& aCopy) = default;
 		~CModel();
 
-		bool Init(const MeshID aMesh, const TextureID aTexture, const ConstantBufferID aTransformationBuffer);
+		bool Init(const MeshID aMesh, const TextureID aTexture, const ConstantBufferID aTransformationBuffer, const ConstantBufferID aAlbedoBuffer);
 		void Render(CBaseRenderer& aRenderer);
 
 		inline const cu::Matrix44f& GetTransformation() const;
 		inline const cu::Vector3f& GetPosition() const;
+		inline cu::Matrix44f& GetTransformation();
+		inline cu::Vector3f& GetPosition();
+
 		inline void SetTransformation(const cu::Matrix44f& aTransformation);
 		inline void SetPosition(const cu::Vector3f& aPosition);
 		inline void SetPosition(const float aX, const float aY, const float aZ);
@@ -31,6 +34,7 @@ namespace wendy
 		MeshID myMesh;
 		ConstantBufferID myTransformationBuffer;
 		TextureID myTexture;
+		ConstantBufferID myAlbedoBuffer;
 	};
 
 	inline const cu::Matrix44f& CModel::GetTransformation() const
@@ -38,7 +42,17 @@ namespace wendy
 		return myTransformation;
 	}
 
+	inline cu::Matrix44f& CModel::GetTransformation()
+	{
+		return myTransformation;
+	}
+
 	inline const cu::Vector3f& CModel::GetPosition() const
+	{
+		return myTransformation.myPosition;
+	}
+
+	inline cu::Vector3f& CModel::GetPosition()
 	{
 		return myTransformation.myPosition;
 	}

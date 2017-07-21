@@ -28,7 +28,7 @@ public:
 private:
 	std::unique_ptr<wendy::CScene> myScene;
 
-	size_t myTorus;
+	//size_t myTorus;
 	size_t myTumbleWeed;
 
 	cu::CStopWatch myStopWatch;

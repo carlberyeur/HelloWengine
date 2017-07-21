@@ -193,6 +193,12 @@ namespace wendy
 			return false;
 		}
 
+		glUniform1i = (PFNGLUNIFORM1IPROC)getExtension("glUniform1i");
+		if (!glUniform1i)
+		{
+			return false;
+		}
+
 		glUniformMatrix3fv = (PFNGLUNIFORMMATRIX3FVPROC)getExtension("glUniformMatrix3fv");
 		if (!glUniformMatrix3fv)
 		{
@@ -219,6 +225,24 @@ namespace wendy
 
 		glDeleteShader = (PFNGLDELETESHADERPROC)getExtension("glDeleteShader");
 		if (!glDeleteShader)
+		{
+			return false;
+		}
+
+		glActiveTexture = (PFNGLACTIVETEXTUREPROC)getExtension("glActiveTexture");
+		if (!glActiveTexture)
+		{
+			return false;
+		}
+
+		glGenerateMipmap = (PFNGLGENERATEMIPMAPPROC)getExtension("glGenerateMipmap");
+		if (!glGenerateMipmap)
+		{
+			return false;
+		}
+
+		glCompressedTexImage2D = (PFNGLCOMPRESSEDTEXIMAGE2DPROC)getExtension("glCompressedTexImage2D");
+		if (!glCompressedTexImage2D)
 		{
 			return false;
 		}
@@ -258,6 +282,7 @@ namespace wendy
 	PFNGLACTIVETEXTUREPROC glActiveTexture;
 	PFNGLUNIFORM1IPROC glUniform1i;
 	PFNGLGENERATEMIPMAPPROC glGenerateMipmap;
+	PFNGLCOMPRESSEDTEXIMAGE2DPROC glCompressedTexImage2D;
 	PFNGLGENFRAMEBUFFERSPROC glGenFramebuffers;
 	PFNGLBINDFRAMEBUFFERPROC glBindFramebuffer;
 	PFNGLDELETEFRAMEBUFFERSPROC glDeleteFramebuffers;

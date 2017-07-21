@@ -11,15 +11,16 @@ namespace wendy
 	class CRenderModelCommand : public IRenderCommand
 	{
 	public:
-		CRenderModelCommand(const MeshID aMesh, const ConstantBufferID aConstantBuffer, const TextureID aTexture, const cu::Matrix44f& aTransformation);
+		CRenderModelCommand(const MeshID aMesh, const ConstantBufferID aConstantBuffer, const TextureID aTexture, const ConstantBufferID aAlbedoBuffer, const cu::Matrix44f& aTransformation);
 		~CRenderModelCommand();
 
 		virtual void Execute(COpenGLRenderer& aRenderer) override;
 
 	private:
 		const cu::Matrix44f myTransformation;
-		const ConstantBufferID myConstantBuffer;
 		const MeshID myMesh;
+		const ConstantBufferID myConstantBuffer;
 		const TextureID myTexture;
+		const ConstantBufferID myAlbedoBuffer;
 	};
 }

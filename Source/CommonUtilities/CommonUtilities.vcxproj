@@ -147,6 +147,7 @@
     <ClInclude Include="CommonSTL.h" />
     <ClInclude Include="cumath.h" />
     <ClInclude Include="CUTime.h" />
+    <ClInclude Include="DDSLoader.h" />
     <ClInclude Include="DebugLogger.h" />
     <ClInclude Include="FBXLoader.h" />
     <ClInclude Include="Function.h" />
@@ -171,6 +172,7 @@
   <ItemGroup>
     <ClCompile Include="AlarmClock.cpp" />
     <ClCompile Include="CUTime.cpp" />
+    <ClCompile Include="DDSLoader.cpp" />
     <ClCompile Include="DebugLogger.cpp" />
     <ClCompile Include="FBXLoader.cpp" />
     <ClCompile Include="InputHelper.cpp" />
