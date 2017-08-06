@@ -4,6 +4,8 @@
 static const std::string locUnNamedThread("UnNamed");
 static std::map<uint32_t, std::string> locThreadNames;
 
+static std::mutex locThreadNameMutex;
+
 #ifdef _WIN32
 #include <windows.h>
 
@@ -26,6 +28,7 @@ namespace CU
 {
 	void SetThreadName(const uint32_t dwThreadID, const std::string& threadName);
 	const std::string& GetThreadName(const uint32_t aThreadID);
+	void SaveThreadName(uint32_t dwThreadID, const std::string& threadName);
 
 	void SetThreadName(const std::string& threadName)
 	{
@@ -73,7 +76,7 @@ namespace CU
 		}
 #endif // _WIN32
 		
-		locThreadNames[dwThreadID] = threadName;
+		SaveThreadName(dwThreadID, threadName);
 	}
 
 	const std::string& GetThreadName()
@@ -110,11 +113,19 @@ namespace CU
 
 	const std::string& GetThreadName(const uint32_t aThreadID)
 	{
+		std::lock_guard<std::mutex> lock(locThreadNameMutex);
+
 		if (locThreadNames.find(aThreadID) != locThreadNames.end())
 		{
 			return locThreadNames[aThreadID];
 		}
 
 		return locUnNamedThread;
+	}
+
+	void SaveThreadName(uint32_t dwThreadID, const std::string& threadName)
+	{
+		std::lock_guard<std::mutex> lock(locThreadNameMutex);
+		locThreadNames[dwThreadID] = threadName;
 	}
 }

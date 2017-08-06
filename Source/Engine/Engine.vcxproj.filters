@@ -121,6 +121,10 @@
     <ClInclude Include="Renderable.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="GLSurface.h">
+      <Filter>Renderer\OpenGLRenderer\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="SetTextureSlotCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -184,5 +188,9 @@
     <ClCompile Include="Renderable.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="GLSurface.cpp">
+      <Filter>Renderer\OpenGLRenderer\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="SetTextureSlotCommand.cpp" />
   </ItemGroup>
 </Project>

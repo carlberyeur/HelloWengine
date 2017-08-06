@@ -104,6 +104,24 @@
     <ClInclude Include="DDSLoader.h">
       <Filter>DataLoading</Filter>
     </ClInclude>
+    <ClInclude Include="cuarray.h">
+      <Filter>Container</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Intersection.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Frustum.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Plane.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaneVolume.h">
+      <Filter>Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -147,6 +165,15 @@
     </ClCompile>
     <ClCompile Include="DDSLoader.cpp">
       <Filter>DataLoading</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Intersection.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Frustum.cpp">
+      <Filter>Math</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

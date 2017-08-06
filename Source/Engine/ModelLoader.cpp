@@ -78,12 +78,12 @@ namespace wendy
 		//TextureID texture = myRenderer.CreateTexture(textureDesc);
 
 		SConstantBufferDesc constantBufferDesc;
-		constantBufferDesc.constantBuffer = std::hash<std::string>()("transform");
+		constantBufferDesc.constantBuffer = std::hash<std::string>()("mvp");
 		constantBufferDesc.effect = aEffect;
 
 		ConstantBufferID constantBuffer = myRenderer.CreateConstantBuffer(constantBufferDesc);
 
-		if (!aModelOut.Init(mesh, NullTexture, constantBuffer, NullConstantBuffer))
+		if (!aModelOut.Init(mesh, /*NullTexture*/NullSurface, constantBuffer, NullConstantBuffer))
 		{
 			return false;
 		}
@@ -117,32 +117,64 @@ namespace wendy
 
 		MeshID mesh = myRenderer.CreateMesh(meshDesc);
 
-		cu::CDDSLoader::STextureData textureData;
-		cu::CDDSLoader::LoadDDSFile("Textures/" + fbxData.textures[cu::CFBXLoader::STextureData::eTextureType::eAlbedo], textureData);
+		//cu::CDDSLoader::STextureData textureData;
+		//cu::CDDSLoader::LoadDDSFile("Textures/" + fbxData.textures[cu::CFBXLoader::STextureData::eTextureType::eAlbedo], textureData);
 
-		STextureDesc textureDesc;
-		textureDesc.pixelData = textureData.data;
-		textureDesc.textureSize = textureData.textureSize;
-		textureDesc.textureUnit = 0u;
-		textureDesc.dxt.enable = true;
-		textureDesc.dxt.mipMapCount = textureData.mipMapCount;
-		textureDesc.dxt.format = textureData.dxtFormat;
+		//STextureDesc textureDesc;
+		//textureDesc.pixelData = textureData.data;
+		//textureDesc.textureSize = textureData.textureSize;
+		//textureDesc.textureUnit = 0u;
+		//textureDesc.dxt.enable = true;
+		//textureDesc.dxt.mipMapCount = textureData.mipMapCount;
+		//textureDesc.dxt.format = textureData.dxtFormat;
 
-		TextureID texture = myRenderer.CreateTexture(textureDesc);
+		//TextureID texture = myRenderer.CreateTexture(textureDesc);
 
-		SConstantBufferDesc albedoBufferDesc;
-		albedoBufferDesc.constantBuffer = std::hash<std::string>()("albedo");
-		albedoBufferDesc.effect = aEffect;
+		cu::CArray<cu::CDDSLoader::STextureData, 4> textureDatas;
+		const cu::CArray<cu::eTextureType, 4> textureTypes = { cu::eTextureType::eAlbedo, cu::eTextureType::eNormal, cu::eTextureType::eRoughness, cu::eTextureType::eEmissive };
 
-		ConstantBufferID albedoBuffer = myRenderer.CreateConstantBuffer(albedoBufferDesc);
+		if (fbxData.textures[cu::eTextureType::eEmissive].empty())
+		{
+			fbxData.textures[cu::eTextureType::eEmissive] = "default_emissive.dds";
+		}
+
+		for (size_t i = 0; i < 4; ++i)
+		{
+			if (!cu::CDDSLoader::LoadDDSFile("Textures/" + fbxData.textures[textureTypes[i]], textureDatas[i]))
+			{
+				textureDatas[i].textureSize.Set(4, 4);
+			}
+		}
+		//cu::CDDSLoader::LoadDDSFile("Textures/" + fbxData.textures[cu::eTextureType::eAlbedo], textureDatas[0]);
+		//cu::CDDSLoader::LoadDDSFile("Textures/" + fbxData.textures[cu::eTextureType::eNormal], textureDatas[1]);
+		//cu::CDDSLoader::LoadDDSFile("Textures/" + fbxData.textures[cu::eTextureType::eRoughness], textureDatas[2]);
+		//cu::CDDSLoader::LoadDDSFile("Textures/" + fbxData.textures[cu::eTextureType::eEmissive], textureDatas[3]);
+
+		SSurfaceDesc surfaceDesc = {};
+		for (size_t i = 0; i < textureDatas.size(); ++i)
+		{
+			surfaceDesc.pixelDatas[i] = textureDatas[i].data;
+			surfaceDesc.textureSizes[i] = textureDatas[i].textureSize;
+			surfaceDesc.dxt[i].enable = true;
+			surfaceDesc.dxt[i].mipMapCount = textureDatas[i].mipMapCount;
+			surfaceDesc.dxt[i].format = textureDatas[i].dxtFormat;
+		}
+
+		SurfaceID surface = myRenderer.CreateSurface(surfaceDesc);
+
+		//SConstantBufferDesc albedoBufferDesc;
+		//albedoBufferDesc.constantBuffer = std::hash<std::string>()("albedo");
+		//albedoBufferDesc.effect = aEffect;
+
+		//ConstantBufferID albedoBuffer = myRenderer.CreateConstantBuffer(albedoBufferDesc);
 
 		SConstantBufferDesc transformBufferDesc;
-		transformBufferDesc.constantBuffer = std::hash<std::string>()("transform");
+		transformBufferDesc.constantBuffer = std::hash<std::string>()("mvp");
 		transformBufferDesc.effect = aEffect;
 
 		ConstantBufferID constantBuffer = myRenderer.CreateConstantBuffer(transformBufferDesc);
 
-		if (!aModelOut.Init(mesh, texture, constantBuffer, albedoBuffer))
+		if (!aModelOut.Init(mesh, /*texture*/surface, constantBuffer, /*albedoBuffer*/NullConstantBuffer))
 		{
 			return false;
 		}

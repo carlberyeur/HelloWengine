@@ -8,6 +8,7 @@
 
 
 #include "cuvector.h"
+#include "cuarray.h"
 #include "DebugLogger.h"
 #include "Function.h"
 #include "cumath.h"

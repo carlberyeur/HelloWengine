@@ -87,14 +87,15 @@ namespace cu
 			bufferSize *= 2;
 		}
 
-		if (fileContent.size() > bufferSize)
-		{
-			return false;
-		}
+		//if (fileContent.size() < bufferSize)
+		//{
+		//	assert(!"i did wrong here, buffer size is not real size? just max size??");
+		//	return false;
+		//}
 
 		aDataOut.data.resize(bufferSize);
 
-		memcpy(aDataOut.data.data(), fileContent.c_str() + 4 + sizeof(SDDSHeader), fileContent.size() - 4 - sizeof(SDDSHeader));
+		memcpy(aDataOut.data.data(), fileContent.c_str() + 4 + sizeof(SDDSHeader), bufferSize);
 
 		return true;
 	}

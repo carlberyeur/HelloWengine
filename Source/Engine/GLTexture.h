@@ -11,9 +11,9 @@ namespace wendy
 		CGLTexture& operator=(CGLTexture&& aTemporary);
 		~CGLTexture();
 
-		bool Init(const std::uint32_t aTextureUnit, const cu::Vector2ui& aTextureSize, const void* aPixelData);
-		bool InitCompressed(const std::uint32_t aTextureUnit, const cu::Vector2ui& aTextureSize, const void* aPixelData, const std::uint32_t aMipMapCount, const int aDXTFormat);
-		void Activate();
+		bool Init(const std::uint32_t aTextureUnit, const cu::Vector2ui& aTextureSize, const void* aPixelData, const bool aClampToEdge);
+		bool InitCompressed(const std::uint32_t aTextureUnit, const cu::Vector2ui& aTextureSize, const void* aPixelData, const std::uint32_t aMipMapCount, const int aDXTFormat, const bool aClampToEdge);
+		void Activate(const int aTextureSlot);
 
 		const cu::Vector2ui& GetTextureSize() const;
 		cu::Vector2f GetTextureSizeF() const;

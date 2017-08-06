@@ -14,6 +14,17 @@ enum aiTextureType; // ISO C++ forbids forward reference to 'enum' types
 
 namespace cu
 {
+	enum class eTextureType
+	{
+		eAlbedo,
+		eRoughness,
+		eAmbientOcclusion,
+		eEmissive,
+		eNormal,
+		eMetalness,
+		eLength
+	};
+
 	class CFBXLoader
 	{
 	public:
@@ -49,17 +60,6 @@ namespace cu
 
 		struct STextureData
 		{
-			enum class eTextureType
-			{
-				eAlbedo,
-				eRoughness,
-				eAmbientOcclusion,
-				eEmissive,
-				eNormal,
-				eMetalness,
-				eLength
-			};
-
 			std::array<std::string, static_cast<size_t>(eTextureType::eLength)> texturePaths;
 
 			std::string& operator[](const eTextureType aType) { return texturePaths[static_cast<size_t>(aType)]; }

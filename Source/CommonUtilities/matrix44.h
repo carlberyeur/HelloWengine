@@ -221,13 +221,13 @@ namespace cu
 			return *this;
 		}
 
-		Matrix44 CreateProjectionMatrixLH(TYPE aNear, TYPE aFar, TYPE aWidth, TYPE aHeight, TYPE aFov)
+		static Matrix44 CreateProjectionMatrixLH(TYPE aNear, TYPE aFar, TYPE aWidth, TYPE aHeight, TYPE aFov)
 		{
 			TYPE scaling = aFar / (aFar - aNear);
 			Matrix44<TYPE> returnMatrix = Matrix44<TYPE>::Identity;
 
 			TYPE AspectRatioY = aHeight / aWidth;
-			TYPE FovX = aFov * (static_cast<TYPE>(M_PI) / 180.0f);
+			TYPE FovX = aFov;
 			TYPE TanFovX = tan(FovX / 2.0f);
 			TYPE FovY = 2.0f * atan(TanFovX * AspectRatioY);
 
@@ -271,7 +271,6 @@ namespace cu
 			SetRotation(mRotationZ * mRotationX * mRotationY);
 		}
 
-		//template <typename TYPE>
 		const Vector3<TYPE> GetEulerRotation() const
 		{
 			const Matrix33<TYPE> rotation = GetRotation();
@@ -360,9 +359,9 @@ namespace cu
 			return rotationZ;
 		}
 
-		static Matrix44 Transpose(Matrix44 aMatrix)
+		Matrix44 GetTransposed() const
 		{
-			Matrix44 transposed = aMatrix;
+			Matrix44 transposed = *this;
 
 			transposed.Transpose();
 
@@ -628,11 +627,24 @@ namespace cu
 			InvertMatrix(myMatrix.data());
 		}
 
-		Matrix44<TYPE> GetInverted() const
+		Matrix44 GetInverse() const
 		{
-			Matrix44<TYPE> matrix44 = *this;
+			Matrix44 matrix44 = *this;
 			matrix44.Invert();
 			return matrix44;
+		}
+
+		Matrix44 GetFastInverse() const
+		{
+			Matrix44 inverse = *this;
+			Vector4<TYPE> position = inverse.myPosition4;
+			inverse.myPosition.Set(0.f, 0.f, 0.f);
+			
+			inverse.Transpose();
+			position = (-position) * inverse;
+			inverse.myPosition = position;
+
+			return inverse;
 		}
 
 #pragma warning( disable : 4201 ) // nonstandard extension used: nameless struct/union
@@ -653,10 +665,10 @@ namespace cu
 
 			struct
 			{
-				Vector3<TYPE> myRightVector;	TYPE ms14;
-				Vector3<TYPE> myUpVector;		TYPE ms24;
-				Vector3<TYPE> myForwardVector;	TYPE ms34;
-				Vector3<TYPE> myPosition;		TYPE ms44;
+				Vector3<TYPE> myRightVector;	TYPE _m14;
+				Vector3<TYPE> myUpVector;		TYPE _m24;
+				Vector3<TYPE> myForwardVector;	TYPE _m34;
+				Vector3<TYPE> myPosition;		TYPE _m44;
 			};
 
 			struct

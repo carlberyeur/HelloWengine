@@ -4,9 +4,17 @@ in vec2 fragUV;
 out vec4 outputColor;
 
 uniform sampler2D albedo;
+uniform sampler2D normal;
+uniform sampler2D rmao;
+uniform sampler2D emissive;
 
 void main(void)
 {
-	outputColor = texture(albedo, fragUV);
-	//outputColor = vec4(0.5f, 1.f, 0.f, 1.f);
+	vec4 albedoColor = texture(albedo, fragUV);
+	vec4 normalColor = texture(normal, fragUV);
+	vec4 rmaoColor = texture(rmao, fragUV);
+	vec4 emissiveColor = texture(emissive, fragUV);
+	
+	outputColor = albedoColor;
+	outputColor.a = albedoColor.a;
 }

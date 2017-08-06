@@ -1,9 +1,11 @@
 #include "stdafx.h"
 #include "OpenGLRenderer.h"
+
 #include "GLMesh.h"
 #include "GLEffect.h"
 #include "GLUniformBuffer.h"
 #include "GLTexture.h"
+#include "GLSurface.h"
 
 #include "VertexStructs.h"
 
@@ -14,6 +16,11 @@
 namespace wendy
 {
 	COpenGLRenderer::COpenGLRenderer()
+		: myMeshCount(0u)
+		, myEffectCount(0u)
+		, myUniformCount(0u)
+		, myTextureCount(0u)
+		, mySurfaceCount(0u)
 	{
 	}
 
@@ -32,15 +39,16 @@ namespace wendy
 	{
 		std::lock_guard<std::mutex> lock(myAddMutex);
 
-		std::uintptr_t index = myMeshes.Size<std::uintptr_t>();
-		myMeshes.Add();
+		std::uintptr_t index = myMeshCount++;
 
 		auto addFunction = [aMeshDesc, this, index]()
 		{
+			assert(myMeshes.Size<std::uintptr_t>() == index && "this should work, the other create functions are not thread safe :(");
+
 			CGLMesh newMesh;
 			if (newMesh.Init(aMeshDesc.vertexSize, aMeshDesc.vertexCount, aMeshDesc.vertices.data(), aMeshDesc.indices, aMeshDesc.attributeInfos))
 			{
-				myMeshes[index] = std::move(newMesh);
+				myMeshes.push_back(std::move(newMesh));
 			}
 		};
 
@@ -102,14 +110,14 @@ namespace wendy
 			CGLTexture newTexture;
 			if (aTextureDesc.dxt.enable)
 			{
-				if (newTexture.InitCompressed(aTextureDesc.textureUnit, aTextureDesc.textureSize, aTextureDesc.pixelData.data(), aTextureDesc.dxt.mipMapCount, aTextureDesc.dxt.format))
+				if (newTexture.InitCompressed(aTextureDesc.textureUnit, aTextureDesc.textureSize, aTextureDesc.pixelData.data(), aTextureDesc.dxt.mipMapCount, aTextureDesc.dxt.format, false))
 				{
 					myTextures[index] = std::move(newTexture);
 				}
 			}
 			else
 			{
-				if (newTexture.Init(aTextureDesc.textureUnit, aTextureDesc.textureSize, aTextureDesc.pixelData.data()))
+				if (newTexture.Init(aTextureDesc.textureUnit, aTextureDesc.textureSize, aTextureDesc.pixelData.data(), false))
 				{
 					myTextures[index] = std::move(newTexture);
 				}
@@ -119,6 +127,43 @@ namespace wendy
 		myAddFunctions.push_back(addFunction);
 
 		return reinterpret_cast<TextureID>(index);
+	}
+
+	SurfaceID COpenGLRenderer::CreateSurface(const SSurfaceDesc& aSurfaceDesc)
+	{
+		std::lock_guard<std::mutex> lock(myAddMutex);
+
+		std::uintptr_t index = mySurfaces.Size<std::uintptr_t>();
+		mySurfaces.Add();
+
+		auto addFunction = [aSurfaceDesc, this, index]()
+		{
+			CGLSurface newSurface;
+			cu::CArray<const void*, 4> pixelDatas;
+			for (size_t i = 0; i < pixelDatas.size(); ++i)
+			{
+				pixelDatas[i] = aSurfaceDesc.pixelDatas[i].data();
+			}
+
+			if (aSurfaceDesc.dxt[0].enable)
+			{
+				if (newSurface.InitCompressed(aSurfaceDesc.textureSizes, pixelDatas, aSurfaceDesc.dxt[0].mipMapCount, aSurfaceDesc.dxt[0].format, false))
+				{
+					mySurfaces[index] = std::move(newSurface);
+				}
+			}
+			else
+			{
+				if (newSurface.Init(aSurfaceDesc.textureSizes, pixelDatas, false))
+				{
+					mySurfaces[index] = std::move(newSurface);
+				}
+			}
+		};
+
+		myAddFunctions.push_back(addFunction);
+
+		return reinterpret_cast<SurfaceID>(index);
 	}
 
 	void COpenGLRenderer::DestroyMesh(const MeshID aMesh)
@@ -153,6 +198,12 @@ namespace wendy
 	{
 		size_t index = reinterpret_cast<size_t>(aID);
 		return myTextures.TryGet(index);
+	}
+
+	CGLSurface* COpenGLRenderer::GetSurface(SurfaceID aID)
+	{
+		size_t index = reinterpret_cast<size_t>(aID);
+		return mySurfaces.TryGet(index);
 	}
 
 	void COpenGLRenderer::AddRenderCommand(IRenderCommand* aRenderCommand)

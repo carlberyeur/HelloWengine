@@ -32,6 +32,7 @@ namespace cu
 		{
 			float* fdata = reinterpret_cast<float*>(data);
 
+			cu::CArray<int, 3> hej({ 4, 6, 7 });
 			fdata[0] = aPos.x;
 			fdata[1] = aPos.y;
 
@@ -62,7 +63,8 @@ namespace cu
 		const aiScene* scene = aiImportFile(aFilePath.c_str(), aiProcessPreset_TargetRealtime_MaxQuality /*| aiProcess_ConvertToLeftHanded*/);
 		if (!scene)
 		{
-			//aiGetErrorString();
+			const char* errorStr = aiGetErrorString();
+			DL_MESSAGE_BOX(errorStr);
 			return false;
 		}
 
@@ -172,12 +174,12 @@ namespace cu
 
 	void CFBXLoader::LoadTexturesInternal(const aiScene& aScene, STextureData& aDataOut)
 	{
-		LoadTextureInternal(aiTextureType_DIFFUSE, *aScene.mMaterials[0], aDataOut[STextureData::eTextureType::eAlbedo]); // TEXTURE_DEFINITION_ALBEDO
-		LoadTextureInternal(aiTextureType_SPECULAR, *aScene.mMaterials[0], aDataOut[STextureData::eTextureType::eRoughness]); // TEXTURE_DEFINITION_ROUGHNESS
-		LoadTextureInternal(aiTextureType_AMBIENT, *aScene.mMaterials[0], aDataOut[STextureData::eTextureType::eAmbientOcclusion]); // TEXTURE_DEFINITION_AMBIENTOCCLUSION
-		LoadTextureInternal(aiTextureType_EMISSIVE, *aScene.mMaterials[0], aDataOut[STextureData::eTextureType::eEmissive]); // TEXTURE_DEFINITION_EMISSIVE
-		LoadTextureInternal(aiTextureType_NORMALS, *aScene.mMaterials[0], aDataOut[STextureData::eTextureType::eNormal]); // TEXTURE_DEFINITION_NORMAL
-		LoadTextureInternal(aiTextureType_REFLECTION, *aScene.mMaterials[0], aDataOut[STextureData::eTextureType::eMetalness]); // TEXTURE_DEFINITION_METALNESS
+		LoadTextureInternal(aiTextureType_DIFFUSE, *aScene.mMaterials[0], aDataOut[eTextureType::eAlbedo]); // TEXTURE_DEFINITION_ALBEDO
+		LoadTextureInternal(aiTextureType_SPECULAR, *aScene.mMaterials[0], aDataOut[eTextureType::eRoughness]); // TEXTURE_DEFINITION_ROUGHNESS
+		LoadTextureInternal(aiTextureType_AMBIENT, *aScene.mMaterials[0], aDataOut[eTextureType::eAmbientOcclusion]); // TEXTURE_DEFINITION_AMBIENTOCCLUSION
+		LoadTextureInternal(aiTextureType_EMISSIVE, *aScene.mMaterials[0], aDataOut[eTextureType::eEmissive]); // TEXTURE_DEFINITION_EMISSIVE
+		LoadTextureInternal(aiTextureType_NORMALS, *aScene.mMaterials[0], aDataOut[eTextureType::eNormal]); // TEXTURE_DEFINITION_NORMAL
+		LoadTextureInternal(aiTextureType_REFLECTION, *aScene.mMaterials[0], aDataOut[eTextureType::eMetalness]); // TEXTURE_DEFINITION_METALNESS
 	}
 
 	void CFBXLoader::LoadTextureInternal(const aiTextureType aType, const aiMaterial& aMaterial, std::string& aTexturePathOut)

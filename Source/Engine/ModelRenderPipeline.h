@@ -1,10 +1,12 @@
 #pragma once
 
 #include "BaseRenderPipeline.h"
+#include "../CommonUtilities/Camera.h"
 
 namespace wendy
 {
 	typedef struct EffectID_t* EffectID;
+	typedef struct ConstantBufferID_t* ConstantBufferID;
 
 	class CBaseRenderer;
 	class CModel;
@@ -27,10 +29,13 @@ namespace wendy
 		virtual CModel* GetModel(const size_t aIndex) override;
 
 	private:
+		cu::Camera myCamera;
+
 		cu::CVector<CModel> myModels;
 		cu::CVector<CModel*> myPreparedModels;
 
 		std::unique_ptr<CModelLoader> myModelLoader;
 		EffectID myEffect;
+		cu::CArray<ConstantBufferID, 4> myTextureSlots;
 	};
 }

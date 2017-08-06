@@ -91,6 +91,18 @@ namespace cu
 				Vector2<TYPE> zw;
 			};
 
+			struct
+			{
+				Vector3<TYPE> xyz;
+				TYPE _w;
+			};
+
+			struct
+			{
+				TYPE _x;
+				Vector3<TYPE> yzw;
+			};
+
 #pragma warning(default : 4201)
 
 			TYPE vector[4];

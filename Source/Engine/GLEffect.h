@@ -28,8 +28,8 @@ namespace wendy
 		static bool CompileShader(const std::string& aFileContent, const unsigned int aShaderStage, unsigned int& aShaderIDOut);
 		static bool LinkShader(const unsigned int aShaderProgram);
 
-		std::array<size_t, 4> myConstantBufferNames;
-		std::array<int, 4> myConstantBufferLocations;
+		std::array<size_t, 8> myConstantBufferNames;
+		std::array<int, 8> myConstantBufferLocations;
 
 		std::uint32_t myVertexShader;
 		std::uint32_t myFragmentShader;

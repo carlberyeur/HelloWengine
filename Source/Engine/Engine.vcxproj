@@ -172,6 +172,7 @@
     <ClInclude Include="GLEffect.h" />
     <ClInclude Include="GLFWWindow.h" />
     <ClInclude Include="GLMesh.h" />
+    <ClInclude Include="GLSurface.h" />
     <ClInclude Include="GLTexture.h" />
     <ClInclude Include="GLUniformBuffer.h" />
     <ClInclude Include="Model.h" />
@@ -184,6 +185,7 @@
     <ClInclude Include="ModelRenderPipeline.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SetBlendStateCommand.h" />
+    <ClInclude Include="SetTextureSlotCommand.h" />
     <ClInclude Include="SetCullModeCommand.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -197,6 +199,7 @@
     <ClCompile Include="GLEffect.cpp" />
     <ClCompile Include="GLFWWindow.cpp" />
     <ClCompile Include="GLMesh.cpp" />
+    <ClCompile Include="GLSurface.cpp" />
     <ClCompile Include="GLTexture.cpp" />
     <ClCompile Include="GLUniformBuffer.cpp" />
     <ClCompile Include="Model.cpp" />
@@ -208,6 +211,7 @@
     <ClCompile Include="ModelRenderPipeline.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SetBlendStateCommand.cpp" />
+    <ClCompile Include="SetTextureSlotCommand.cpp" />
     <ClCompile Include="SetCullModeCommand.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

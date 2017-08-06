@@ -25,6 +25,9 @@ namespace cu
 		void RemoveCyclicAtIndex(const size_t aIndex);
 		void DeleteAll();
 
+		template <typename COMPARER>
+		void Sort(COMPARER aComparer);
+
 		T* TryGet(const size_t aIndex);
 		const T* TryGet(const size_t aIndex) const;
 
@@ -150,6 +153,13 @@ namespace cu
 		}
 
 		this->clear();
+	}
+
+	template<typename T>
+	template<typename COMPARER>
+	inline void CVector<T>::Sort(COMPARER aComparer)
+	{
+		std::sort(this->begin(), this->end(), aComparer);
 	}
 
 	template<typename T>

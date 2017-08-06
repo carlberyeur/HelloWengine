@@ -6,11 +6,13 @@ namespace wendy
 	typedef struct EffectID_t* EffectID;
 	typedef struct ConstantBufferID_t* ConstantBufferID;
 	typedef struct TextureID_t* TextureID;
+	typedef struct SurfaceID_t* SurfaceID;
 
 	const MeshID NullMesh(MeshID(PTRDIFF_MAX));
 	const EffectID NullEffect(EffectID(PTRDIFF_MAX));
 	const ConstantBufferID NullConstantBuffer(ConstantBufferID(PTRDIFF_MAX));
 	const TextureID NullTexture(TextureID(PTRDIFF_MAX));
+	const SurfaceID NullSurface(SurfaceID(PTRDIFF_MAX));
 
 	struct SVertexAttributeInfo;
 
@@ -53,6 +55,19 @@ namespace wendy
 		} dxt;
 	};
 
+	struct SSurfaceDesc
+	{
+		cu::CArray<cu::CVector<char>, 4> pixelDatas;
+		cu::CArray<cu::Vector2ui, 4> textureSizes;
+		struct SDXT
+		{
+			bool enable;
+			std::uint32_t mipMapCount;
+			std::uint32_t format;
+		};
+		cu::CArray<SDXT, 4> dxt;
+	};
+
 	class CBaseWindow;
 	class IRenderCommand;
 
@@ -72,6 +87,7 @@ namespace wendy
 		virtual EffectID CreateEffect(const SEffectDesc& aEffectDesc) = 0;
 		virtual ConstantBufferID CreateConstantBuffer(const SConstantBufferDesc& aConstantBufferDesc) = 0;
 		virtual TextureID CreateTexture(const STextureDesc& aTextureDesc) = 0;
+		virtual SurfaceID CreateSurface(const SSurfaceDesc& aSurfaceDesc) = 0;
 
 		virtual void DestroyMesh(const MeshID aMesh) = 0;
 	};

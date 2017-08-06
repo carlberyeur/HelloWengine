@@ -13,9 +13,12 @@ extern "C"
 		_In_   unsigned       _Line
 	);
 }
+#define _crash() _wassert(nullptr, nullptr, 0)
 #elif defined(__APPLE__)
 #include <CoreFoundation/CFUserNotification.h>
-
+#define _crash() assert(false)
+#else
+#define _crash() assert(false)
 #endif
 
 
@@ -92,25 +95,25 @@ namespace cu
 		VSPRINTF(buffer, aFormattedString, args);
 		va_end(args);
 		
-		eMessageBoxReturn result;
-		
 #ifdef _WIN32
-		result = ShowMessageBoxWin(buffer);
+		eMessageBoxReturn result = ShowMessageBoxWin(buffer);
 #elif defined(__APPLE__)
-		result = ShowMessageBoxMacOS(buffer);
+		eMessageBoxReturn result = ShowMessageBoxMacOS(buffer);
+#else
+#error "Function not implemented"
 #endif
 		
-		switch(result)
+		switch (result)
 		{
-			case eMessageBoxReturn::eIgnore:
-				break;
-			case eMessageBoxReturn::eAbort:
-				std::cout << buffer << std::endl;
-				DebugOutputWindow8(buffer);
-				exit(1337);
-				break;
-			case eMessageBoxReturn::eRetry:
-				//_wassert(nullptr, nullptr, 0);
+		case eMessageBoxReturn::eIgnore:
+			break;
+		case eMessageBoxReturn::eAbort:
+			std::cout << buffer << std::endl;
+			DebugOutputWindow8(buffer);
+			exit(1337);
+			break;
+		case eMessageBoxReturn::eRetry:
+			_crash();
 			break;
 		}
 	}

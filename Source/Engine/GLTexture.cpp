@@ -28,7 +28,7 @@ namespace wendy
 		Destroy();
 	}
 
-	bool CGLTexture::Init(const std::uint32_t aTextureUnit, const cu::Vector2ui& aTextureSize, const void* aPixelData)
+	bool CGLTexture::Init(const std::uint32_t aTextureUnit, const cu::Vector2ui& aTextureSize, const void* aPixelData, const bool aClampToEdge)
 	{
 		if (aTextureSize.Length2() == 0)
 		{
@@ -42,20 +42,20 @@ namespace wendy
 			return false;
 		}
 
-		glActiveTexture(GL_TEXTURE0 + aTextureUnit);
 		glGenTextures(1, &myTextureID);
+		glActiveTexture(GL_TEXTURE0 + aTextureUnit);
 		glBindTexture(GL_TEXTURE_2D, myTextureID);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, aTextureSize.x, aTextureSize.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, aPixelData);
 
-		if (aPixelData)
-		{
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		}
-		else
+		if (aClampToEdge)
 		{
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		}
+		else
+		{
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 		}
 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -65,13 +65,15 @@ namespace wendy
 		{
 			glGenerateMipmap(GL_TEXTURE_2D);
 		}
-
+		
 		myTextureSize = aTextureSize;
+
+		glBindTexture(GL_TEXTURE_2D, 0);
 
 		return true;
 	}
 
-	bool CGLTexture::InitCompressed(const std::uint32_t aTextureUnit, const cu::Vector2ui& aTextureSize, const void* aPixelData, const std::uint32_t aMipMapCount, const int aDXTFormat)
+	bool CGLTexture::InitCompressed(const std::uint32_t aTextureUnit, const cu::Vector2ui& aTextureSize, const void* aPixelData, const std::uint32_t aMipMapCount, const int aDXTFormat, const bool /*aClampToEdge*/)
 	{
 		if (aTextureSize.Length2() == 0)
 		{
@@ -82,6 +84,12 @@ namespace wendy
 		if (aTextureUnit >= GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS - GL_TEXTURE0)
 		{
 			DL_MESSAGE_BOX("Error loading texture, invalid texture unit: %d", aTextureUnit);
+			return false;
+		}
+
+		if (!aPixelData)
+		{
+			DL_MESSAGE_BOX("Error loading texture, pixeldata is NULL");
 			return false;
 		}
 
@@ -102,8 +110,8 @@ namespace wendy
 			return false;
 		}
 
-		glActiveTexture(GL_TEXTURE0 + aTextureUnit);
 		glGenTextures(1, &myTextureID);
+		glActiveTexture(GL_TEXTURE0 + aTextureUnit);
 		glBindTexture(GL_TEXTURE_2D, myTextureID);
 
 		std::uint32_t blockSize = 8u;
@@ -130,11 +138,14 @@ namespace wendy
 
 		myTextureSize = aTextureSize;
 
+		glBindTexture(GL_TEXTURE_2D, 0);
+
 		return true;
 	}
 
-	void CGLTexture::Activate()
+	void CGLTexture::Activate(const int aTextureSlot)
 	{
+		glActiveTexture(GL_TEXTURE0 + aTextureSlot);
 		glBindTexture(GL_TEXTURE_2D, myTextureID);
 	}
 

@@ -6,14 +6,16 @@
 #include "GLEffect.h"
 #include "GLUniformBuffer.h"
 #include "GLTexture.h"
+#include "GLSurface.h"
 
 namespace wendy
 {
-	CRenderModelCommand::CRenderModelCommand(const MeshID aMesh, const ConstantBufferID aConstantBuffer, const TextureID aTexture, const ConstantBufferID aAlbedoBuffer, const cu::Matrix44f& aTransformation)
+	CRenderModelCommand::CRenderModelCommand(const MeshID aMesh, const ConstantBufferID aConstantBuffer, const /*TextureID*/SurfaceID aTexture, const ConstantBufferID aAlbedoBuffer, const cu::Matrix44f& aTransformation)
 		: myTransformation(aTransformation)
 		, myMesh(aMesh)
 		, myConstantBuffer(aConstantBuffer)
-		, myTexture(aTexture)
+		, myTexture(/*aTexture*/NullTexture)
+		, mySurface(aTexture)
 		, myAlbedoBuffer(aAlbedoBuffer)
 	{
 	}
@@ -30,14 +32,19 @@ namespace wendy
 		CGLUniformBuffer* constantBuffer = aRenderer.GetUniformBuffer(myConstantBuffer);
 		if (!constantBuffer) return;
 
-		CGLTexture* texture = aRenderer.GetTexture(myTexture);
-		if (!texture) return;
+		//CGLTexture* texture = aRenderer.GetTexture(myTexture);
+		//if (!texture) return;
 
-		CGLUniformBuffer* albedoBuffer = aRenderer.GetUniformBuffer(myAlbedoBuffer);
-		if (!albedoBuffer) return;
+		CGLSurface* surface = aRenderer.GetSurface(mySurface);
+		if (!surface) return;
+
+		//CGLUniformBuffer* albedoBuffer = aRenderer.GetUniformBuffer(myAlbedoBuffer);
+		//if (!albedoBuffer) return;
 		
-		texture->Activate();
-		albedoBuffer->SetData(0);
+		surface->Activate();
+
+		//texture->Activate(0);
+		//albedoBuffer->SetData(0);
 		constantBuffer->SetData(myTransformation);
 		
 		mesh->Draw();

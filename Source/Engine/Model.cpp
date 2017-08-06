@@ -4,13 +4,16 @@
 #include "BaseRenderer.h"
 #include "RenderModelCommand.h"
 
+#include "../CommonUtilities/Intersection.h"
+
 namespace wendy
 {
 	CModel::CModel()
 		: myMesh(NullMesh)
 		, myTransformationBuffer(NullConstantBuffer)
-		, myTexture(NullTexture)
+		, myTexture(/*NullTexture*/NullSurface)
 		, myAlbedoBuffer(NullConstantBuffer)
+		, myRadius(10.f)
 	{
 	}
 
@@ -18,7 +21,7 @@ namespace wendy
 	{
 	}
 	
-	bool CModel::Init(const MeshID aMesh, const TextureID aTexture, const ConstantBufferID aTransformationBuffer, const ConstantBufferID aAlbedoBuffer)
+	bool CModel::Init(const MeshID aMesh, const /*TextureID*/SurfaceID aTexture, const ConstantBufferID aTransformationBuffer, const ConstantBufferID aAlbedoBuffer)
 	{
 		myMesh = aMesh;
 		myTexture = aTexture;
@@ -32,5 +35,14 @@ namespace wendy
 	{
 		CRenderModelCommand* renderCommand = new CRenderModelCommand(myMesh, myTransformationBuffer, myTexture, myAlbedoBuffer, myTransformation);
 		aRenderer.AddRenderCommand(renderCommand);
+	}
+
+	cu::SSphere CModel::GetBoundingSphere() const
+	{
+		cu::SSphere sphere;
+		sphere.position = myTransformation.myPosition;
+		sphere.radius = myRadius;
+
+		return sphere;
 	}
 }

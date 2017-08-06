@@ -8,6 +8,9 @@
 #include "ChangeEffectCommand.h"
 #include "SetCullModeCommand.h"
 #include "SetBlendStateCommand.h"
+#include "SetTextureSlotCommand.h"
+
+#include "../CommonUtilities/Intersection.h"
 
 namespace wendy
 {
@@ -23,16 +26,29 @@ namespace wendy
 	{
 		myModelLoader = std::make_unique<CModelLoader>(aRenderer);
 		
-		SEffectDesc effectDesc;
+		SEffectDesc effectDesc = {};
 		effectDesc.vertexPath = "Shaders/modelshader.vert";
 		effectDesc.pixelPath = "Shaders/modelshader.frag";
 		effectDesc.inputAttributes = { "Pos", "Norm", "Tangent", "Bitangent", "uv" };
-		effectDesc.constantBuffers = { "transform", "albedo" };
+		effectDesc.constantBuffers = { "mvp", "albedo", "normal", "rmao", "emissive" };
 
 		myEffect = aRenderer.CreateEffect(effectDesc);
 		if (myEffect == NullEffect)
 		{
 			return false;
+		}
+
+		for (size_t i = 0; i < myTextureSlots.size(); ++i)
+		{
+			SConstantBufferDesc textureSlotDesc = {};
+			textureSlotDesc.constantBuffer = std::hash<std::string>()(effectDesc.constantBuffers[i + 1]);
+			textureSlotDesc.effect = myEffect;
+
+			myTextureSlots[i] = aRenderer.CreateConstantBuffer(textureSlotDesc);
+			if (myTextureSlots[i] == NullConstantBuffer)
+			{
+				return false;
+			}
 		}
 		
 		return true;
@@ -44,21 +60,21 @@ namespace wendy
 
 		for (CModel& model : myModels)
 		{
-			if (/*myCamera.IsInside(model.GetBoundingBox())*/true)
+			if (myCamera.IsInside(model.GetBoundingSphere()))
 			{
 				myPreparedModels.push_back(&model);
 			}
 		}
 
-		//auto lessComparer = [this](CModel* aLeft, CModel* aRight) -> bool
-		//{
-		//	cu::Vector3f leftPosition = myCamera.GetInverse() * aLeft->GetPosition();
-		//	cu::Vector3f rightPosition = myCamera.GetInverse() * aRight->GetPosition();
-		//	
-		//	return leftPosition.z < rightPosition.z;
-		//};
+		auto lessComparer = [this](CModel* aLeft, CModel* aRight) -> bool
+		{
+			cu::Vector3f leftPosition = aLeft->GetPosition() * myCamera.GetTransformationInverse();
+			cu::Vector3f rightPosition = aRight->GetPosition() * myCamera.GetTransformationInverse();
+			
+			return leftPosition.z < rightPosition.z;
+		};
 
-		//std::sort(myPreparedModels.begin(), myPreparedModels.end(), lessComparer);
+		myPreparedModels.Sort(lessComparer);
 	}
 
 	void CModelRenderPipeline::DoFrame(CBaseRenderer& aRenderer)
@@ -67,9 +83,14 @@ namespace wendy
 		//aRenderer.AddRenderCommand(new CSetCullModeCommand(eCullMode_WireFrame));
 		aRenderer.AddRenderCommand(new CSetBlendStateCommand(eBlendState::eAlphaBlend));
 
-		for (CModel& model : myModels)
+		for (int i = 0; i < myTextureSlots.Size<int>(); ++i)
 		{
-			model.Render(aRenderer);
+			aRenderer.AddRenderCommand(new CSetTextureSlotCommand(myTextureSlots.At(i), i));
+		}
+
+		for (CModel* model : myPreparedModels)
+		{
+			model->Render(aRenderer);
 		}
 	}
 
