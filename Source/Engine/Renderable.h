@@ -1,6 +1,6 @@
 #pragma once
 
-namespace pulp
+namespace wendy
 {
 	class CScene;
 	enum eRenderPipeline : std::uint16_t;

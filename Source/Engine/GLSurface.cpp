@@ -2,7 +2,7 @@
 #include "GLSurface.h"
 #include "OpenGLFramework.h"
 
-namespace pulp
+namespace wendy
 {
 	CGLSurface::CGLSurface()
 	{

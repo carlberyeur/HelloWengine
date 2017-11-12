@@ -19,7 +19,7 @@ CInitState::~CInitState()
 
 bool CInitState::Init()
 {
-	myScene = pulp::CEngine::GetInstance()->CreateScene();
+	myScene = wendy::CEngine::GetInstance()->CreateScene();
 	myScene->Init();
 	
 	//myTorus = myScene->AddModel("Meshes/sphere.fbx");
@@ -31,8 +31,8 @@ bool CInitState::Init()
 	//transform = transform * cu::Matrix44f::CreateRotateAroundX(3.14f * 0.5f);
 	//model->SetTransformation(transform);
 
-	myTumbleWeed = myScene->AddModel("Meshes/M_thumbleweed_01.fbx", pulp::eRenderPipeline_Model);
-	pulp::CModel* model2 = myScene->GetModel(myTumbleWeed, pulp::eRenderPipeline_Model);
+	myTumbleWeed = myScene->AddModel("Meshes/M_thumbleweed_01.fbx", wendy::eRenderPipeline_Model);
+	wendy::CModel* model2 = myScene->GetModel(myTumbleWeed, wendy::eRenderPipeline_Model);
 	cu::Matrix44f transform2;
 	transform2.SetScale({ 0.5f, 0.5f, 0.5f });
 	model2->SetTransformation(transform2);
@@ -47,7 +47,7 @@ bool CInitState::Update()
 {
 	myStopWatch.Update();
 
-	pulp::CModel* model = myScene->GetModel(myTumbleWeed, pulp::eRenderPipeline::eRenderPipeline_Model);
+	wendy::CModel* model = myScene->GetModel(myTumbleWeed, wendy::eRenderPipeline::eRenderPipeline_Model);
 	//cu::Matrix44f transform = model->GetTransformation();
 	cu::Matrix44f transform;
 	transform.SetScale({ 0.5f, 0.5f, 0.5f });

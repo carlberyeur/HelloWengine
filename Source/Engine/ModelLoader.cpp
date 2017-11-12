@@ -11,7 +11,7 @@
 
 #include "../CommonUtilities/DDSLoader.h"
 
-namespace pulp
+namespace wendy
 {
 	CModelLoader::CModelLoader(CBaseRenderer& aRenderer)
 		: myRenderer(aRenderer)

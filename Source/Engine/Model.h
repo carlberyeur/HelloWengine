@@ -5,7 +5,7 @@ namespace cu
 	struct SSphere;
 }
 
-namespace pulp
+namespace wendy
 {
 	typedef struct MeshID_t* MeshID;
 	typedef struct ConstantBufferID_t* ConstantBufferID;

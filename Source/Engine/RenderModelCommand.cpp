@@ -8,7 +8,7 @@
 #include "GLTexture.h"
 #include "GLSurface.h"
 
-namespace pulp
+namespace wendy
 {
 	CRenderModelCommand::CRenderModelCommand(const MeshID aMesh, const ConstantBufferID aConstantBuffer, const /*TextureID*/SurfaceID aTexture, const ConstantBufferID aAlbedoBuffer, const cu::Matrix44f& aTransformation)
 		: myTransformation(aTransformation)

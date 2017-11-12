@@ -12,7 +12,7 @@
 
 #include "../CommonUtilities/Intersection.h"
 
-namespace pulp
+namespace wendy
 {
 	CModelRenderPipeline::CModelRenderPipeline()
 	{

@@ -4,7 +4,7 @@
 #include "OpenGLRenderer.h"
 #include "GLEffect.h"
 
-namespace pulp
+namespace wendy
 {
 	CChangeEffectCommand::CChangeEffectCommand(const EffectID aEffect)
 		: myEffect(aEffect)
@@ -15,7 +15,7 @@ namespace pulp
 	{
 	}
 
-	void pulp::CChangeEffectCommand::Execute(COpenGLRenderer& aRenderer)
+	void wendy::CChangeEffectCommand::Execute(COpenGLRenderer& aRenderer)
 	{
 		CGLEffect* effect = aRenderer.GetEffect(myEffect);
 		if (!effect) return;

@@ -3,7 +3,7 @@
 
 #include "../CommonUtilities/StopWatch.h"
 
-namespace pulp
+namespace wendy
 {
 	class CScene;
 }
@@ -26,7 +26,7 @@ public:
 	virtual bool LetThroughRender() override;
 
 private:
-	std::unique_ptr<pulp::CScene> myScene;
+	std::unique_ptr<wendy::CScene> myScene;
 
 	size_t myTorus;
 	size_t myTumbleWeed;

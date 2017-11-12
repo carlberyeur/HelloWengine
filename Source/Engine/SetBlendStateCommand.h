@@ -1,7 +1,7 @@
 #pragma once
 #include "RenderCommand.h"
 
-namespace pulp
+namespace wendy
 {
 	enum class eBlendState
 	{

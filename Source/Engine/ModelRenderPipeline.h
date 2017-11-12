@@ -3,7 +3,7 @@
 #include "BaseRenderPipeline.h"
 #include "../CommonUtilities/Camera.h"
 
-namespace pulp
+namespace wendy
 {
 	typedef struct EffectID_t* EffectID;
 	typedef struct ConstantBufferID_t* ConstantBufferID;

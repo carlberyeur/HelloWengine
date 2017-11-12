@@ -5,9 +5,9 @@
 #ifdef __APPLE__
 #define GLFW_INCLUDE_GLCOREARB
 #endif // !__APPLE__
-//#include <GLFW/glfw3.h>
+#include <GLFW/glfw3.h>
 
-namespace pulp
+namespace wendy
 {
 	class COpenGLFramework : public CBaseFramework
 	{

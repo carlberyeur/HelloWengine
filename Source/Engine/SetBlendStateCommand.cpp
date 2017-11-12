@@ -2,7 +2,7 @@
 #include "SetBlendStateCommand.h"
 #include "OpenGLFramework.h"
 
-namespace pulp
+namespace wendy
 {
 	CSetBlendStateCommand::CSetBlendStateCommand(const eBlendState aBlendState)
 		: myBlendState(aBlendState)

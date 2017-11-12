@@ -3,7 +3,7 @@
 
 struct GLFWwindow;
 
-namespace pulp
+namespace wendy
 {
 
 	class CGLFWWindow : public CBaseWindow

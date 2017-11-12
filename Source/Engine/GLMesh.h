@@ -1,6 +1,6 @@
 #pragma once
 
-namespace pulp
+namespace wendy
 {
 	struct SVertexAttributeInfo;
 	
@@ -33,7 +33,7 @@ namespace pulp
 		std::uint32_t myIndexBufferID;
 	};
 
-	inline bool pulp::CGLMesh::IsInitialized() const
+	inline bool wendy::CGLMesh::IsInitialized() const
 	{
 		return myVertexCount > 0;
 	}

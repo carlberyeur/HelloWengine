@@ -2,7 +2,7 @@
 #include "BaseRenderer.h"
 #include "../CommonUtilities/Synchronizer.h"
 
-namespace pulp
+namespace wendy
 {
 	class CBaseWindow;
 	class CGLMesh;

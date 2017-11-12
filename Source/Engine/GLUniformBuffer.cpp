@@ -3,7 +3,7 @@
 
 #include "OpenGLFramework.h"
 
-namespace pulp
+namespace wendy
 {
 	CGLUniformBuffer::CGLUniformBuffer()
 		: myLocation(-1)

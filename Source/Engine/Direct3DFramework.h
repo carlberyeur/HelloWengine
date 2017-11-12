@@ -8,7 +8,7 @@ struct ID3D11DeviceContext;
 struct ID3D11RenderTargetView;
 struct ID3D11DepthStencilView;
 
-namespace pulp
+namespace wendy
 {
 	class CDirect3DFramework : public CBaseFramework
 	{

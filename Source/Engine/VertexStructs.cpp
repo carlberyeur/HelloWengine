@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "VertexStructs.h"
 
-namespace pulp
+namespace wendy
 {
 	const cu::CVector<SVertexAttributeInfo> SBaseVertex::AttributeInfos =
 	{

@@ -4,7 +4,7 @@
 #include "BaseRenderPipeline.h"
 #include "Model.h"
 
-namespace pulp
+namespace wendy
 {
 	static cu::Matrix44f locNobodysMatrix;
 
@@ -33,7 +33,7 @@ namespace pulp
 		return locNobodysMatrix;
 	}
 
-	bool pulp::CRenderable::IsValid() const
+	bool wendy::CRenderable::IsValid() const
 	{
 		return myScene != nullptr && myPipeline != eRenderPipeline_Length && myRenderableID != UINT16_MAX;
 	}

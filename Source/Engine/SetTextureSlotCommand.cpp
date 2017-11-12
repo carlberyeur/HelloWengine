@@ -4,7 +4,7 @@
 #include "OpenGLRenderer.h"
 #include "GLUniformBuffer.h"
 
-namespace pulp
+namespace wendy
 {
 	CSetTextureSlotCommand::CSetTextureSlotCommand(const ConstantBufferID aTextureSlot, const int aSlotValue)
 		: myTextureSlot(aTextureSlot)
