@@ -30,7 +30,7 @@
 #endif // _WIN32
 
 
-namespace wendy
+namespace pulp
 {
 	CGLFWWindow::CGLFWWindow()
 		: myWindow(nullptr)

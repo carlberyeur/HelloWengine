@@ -26,10 +26,10 @@ int main(int argc, char** argv)
 template <typename CharType>
 bool Init(int /*argc*/, CharType** /*argv*/)
 {
-	wendy::CEngine engine;
+	pulp::CEngine engine;
 	CGame game;
 
-	wendy::SEngineParameters params = {};
+	pulp::SEngineParameters params = {};
 	params.updateCallback = [&game]() -> bool { return game.Update(); };
 	params.renderCallback = [&game]() { game.Render(); };
 	params.threadedRendering = true;

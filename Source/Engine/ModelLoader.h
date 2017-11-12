@@ -1,6 +1,6 @@
 #pragma once
 
-namespace wendy
+namespace pulp
 {
 	typedef struct EffectID_t* EffectID;
 

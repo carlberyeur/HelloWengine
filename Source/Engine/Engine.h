@@ -1,6 +1,6 @@
 #pragma once
 
-namespace wendy
+namespace pulp
 {
 	class CBaseWindow;
 	class CBaseFramework;

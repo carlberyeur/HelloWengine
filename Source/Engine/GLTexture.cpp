@@ -2,7 +2,7 @@
 #include "GLTexture.h"
 #include "OpenGLFramework.h"
 
-namespace wendy
+namespace pulp
 {
 	CGLTexture::CGLTexture()
 		: myTextureID(0u)

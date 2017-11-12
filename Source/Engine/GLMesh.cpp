@@ -4,7 +4,7 @@
 #include "OpenGLFramework.h"
 #include "VertexStructs.h"
 
-namespace wendy
+namespace pulp
 {
 	CGLMesh::CGLMesh()
 		: myVertexCount(0)

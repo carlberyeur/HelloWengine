@@ -4,7 +4,7 @@
 #include "BaseRenderPipeline.h"
 #include "ModelRenderPipeline.h"
 
-namespace wendy
+namespace pulp
 {
 	CScene::CScene(CBaseRenderer& aRenderer)
 		: myRenderer(aRenderer)

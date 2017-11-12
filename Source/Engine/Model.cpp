@@ -6,7 +6,7 @@
 
 #include "../CommonUtilities/Intersection.h"
 
-namespace wendy
+namespace pulp
 {
 	CModel::CModel()
 		: myMesh(NullMesh)

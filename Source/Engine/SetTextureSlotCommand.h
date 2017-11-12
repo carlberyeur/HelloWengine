@@ -1,7 +1,7 @@
 #pragma once
 #include "RenderCommand.h"
 
-namespace wendy
+namespace pulp
 {
 	typedef struct ConstantBufferID_t* ConstantBufferID;
 

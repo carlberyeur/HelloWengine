@@ -2,7 +2,7 @@
 #include "SetCullModeCommand.h"
 #include "OpenGLFramework.h"
 
-namespace wendy
+namespace pulp
 {
 	CSetCullModeCommand::CSetCullModeCommand(const std::uint_fast8_t aCullModeFlags)
 		: myCullModeFlags(aCullModeFlags)

@@ -13,7 +13,7 @@
 #include "BaseWindow.h"
 #include "OpenGLFramework.h"
 
-namespace wendy
+namespace pulp
 {
 	COpenGLRenderer::COpenGLRenderer()
 		: myMeshCount(0u)

@@ -21,7 +21,7 @@
 #endif // _DEBUG
 
 
-namespace wendy
+namespace pulp
 {
 	CEngine* CEngine::theInstance = nullptr;
 
@@ -52,7 +52,7 @@ namespace wendy
 		DEBUG_INIT_PARAMETERS();
 
 		myWindow = std::make_unique<CGLFWWindow>();
-		if (!myWindow->Init(aInitParameters.windowSize, "Hello Wengine"))
+		if (!myWindow->Init(aInitParameters.windowSize, "PULP"))
 		{
 			return false;
 		}

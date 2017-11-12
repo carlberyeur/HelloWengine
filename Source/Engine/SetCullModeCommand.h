@@ -1,7 +1,7 @@
 #pragma once
 #include "RenderCommand.h"
 
-namespace wendy
+namespace pulp
 {
 	enum eCullMode : std::uint_fast8_t
 	{

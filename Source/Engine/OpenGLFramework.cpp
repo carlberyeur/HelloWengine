@@ -6,7 +6,7 @@
 #pragma comment(lib, "opengl32.lib")
 #endif // _WIN32
 
-namespace wendy
+namespace pulp
 {
 	COpenGLFramework::COpenGLFramework()
 	{

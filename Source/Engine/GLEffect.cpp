@@ -4,7 +4,7 @@
 #include "OpenGLFramework.h"
 #include "GLUniformBuffer.h"
 
-namespace wendy
+namespace pulp
 {
 	CGLEffect::CGLEffect()
 		: myVertexShader(0u)

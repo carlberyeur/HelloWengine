@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "BaseWindow.h"
 
-namespace wendy
+namespace pulp
 {
 	CBaseWindow::CBaseWindow()
 	{

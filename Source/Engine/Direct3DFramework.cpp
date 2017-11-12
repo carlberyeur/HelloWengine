@@ -10,7 +10,7 @@
 
 #define SAFE_RELEASE(com_ptr) do { if (com_ptr) { com_ptr->Release(); com_ptr = nullptr; } } while(false)
 
-namespace wendy
+namespace pulp
 {
 	CDirect3DFramework::CDirect3DFramework()
 		: myDevice(nullptr)
